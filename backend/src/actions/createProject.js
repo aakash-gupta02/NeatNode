@@ -19,7 +19,11 @@ export async function createProject({ projectName, templatePath }) {
     // Copy template
     console.log("📁 Creating project folder...");
     fs.mkdirSync(targetPath);
-    await copyTemplate(templatePath, targetPath);
+    await copyTemplate(templatePath, targetPath, {
+      "project-name": projectName,
+      "author": "Your Name"
+
+    });
 
     console.log(`✅ Project "${projectName}" created successfully!`);
     console.log(`\ncd ${projectName}`);
