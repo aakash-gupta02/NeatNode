@@ -1,0 +1,45 @@
+{
+  "name": "neatnode",
+  "version": "1.0.1",
+  "description": "Plug & Play Node.js backend starter templates — build REST APIs, socket servers, and more in seconds.",
+  "bin": {
+    "neatnode": "./bin/index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "rest-api",
+    "cli",
+    "backend-starter",
+    "template",
+    "neatnode"
+  ],
+  "files": [
+    "bin/",
+    "src/",
+    "templates/",
+    "utils/",
+    "package.json",
+    "README.md"
+  ],
+  "author": {
+    "name": "Aakash Gupta",
+    "email": "aakashgupta052004@gmail.com",
+    "url": "https://github.com/aakash-gupta02"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aakash-gupta02/NeatNode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aakash-gupta02/NeatNode/issues"
+  },
+  "homepage": "https://github.com/aakash-gupta02/NeatNode#readme",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "fs-extra": "^11.3.2",
+    "inquirer": "^12.10.0"
+  }
+}
