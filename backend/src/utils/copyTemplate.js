@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export async function copyTemplate(srcDir, destDir, replacements = {}) {
-  const ignoreList = ["node_modules", ".git", ".env"];
+  const ignoreList = ["node_modules", ".git", ".env", "package-lock.json"];
 
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
