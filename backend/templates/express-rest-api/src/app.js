@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import authRoutes from './routes/user.route.js'
 import { errorHandler, notFound } from './middleware/error.middleware.js';
-
+// ROUTE_IMPORTS_START
+import authRoutes from './routes/user.route.js'
+// ROUTE_IMPORTS_END
 
 // instance 
 const app = express();
@@ -15,8 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 // routes
-app.use("/api/auth", authRoutes);
 
+// ROUTE_USES_START
+app.use("/api/auth", authRoutes);
+// ROUTE_USES_END
+
+
+// default route
 app.get("/", (req, res) => {
     res.send("API is running...");
 });

@@ -2,11 +2,12 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
+import { removeCrud, removeCrudReferences } from "./removeCRUD.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function createProject({ projectName, templatePath }) {
+export async function createProject({ projectName, templatePath, includeCrud }) {
   try {
     const targetPath = path.join(process.cwd(), projectName);
 
@@ -16,6 +17,7 @@ export async function createProject({ projectName, templatePath }) {
       process.exit(1);
     }
 
+
     // Copy template
     console.log("📁 Creating project folder...");
     fs.mkdirSync(targetPath);
@@ -24,6 +26,15 @@ export async function createProject({ projectName, templatePath }) {
       "author": "Your Name"
 
     });
+
+    if (!includeCrud) {
+      console.log(" X Removing CRUD files...");
+      await removeCrud(targetPath);
+      await removeCrudReferences(path.join(targetPath, "src", "app.js"));
+    } else {
+      console.log("✔ Keeping CRUD setup in your project.");
+    }
+
 
     console.log(`✅ Project "${projectName}" created successfully!`);
     console.log(`\ncd ${projectName}`);
