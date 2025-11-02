@@ -19,7 +19,7 @@ export async function createProject({ projectName, templatePath, includeCrud }) 
     }
 
     if (projectName !== ".") {
-      console.log("📁 Creating project folder...");
+      console.log("Creating project folder...");
       fs.mkdirSync(targetPath);
     }
 
