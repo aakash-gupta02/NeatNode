@@ -1,10 +1,11 @@
 import { config } from "../config/env.config.js";
+import logger from "../config/logger.config.js";
 import ApiError from "../utils/ApiError.js";
 
 
 // Global error handling middleware
 export const errorHandler = (err, req, res, next) => {
-  console.error("Error 💥", err);
+  logger.error("Error 💥", err);
 
   let { statusCode, message } = err;
   if (!statusCode) statusCode = 500;
