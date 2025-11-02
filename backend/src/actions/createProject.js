@@ -8,7 +8,7 @@ import { removeCrud, removeCrudReferences } from "./removeCRUD.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function createProject({ projectName, templatePath, includeCrud }) {
+export async function createProject({ projectName, templatePath, includeCrud, crudName }) {
   try {
     // If user wants to create in current dir (.)
     const targetPath = projectName === "." ? process.cwd() : path.join(process.cwd(), projectName);
@@ -30,7 +30,7 @@ export async function createProject({ projectName, templatePath, includeCrud }) 
 
     if (!includeCrud) {
       console.log("🗑️ Removing CRUD files...");
-      removeCrud(targetPath);
+      removeCrud(targetPath, crudName);
       removeCrudReferences(path.join(targetPath, "src", "app.js"));
     } else {
       console.log("✅ Including CRUD functionality...");

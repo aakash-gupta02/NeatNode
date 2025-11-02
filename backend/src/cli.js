@@ -31,6 +31,20 @@ async function main() {
 
   // Step 3: Optional prompt if REST API
   let includeCrud = false;
+  let crudName = "";
+  if (chosen.name === "Basic Express") {
+    const answer = await inquirer.prompt([
+      {
+        name: "includeCrud",
+        type: "confirm",
+        message: "Include example Todo CRUD setup?",
+        default: true
+      }
+    ]);
+    includeCrud = answer.includeCrud;
+    crudName = "todo";
+  }
+
   if (chosen.name === "REST API") {
     const answer = await inquirer.prompt([
       {
@@ -41,13 +55,15 @@ async function main() {
       }
     ]);
     includeCrud = answer.includeCrud;
+    crudName = "user";
   }
 
   // Step 4: Create the project
   await createProject({
     projectName,
     templatePath: chosen.path,
-    includeCrud
+    includeCrud,
+    crudName
   });
 
   console.log(`\n✅ Project "${projectName}" created successfully using "${chosen.name}" template.\n`);
