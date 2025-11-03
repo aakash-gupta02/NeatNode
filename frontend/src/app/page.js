@@ -2,6 +2,7 @@ import Background from "@/components/landingPage/Background";
 import CTA from "@/components/landingPage/CTA";
 import DocsnSetup from "@/components/landingPage/DocsnSetup";
 import Features from "@/components/landingPage/Features";
+import Footer from "@/components/landingPage/Footer";
 import Hero from "@/components/landingPage/Hero";
 import Navbar from "@/components/landingPage/Navbar";
 import Templates from "@/components/landingPage/Templates";
@@ -18,6 +19,7 @@ export default function Home() {
       <Features />
       <DocsnSetup />
       <CTA />
+      <Footer/>
 
 
     </main>
