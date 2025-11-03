@@ -9,7 +9,7 @@ const steps = [
         id: 1,
         title: "Install globally",
         icon: <Download className="w-6 h-6" />,
-        command: "npm install -g neatnode",
+        command: "npm i -g neatnode",
     },
     {
         id: 2,

@@ -1,4 +1,5 @@
 import Background from "@/components/landingPage/Background";
+import DocsnSetup from "@/components/landingPage/DocsnSetup";
 import Features from "@/components/landingPage/Features";
 import Hero from "@/components/landingPage/Hero";
 import Navbar from "@/components/landingPage/Navbar";
@@ -11,9 +12,10 @@ export default function Home() {
       <Background />
       <Navbar />
       <Hero />
-      <Features />
       <Templates />
       <Usage />
+      <Features />
+      <DocsnSetup />
 
 
     </main>

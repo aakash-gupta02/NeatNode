@@ -53,7 +53,7 @@ const Templates = () => {
             key={idx}
             className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-700 transition-all"
           >
-            <div className="bg-gradient-to-br from-emerald-500/10 to-transparent p-6 border-b border-zinc-800">
+            <div className="bg-linear-to-br from-emerald-500/10 to-transparent p-6 border-b border-zinc-800">
               <div className="bg-emerald-500/10 border border-emerald-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                 {temp.icon}
               </div>
