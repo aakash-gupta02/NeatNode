@@ -3,6 +3,7 @@ import Features from "@/components/landingPage/Features";
 import Hero from "@/components/landingPage/Hero";
 import Navbar from "@/components/landingPage/Navbar";
 import Templates from "@/components/landingPage/Templates";
+import Usage from "@/components/landingPage/Usage";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Features />
       <Templates />
+      <Usage />
 
 
     </main>
