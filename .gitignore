@@ -25,6 +25,7 @@ logs/
 *.tmp
 tmp/
 temp/
+testhtml/
 
 # ─────────────────────────────
 # Build / Output / Cache
