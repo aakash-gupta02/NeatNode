@@ -10,10 +10,8 @@ const SectionCommon = ({ children, title, desc }) => {
                     <p className="text-lg text-zinc-400">{desc}</p>
                 </div>
 
-                <div className="grid lg:grid-cols-3 gap-8">
-                    {children}
+                {children}
 
-                </div>
             </div>
         </section>
     )

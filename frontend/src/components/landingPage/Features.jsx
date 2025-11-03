@@ -51,6 +51,7 @@ const Features = () => {
       title="Why NeatNode?"
       desc="A practical CLI tool built for developers who value time, structure, and scalability"
     >
+      <div className="grid lg:grid-cols-3 gap-8">
         {features.map((feature, index) => (
           <div
             key={index}
@@ -63,6 +64,7 @@ const Features = () => {
             <p className="text-zinc-400 text-sm leading-relaxed">{feature.desc}</p>
           </div>
         ))}
+      </div>
     </SectionCommon>
   );
 };

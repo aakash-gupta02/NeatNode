@@ -47,6 +47,7 @@ const Templates = () => {
       title="Choose your Structure."
       desc="Pre-configured templates for every project type. — plug, code, and go."
     >
+      <div className="grid lg:grid-cols-3 gap-8">
         {templates.map((temp, idx) => (
           <div
             key={idx}
@@ -71,6 +72,8 @@ const Templates = () => {
             </div>
           </div>
         ))}
+      </div>
+
     </SectionCommon>
   );
 };
