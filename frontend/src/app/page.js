@@ -1,4 +1,5 @@
 import Background from "@/components/landingPage/Background";
+import CTA from "@/components/landingPage/CTA";
 import DocsnSetup from "@/components/landingPage/DocsnSetup";
 import Features from "@/components/landingPage/Features";
 import Hero from "@/components/landingPage/Hero";
@@ -16,6 +17,7 @@ export default function Home() {
       <Usage />
       <Features />
       <DocsnSetup />
+      <CTA />
 
 
     </main>

@@ -33,7 +33,7 @@ const DocsnSetup = () => {
     return (
         <SectionCommon
             title="Documentation & Setup"
-            desc="Comprehensive guides and references for NodeNeat"
+            desc="Comprehensive guides and references for NeatNode"
         >
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
                 {docItems.map((item, index) => (
@@ -54,7 +54,7 @@ const DocsnSetup = () => {
                                     </div>
                                     <div className="absolute -inset-2 bg-emerald-500/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                                 </div>
-                                <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 transition-colors duration-300 flex-shrink-0" />
+                                <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 transition-colors duration-300 shrink-0" />
                             </div>
 
                             {/* Content - flex-grow to push arrow to bottom */}
