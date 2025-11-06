@@ -1,0 +1,22 @@
+# Middleware
+
+The REST template centralizes middleware under `src/middleware`. Common middleware included or expected:
+
+- `auth.middleware.js` — protects routes using JWT tokens.
+- `validateRequest.middleware.js` — request validation (Joi) wrapper.
+- `rateLimiter.js` — rate limiting for sensitive endpoints.
+- `error.middleware.js` — centralized error handler.
+
+Attach middleware globally in `src/app.js` or to individual routes as needed.
+`````mdx
+# Middleware
+
+The REST template centralizes middleware under `src/middleware`. Common middleware included or expected:
+
+ - `auth.middleware.js` — protects routes using JWT tokens.
+ - `validateRequest.middleware.js` — request validation (Joi) wrapper.
+ - `rateLimiter.js` — rate limiting for sensitive endpoints.
+ - `error.middleware.js` — centralized error handler.
+
+Attach middleware globally in `src/app.js` or to individual routes as needed.
+`````

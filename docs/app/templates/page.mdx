@@ -1,13 +1,20 @@
-import { AppleIcon, BadgePlusIcon, BoxIcon, SortAsc } from "lucide-react"
+---
+asIndexPage: true
+sidebarTitle: Built-Ins
+icon: BoxIcon
+---
+
+import { BoxIcon, RocketIcon, SwatchBook, Terminal } from "lucide-react"
 import { OverviewPage } from "../_components/Overviewpage"
 
+# Built-In Templates
 
-{/* ---
-asIndexPage: true
-sidebarTitle: Built-In Components
-icon: BoxIcon
---- */}
-
-# Built-Ins
-
-<OverviewPage filePath={metadata.filePath} icons={{ BoxIcon,BadgePlusIcon,AppleIcon, SortAsc }} />
+<OverviewPage
+  filePath={metadata.filePath}
+  icons={{
+    BoxIcon,
+    RocketIcon,
+    SwatchBook,
+    Terminal
+  }}
+/>

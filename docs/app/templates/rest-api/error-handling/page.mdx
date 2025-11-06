@@ -1,0 +1,35 @@
+# Error Handling
+
+The REST template includes a centralized error handler under `src/middleware/error.middleware.js`. Use it to normalize errors and return consistent JSON responses.
+
+Example (simplified):
+
+```js
+// src/middleware/error.middleware.js
+export default function errorHandler(err, req, res, next) {
+  res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' })
+}
+```
+
+Register the error handler after all routes in `src/app.js`.
+`````mdx
+# Error Handling
+
+NeatNode's REST template includes a centralized error handler. Use it to normalize errors and return consistent responses.
+
+Example:
+
+# Error Handling
+
+The REST template includes a centralized error handler under `src/middleware/error.middleware.js`. Use it to normalize errors and return consistent JSON responses.
+
+Example (simplified):
+
+```js
+// src/middleware/error.middleware.js
+export default function errorHandler(err, req, res, next) {
+  res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' })
+}
+```
+
+Register the error handler after all routes in `src/app.js`.

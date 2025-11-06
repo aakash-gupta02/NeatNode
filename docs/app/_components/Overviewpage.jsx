@@ -1,39 +1,68 @@
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
-import { PageMapItem } from 'nextra'
 import { Cards } from 'nextra/components'
 import { getIndexPageMap, getPageMap } from 'nextra/page-map'
 
-export const OverviewPage = async ({ filePath, icons, pageMap: $pageMap }) => {
+
+export const OverviewPage = async ({ filePath, icons = {}, pageMap: $pageMap } = {}) => {
   const { h2: H2 } = getMDXComponents()
-  const currentRoute = filePath.replace('app', '').replace('/page.mdx', '')
+
+  if (!filePath && !$pageMap) {
+    console.error('OverviewPage requires either `filePath` or `pageMap`')
+    return null
+  }
+
+  
+
+  const currentRoute = filePath ? filePath.replace('app', '').replace('/page.mdx', '') : undefined
   const pageMap = $pageMap ?? (await getPageMap(currentRoute))
 
-  
-  
+  const index = getIndexPageMap(pageMap)
 
-  return getIndexPageMap(pageMap).map((pageItem, index) => {
+  return index.map((pageItem, idx) => {
     if (!Array.isArray(pageItem)) {
-      return <H2 key={index}>{pageItem.title}</H2>
+      console.log(`Rendering heading: ${pageItem.title}`);
+      return <H2 key={idx}>{pageItem.title}</H2>
     }
+
     return (
-      <Cards key={index}>
+      <Cards key={idx}>
         {pageItem.map(item => {
-          const icon = item.frontMatter?.icon
-          const Icon = icons?.[icon]
-          if (icon && !Icon) {
-            throw new Error(
-              `Icon "${icon}" is defined in front matter but isn't provided`
+          const rawIcon = item.frontMatter?.icon
+          let Icon
+
+          // Support three frontMatter patterns:
+          // - string keys that map to the `icons` prop (try a few common variants)
+          // - already-provided React components (if somehow present)
+          // - undefined / missing
+          if (typeof rawIcon === 'string') {
+            // try direct key, key + 'Icon', and capitalized variant
+            Icon =
+              icons?.[rawIcon] ??
+              icons?.[`${rawIcon}Icon`] ??
+              icons?.[rawIcon.charAt(0).toUpperCase() + rawIcon.slice(1)] ??
+              undefined
+          } else if (rawIcon && (typeof rawIcon === 'function' || typeof rawIcon === 'object')) {
+            // rawIcon might already be a React component (handle gracefully)
+            Icon = rawIcon
+          } else {
+            Icon = undefined
+          }
+
+          if (rawIcon && !Icon) {
+            // Log a warning instead of throwing so the docs site doesn't crash
+            // eslint-disable-next-line no-console
+            console.warn(
+              `Icon "${rawIcon}" is defined in front matter for ${item.name} but isn't provided via the 'icons' prop.`
             )
           }
+
           return (
-            // @ts-expect-error -- fixme
+            // @ts-expect-error -- Card props are dynamic from nextra
             <Cards.Card
               key={item.name}
-              // @ts-expect-error -- fixme
               title={item.title}
-              // @ts-expect-error -- fixme
               href={item.route || item.href}
-              icon={Icon && <Icon />}
+              icon={Icon ? <Icon /> : undefined}
             />
           )
         })}

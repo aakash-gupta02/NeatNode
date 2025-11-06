@@ -1,0 +1,48 @@
+# Events
+
+The Socket.IO template does not include many default events; it provides a socket initializer at `src/config/socket.js` where you can register event handlers.
+
+Place reusable event handlers under a directory such as `src/events` and import them from the socket initializer. Example handler:
+
+```js
+// src/events/chat.js
+export default function registerChat(io) {
+  io.on('connection', (socket) => {
+    socket.on('message', (data) => {
+      socket.broadcast.emit('message', data)
+    })
+  })
+}
+```
+
+Then call `registerChat(io)` from your socket initializer.
+`````mdx
+# Events
+
+The Socket.io template includes example event handlers. Place handlers in `src/events` and export to the main socket setup.
+
+Example:
+
+```js
+// events/chat.js
+
+## Events
+
+The Socket.IO template does not include many default events; it provides a socket initializer at `src/config/socket.js` where you can register event handlers.
+
+Place reusable event handlers under a directory such as `src/events` and import them from the socket initializer. Example handler:
+
+```js
+// src/events/chat.js
+export default function registerChat(io) {
+  io.on('connection', (socket) => {
+    socket.on('message', (data) => {
+      socket.broadcast.emit('message', data)
+    })
+  })
+}
+```
+
+Then call `registerChat(io)` from your socket initializer.
+
+`````
