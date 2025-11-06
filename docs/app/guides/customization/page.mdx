@@ -1,36 +1,173 @@
+---
+title: Customization
+sidebarTitle: Customization
+description: Learn how to extend and customize NeatNode-generated projects with your own middleware, routes, and configurations.
+icon: WrenchIcon
+---
+
 # Customization
 
-Learn how to customize generated projects: change configs, add middleware, swap template parts, and wire custom scripts.
+NeatNode projects are intentionally lightweight — so you can easily modify them for your own workflow.  
+This guide shows how to adjust configuration, extend templates, and add your own logic safely.
 
-This page includes examples for:
+---
 
-- Changing the server entrypoint
-- Adding global middleware
-- Extending templates with custom files
+## 1. Change the Server Entrypoint
 
-More examples will be added over time.
-# Customization
+Each template includes a `server.js` file — this is where your app boots up.
 
-Learn how to customize generated projects: change configs, add middleware, swap template parts, and wire custom scripts.
+Example default:
+```js
+import app from "./src/app.js"
+import { connectDB } from "./src/config/db.js"
 
-This page includes examples for:
+const PORT = process.env.PORT || 5000
 
-- Changing the server entrypoint
-- Adding global middleware
-- Extending templates with custom files
+connectDB()
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+````
 
-More examples will be added over time.
-`````mdx
-# Customization
+You can:
 
-Learn how to customize generated projects: change configs, add middleware, swap template parts, and wire custom scripts.
+* Rename `server.js` to `main.js` or `index.js`
+* Add new startup logic
+* Enable clustering or background jobs
 
-This page will include examples for:
+Example custom version:
 
-- Changing the server entrypoint
-- Adding global middleware
-- Extending templates with custom files
+```js
+import app from "./src/app.js"
+import cluster from "cluster"
+import os from "os"
 
-More content coming soon.
+if (cluster.isPrimary) {
+  os.cpus().forEach(() => cluster.fork())
+} else {
+  app.listen(5000, () => console.log(`Worker ${process.pid} running`))
+}
+```
 
-`````
+---
+
+## 2. Add Global Middleware
+
+Open `src/app.js`.
+Here you can register additional middleware before routes load.
+
+Example: add rate-limiting or CORS tweaks.
+
+```js
+import rateLimit from "express-rate-limit"
+
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100,
+  message: "Too many requests"
+})
+
+app.use(limiter)
+```
+
+You can also define your own reusable middleware:
+
+```js
+// src/middleware/requestLogger.js
+export const requestLogger = (req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`)
+  next()
+}
+
+// src/app.js
+import { requestLogger } from "./middleware/requestLogger.js"
+app.use(requestLogger)
+```
+
+---
+
+## 3. Extend Templates with Custom Files
+
+Want to add your own scripts, services, or schemas?
+Just create new folders under `src/`.
+
+For example:
+
+```
+src/
+ ┣ services/
+ ┃ ┗ email.service.js
+ ┣ utils/
+ ┃ ┗ jwtHelper.js
+ ┗ scripts/
+   ┗ seedDatabase.js
+```
+
+You can wire these in via npm scripts:
+
+```json
+"scripts": {
+  "seed": "node src/scripts/seedDatabase.js"
+}
+```
+
+> [!TIP]
+> You can even build your own reusable templates and register them in
+> `backend/src/config/templates.js`.
+
+---
+
+## 4. Change Configuration
+
+Configs live in `src/config/`.
+
+Examples:
+
+* `db.js` → database connection logic
+* `logger.js` → Winston or console-based logger
+* `socket.js` → Socket.IO setup
+
+You can add new configs (e.g., Redis, Mailer, etc.) and import them in `server.js`.
+
+---
+
+## 5. Enable TypeScript (Optional)
+
+To switch a generated project to TypeScript:
+
+1. Install dependencies:
+
+   ```bash
+   npm i -D typescript @types/node ts-node
+   npx tsc --init
+   ```
+
+2. Rename files:
+
+   * `server.js` → `server.ts`
+   * `src/**/*.js` → `.ts`
+
+3. Update package.json:
+
+   ```json
+   "scripts": {
+     "dev": "ts-node server.ts"
+   }
+   ```
+
+---
+
+## Summary
+
+| Task              | File to Edit  | Description                                |
+| ----------------- | ------------- | ------------------------------------------ |
+| Change entrypoint | `server.js`   | Rename or modify app startup               |
+| Add middleware    | `src/app.js`  | Register global or route-level middlewares |
+| Extend template   | `src/`        | Add new folders like services or utils     |
+| Change config     | `src/config/` | Adjust env, DB, or socket behavior         |
+| Enable TS         | root + src/   | Convert to TypeScript manually             |
+
+---
+
+> [!NOTE]
+> NeatNode projects are simple by design — every folder and file can be edited or extended freely.
+> There are no internal locks, so customization is straightforward and transparent.
+
