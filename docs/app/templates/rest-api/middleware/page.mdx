@@ -1,22 +1,77 @@
+---
+title: Middleware
+sidebarTitle: Middleware
+description: Understand how middleware is organized and applied in NeatNode’s REST API template.
+icon: ShieldCheck
+---
+
 # Middleware
 
-The REST template centralizes middleware under `src/middleware`. Common middleware included or expected:
+The **REST API Template** groups all middleware under `src/middleware/` for clear organization and reusability.  
+Each file handles a specific responsibility and can be applied globally or per-route.
 
-- `auth.middleware.js` — protects routes using JWT tokens.
-- `validateRequest.middleware.js` — request validation (Joi) wrapper.
-- `rateLimiter.js` — rate limiting for sensitive endpoints.
-- `error.middleware.js` — centralized error handler.
+---
 
-Attach middleware globally in `src/app.js` or to individual routes as needed.
-`````mdx
-# Middleware
+## Common Middleware
 
-The REST template centralizes middleware under `src/middleware`. Common middleware included or expected:
+| File | Purpose |
+|------|----------|
+| `auth.middleware.js` | Protects routes using JWT authentication. Blocks unauthorized requests. |
+| `validateRequest.middleware.js` | Wraps request validation schemas (e.g., Joi). |
+| `rateLimiter.js` | Limits request frequency for specific or sensitive endpoints. |
+| `error.middleware.js` | Centralized error handler (always registered last). |
 
- - `auth.middleware.js` — protects routes using JWT tokens.
- - `validateRequest.middleware.js` — request validation (Joi) wrapper.
- - `rateLimiter.js` — rate limiting for sensitive endpoints.
- - `error.middleware.js` — centralized error handler.
+---
 
-Attach middleware globally in `src/app.js` or to individual routes as needed.
-`````
+## Example: Global Middleware
+
+In `src/app.js`, global middleware is applied before route registration:
+
+```js
+import express from "express"
+import morgan from "morgan"
+import helmet from "helmet"
+import cors from "cors"
+
+const app = express()
+
+app.use(express.json())
+app.use(cors())
+app.use(helmet())
+app.use(morgan("dev"))
+````
+
+Add your own middleware here (logging, compression, etc.) as needed.
+
+---
+
+## Example: Route-Level Middleware
+
+Apply middleware directly on a route to protect or validate it:
+
+```js
+import express from "express"
+import { auth } from "../middleware/auth.middleware.js"
+import { validateRequest } from "../middleware/validateRequest.middleware.js"
+import { createUserSchema } from "../schemas/user.schema.js"
+
+const router = express.Router()
+
+router.post("/register", validateRequest(createUserSchema), auth, (req, res) => {
+  res.json({ message: "User registered successfully" })
+})
+
+export default router
+```
+
+---
+
+## Notes
+
+* Always load `error.middleware.js` **after** routes.
+* Keep middleware **modular** — each should do one thing well.
+* You can create custom middleware (e.g., `requestLogger.js`) and include it globally in `app.js`.
+
+---
+
+Consistent middleware structure keeps your codebase predictable, maintainable, and easy to extend.

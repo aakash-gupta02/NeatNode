@@ -1,31 +1,144 @@
-# Endpoints
-
-Place route definitions under `src/routes` and handlers under `src/controllers`.
-
-Example structure:
-
-```
-src/routes/
-src/controllers/
-```
-
-Add a new route file (for example `src/routes/posts.route.js`) and the corresponding controller (`src/controllers/posts.controller.js`).
-`````mdx
-# Endpoints
-
-This section documents how REST endpoints are generated and where to place new routes.
-
-Structure:
+---
+title: Endpoints
+sidebarTitle: Endpoints
+description: Learn how REST endpoints are organized and how to create new routes and controllers in NeatNode's REST API template.
+icon: Terminal
+---
 
 # Endpoints
 
-Place route definitions under `src/routes` and handlers under `src/controllers`.
+In the **REST API Template**, all endpoints are defined inside `src/routes`, and each route connects to a matching controller in `src/controllers`.
 
-Example structure:
+This structure makes it easy to expand your API without cluttering your main app file.
+
+---
+
+## Folder Overview
 
 ```
-src/routes/
-src/controllers/
+
+src/
+├── routes/
+│   ├── user.route.js
+│   └── health.route.js
+└── controllers/
+└── user.controller.js
+
+````
+
+- **Routes** define the HTTP endpoints (`GET /users`, `POST /users`, etc.)
+- **Controllers** hold the logic that runs when those endpoints are called
+
+---
+
+## Example Route File
+
+`src/routes/posts.route.js`
+
+```js
+import express from "express"
+import { createPost, getPosts } from "../controllers/posts.controller.js"
+
+const router = express.Router()
+
+router.get("/", getPosts)
+router.post("/", createPost)
+
+export default router
+````
+
+---
+
+## Example Controller File
+
+`src/controllers/posts.controller.js`
+
+```js
+import { ApiResponse } from "../utils/ApiResponse.js"
+
+export const getPosts = (req, res) => {
+  const posts = [
+    { id: 1, title: "Hello World" },
+    { id: 2, title: "NeatNode Rocks" }
+  ]
+  return ApiResponse.success(res, posts)
+}
+
+export const createPost = (req, res) => {
+  const { title } = req.body
+  return ApiResponse.success(res, { id: Date.now(), title })
+}
 ```
 
-Add a new route file (e.g., `src/routes/posts.route.js`) and corresponding controller (`src/controllers/posts.controller.js`).
+---
+
+## Route Registration
+
+All route files are automatically registered inside `src/app.js` under the comment markers:
+
+```js
+// ROUTE_IMPORTS_START
+import userRouter from "./routes/user.route.js"
+// ROUTE_IMPORTS_END
+
+// ROUTE_USES_START
+app.use("/api/users", userRouter)
+// ROUTE_USES_END
+```
+
+When the CLI removes CRUD examples, these sections are automatically stripped clean — keeping your app.js organized.
+
+To add your own routes, simply add new imports between those markers or below them.
+
+---
+
+## Creating a New Resource
+
+Example: Add a `products` resource.
+
+1. Create your controller:
+   `src/controllers/products.controller.js`
+2. Add routes:
+   `src/routes/products.route.js`
+3. Import and register them in `src/app.js`:
+
+   ```js
+   import productRouter from "./routes/products.route.js"
+   app.use("/api/products", productRouter)
+   ```
+
+That’s it — your new API endpoints are ready.
+
+---
+
+## CRUD Pattern
+
+Each resource typically follows this pattern:
+
+| Method   | Path             | Purpose         |
+| -------- | ---------------- | --------------- |
+| `GET`    | `/api/items`     | Get all items   |
+| `GET`    | `/api/items/:id` | Get single item |
+| `POST`   | `/api/items`     | Create item     |
+| `PUT`    | `/api/items/:id` | Update item     |
+| `DELETE` | `/api/items/:id` | Delete item     |
+
+---
+
+## Notes
+
+* Controllers should handle **business logic** and return formatted responses using `ApiResponse`.
+* Avoid direct DB logic inside route files — always delegate to controllers or services.
+* Group routes by resource for maintainability.
+
+---
+
+## Summary
+
+| Folder         | Purpose                             |
+| -------------- | ----------------------------------- |
+| `routes/`      | HTTP route definitions              |
+| `controllers/` | Request handlers and response logic |
+| `app.js`       | Central route registration point    |
+
+This modular pattern keeps every endpoint predictable, testable, and easy to extend as your API grows.

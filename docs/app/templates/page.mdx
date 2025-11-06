@@ -11,6 +11,8 @@ import { OverviewPage } from "../_components/Overviewpage"
 
 # Built-In Templates
 
+NeatNode includes several prebuilt project templates to help you kickstart development fast — whether you’re building a simple microservice, a full REST API, or a real-time server.
+
 <OverviewPage
   filePath={metadata.filePath}
   icons={{
@@ -20,3 +22,26 @@ import { OverviewPage } from "../_components/Overviewpage"
     Terminal
   }}
 />
+
+---
+
+## Available Templates
+
+| Template | Description | Use Case |
+|-----------|--------------|-----------|
+| **Basic Template** | Minimal Express setup with optional CRUD routes. | For small services or quick prototypes. |
+| **REST API Template** | Feature-rich Express API with structured layers (controllers, services, validation, error handling). | For scalable backends and APIs. |
+| **Socket.IO Template** | Real-time Express + Socket.IO setup with modular event handling. | For live chat, dashboards, or multiplayer apps. |
+
+---
+
+> [!TIP]
+> All templates share the same project structure — once you learn one, you’ll understand them all.
+
+> [!NOTE]
+> You can choose a template directly in the CLI prompt:
+> ```bash
+> npx neatnode
+> ```
+> and switch later by copying or merging configurations.
+

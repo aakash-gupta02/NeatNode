@@ -1,35 +1,60 @@
+---
+title: Error Handling
+sidebarTitle: Error Handling
+description: Learn how NeatNode handles errors in the REST API template using a centralized middleware.
+icon: Bug
+---
+
 # Error Handling
 
-The REST template includes a centralized error handler under `src/middleware/error.middleware.js`. Use it to normalize errors and return consistent JSON responses.
+The **REST API Template** uses a centralized error handler to ensure consistent and clean JSON responses across all endpoints.
 
-Example (simplified):
+---
+
+## Middleware Location
+
+```
+
+src/middleware/error.middleware.js
+
+````
+
+---
+
+## Example
 
 ```js
 // src/middleware/error.middleware.js
 export default function errorHandler(err, req, res, next) {
-  res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' })
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error"
+  })
 }
-```
+````
 
-Register the error handler after all routes in `src/app.js`.
-`````mdx
-# Error Handling
+---
 
-NeatNode's REST template includes a centralized error handler. Use it to normalize errors and return consistent responses.
+## Usage
 
-Example:
-
-# Error Handling
-
-The REST template includes a centralized error handler under `src/middleware/error.middleware.js`. Use it to normalize errors and return consistent JSON responses.
-
-Example (simplified):
+Registered at the bottom of `src/app.js`, after all route definitions:
 
 ```js
-// src/middleware/error.middleware.js
-export default function errorHandler(err, req, res, next) {
-  res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' })
-}
+import errorHandler from "./middleware/error.middleware.js"
+app.use(errorHandler)
 ```
 
-Register the error handler after all routes in `src/app.js`.
+This ensures that **all thrown or forwarded errors** from controllers or services
+are caught and formatted before reaching the client.
+
+---
+
+## Notes
+
+* Combine with the built-in `ApiError` and `CatchAsync` utilities for structured error propagation.
+* Never handle errors manually inside routes; let middleware do the work.
+* Keeps responses predictable and easy to debug.
+
+---
+
+Consistent error handling is key to production-grade APIs — NeatNode gives you that by default.
