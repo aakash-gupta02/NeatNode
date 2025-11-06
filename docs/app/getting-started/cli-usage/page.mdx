@@ -1,28 +1,68 @@
-# CLI Usage (Getting Started)
+---
+title: CLI Usage
+sidebarTitle: CLI Usage
+description: Learn how to run and interact with the NeatNode CLI to scaffold your first Node.js project.
+icon: Terminal
+---
 
-Run the CLI (interactive):
-
-```bash
-npx neatnode
-```
-
-Prompts include project name, template selection, and whether to include example CRUD.
-`````mdx
 # CLI Usage
 
-After installation, run:
+The NeatNode CLI helps you quickly scaffold ready-to-run Node.js projects — interactively and without configuration.
+
+---
+
+## Run the CLI (Interactive Mode)
+
+Execute the command below in your terminal:
 
 ```bash
 npx neatnode
 ````
 
-You’ll be prompted to select:
+You’ll be prompted to choose:
 
-* Project name
-* Template type (Basic / REST / Socket.io)
-* Whether to include CRUD
+* **Project name** (e.g., `my-app`)
+* **Template type** — `Basic`, `REST API`, or `Socket.io`
+* **Include CRUD?** — Whether to add default CRUD examples
 
-Once confirmed, the CLI scaffolds your app instantly.
+---
 
+## Example Session
 
-`````
+```bash
+? Enter project name › my-app
+? Choose a template › REST API
+? Include CRUD example? › No
+```
+
+Once confirmed, the CLI scaffolds your project:
+
+```
+✅ Created project: ./my-app
+💡 Next steps:
+   cd my-app
+   npm install
+   npm run dev
+```
+
+---
+
+## Notes
+
+> You can run NeatNode without installing globally — `npx` always fetches the latest version from npm.
+
+> If you prefer global usage:
+>
+> ```bash
+> npm install -g neatnode
+> neatnode
+> ```
+
+---
+
+## Next Steps
+
+* Explore available templates in [Templates](/templates)
+* Learn about [Installation](/getting-started/installation)
+* Jump to [Quickstart](/getting-started/quickstart)
+

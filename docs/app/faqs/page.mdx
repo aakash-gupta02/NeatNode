@@ -1,19 +1,307 @@
+---
+title: FAQs
+sidebarTitle: FAQs
+description: Common questions and troubleshooting tips for the NeatNode CLI, templates, and project setup.
+icon: HelpCircle
+---
+
 # FAQs
 
-Frequently asked questions about NeatNode.
+Common questions developers have about using **NeatNode**, its CLI, and its generated templates.
 
-Q: How do I change the template?
+---
 
-A: Choose the desired template when running the CLI; or edit the generated project files directly.
-`````mdx
-# FAQs
+## General
 
-Frequently asked questions about NeatNode.
+<details>
+  <summary><strong>How do I create a new project with NeatNode?</strong></summary>
 
-Q: How do I change the template?
+Run the CLI directly using **npx**:
 
-A: Use the CLI prompt to choose a different template when creating the project.
+```bash
+npx neatnode
+````
 
-More questions will be added.
+You’ll be prompted for:
 
-`````
+* **Project name**
+* **Template type** (Basic, REST API, or Socket)
+* **Whether to include CRUD modules**
+
+After generation, follow the next steps:
+
+```bash
+cd my-app
+npm install
+npm run dev
+```
+
+</details>
+
+---
+
+<details>
+  <summary><strong>How do I change the default template?</strong></summary>
+
+You can choose a template during the CLI prompt, or edit the generated files manually later.
+If you want to make a new default, open **`src/config/templates.js`** and reorder or modify the entries.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>How can I add my own custom template?</strong></summary>
+
+1. Create a new folder under `backend/templates/` (e.g., `express-graphql`).
+2. Add all necessary files: `server.js`, `src/app.js`, `package.json`, etc.
+3. Register it in **`templates.js`**:
+
+   ```js
+   { name: "GraphQL API", path: path.join(__dirname, "../../templates/express-graphql") }
+   ```
+4. Run `npx neatnode` and select your new template from the list.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>How do CRUD files get removed?</strong></summary>
+
+NeatNode removes CRUD-related files and route references using markers in `app.js`:
+
+```js
+// ROUTE_IMPORTS_START
+// ROUTE_IMPORTS_END
+
+// ROUTE_USES_START
+// ROUTE_USES_END
+```
+
+When you select “No CRUD” during setup, these files are deleted:
+
+* `src/models/*.model.js`
+* `src/controllers/*.controller.js`
+* `src/routes/*.route.js`
+
+…and their imports and uses are stripped automatically.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Why are my CRUD routes missing?</strong></summary>
+
+If you selected **“No CRUD”** during CLI setup, the example CRUD files were removed intentionally.
+To restore them, either:
+
+* Re-run the CLI and include CRUD, or
+* Copy CRUD modules manually from the template folder.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Can I use TypeScript with NeatNode?</strong></summary>
+
+Currently, templates are **JavaScript-based**, but the structure is TS-friendly.
+A future update will include:
+
+```bash
+--typescript
+```
+
+flag support for generating `.ts` files.
+
+</details>
+
+---
+
+## Configuration & Environment
+
+<details>
+  <summary><strong>Where do I configure environment variables?</strong></summary>
+
+Each template includes a `.env.example` file.
+Copy it and rename to `.env`, then adjust values like:
+
+```bash
+PORT=5000
+DB_URL=mongodb://localhost:27017/mydb
+```
+
+Your app automatically loads these via **dotenv** in `server.js`.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>How do I change the default port?</strong></summary>
+
+Open `server.js` in your generated project and modify:
+
+```js
+const PORT = process.env.PORT || 5000;
+```
+
+Then update `.env` accordingly.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Can I use NeatNode inside an existing project?</strong></summary>
+
+You can, but it’s **not recommended**.
+The CLI assumes it’s creating a new folder.
+If you must, use:
+
+```bash
+npx neatnode .
+```
+
+and it’ll scaffold into the current directory.
+
+</details>
+
+---
+
+## Troubleshooting
+
+<details>
+  <summary><strong>I see “Folder already exists” error</strong></summary>
+
+NeatNode won’t overwrite existing directories to avoid data loss.
+Either:
+
+```bash
+cd existing-folder && npx neatnode .
+```
+
+or create a new one:
+
+```bash
+npx neatnode my-new-app
+```
+
+</details>
+
+---
+
+<details>
+  <summary><strong>removeCrudReferences didn’t clean my app.js file</strong></summary>
+
+Make sure your `app.js` includes both comment markers:
+
+```js
+// ROUTE_IMPORTS_START
+// ROUTE_IMPORTS_END
+// ROUTE_USES_START
+// ROUTE_USES_END
+```
+
+The regex-based remover depends on these comments.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Why does placeholder replacement not work everywhere?</strong></summary>
+
+By default, only occurrences of **`project-name`** inside `package.json` are replaced.
+Future updates will support:
+
+```bash
+{{projectName}}, {{author}}, {{version}}
+```
+
+for broader replacement coverage.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>How do I update NeatNode?</strong></summary>
+
+If globally installed:
+
+```bash
+npm update -g neatnode
+```
+
+Or if using via `npx`, it always fetches the latest published version.
+
+</details>
+
+---
+# Miscellaneous
+
+{/* <details>
+<summary><strong>Miscellaneous</strong></summary> */}
+
+<details>
+  <summary><strong>Where are templates stored?</strong></summary>
+
+Templates live inside the CLI package itself, under:
+
+```
+backend/templates/
+```
+
+Each template folder is a complete Node.js project with its own dependencies.
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Can I deploy generated projects directly?</strong></summary>
+
+Yes — each generated project is a self-contained Node.js app.
+You can deploy it to:
+
+* Render
+* Railway
+* Vercel (with Node adapter)
+* Any VPS (via PM2)
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Will NeatNode support monorepo setup?</strong></summary>
+
+Planned for future versions.
+A `--monorepo` flag will scaffold independent services (auth, API, socket) under one root.
+
+</details>
+{/* </details> */}
+
+{/* ---
+
+> 🧩 **Tip:**
+> If you encounter an unexpected error, run NeatNode with:
+>
+> ```bash
+> DEBUG=1 npx neatnode
+> ```
+>
+> to print internal stack traces for debugging.
+
+--- */}
+
+### 💬 Still stuck?
+
+If you hit issues not covered here,
+open a discussion or issue on [GitHub](https://github.com/aakash-gupta02/NeatNode/issues).
+
+---
+

@@ -1,28 +1,75 @@
-# Installation (Getting Started)
+---
+title: Installation
+sidebarTitle: Installation
+description: Learn how to install or run NeatNode CLI using npm or npx.
+icon: Download
+---
 
-Install the CLI globally if desired:
-
-```bash
-npm i -g neatnode
-```
-
-Or run per-project with npx:
-
-```bash
-npx neatnode
-```
-`````mdx
 # Installation
 
-Install globally:
+NeatNode can be run directly with **npx** or installed globally as a CLI.
 
-```bash
-npm i -g neatnode
-````
+---
 
-Or use npx (recommended):
+## Recommended (Run with npx)
+
+No setup needed — always fetches the latest version.
 
 ```bash
 npx neatnode
+````
+
+This automatically downloads and runs NeatNode without a global install.
+
+> [!TIP]
+> Use this method if you want the latest CLI updates every time.
+
+---
+
+## Global Installation (Optional)
+
+Install the CLI once and run it anywhere:
+
+```bash
+npm install -g neatnode
 ```
-`````
+
+Then simply run:
+
+```bash
+neatnode
+```
+
+> [!NOTE]
+> Global install is useful for offline use or stable, locked versions.
+
+---
+
+## Verify Installation
+
+Run the following command to confirm:
+
+```bash
+neatnode --version
+```
+
+You should see something like:
+
+```
+v1.0.0
+```
+
+---
+
+## Requirements
+
+* **Node.js v18+**
+* **npm v9+ or pnpm 8+**
+* Works on macOS, Linux, and Windows.
+
+---
+
+## Next Steps
+
+* Learn [how to use the CLI](/getting-started/cli-usage)
+* Try the [Quickstart tutorial](/getting-started/quickstart)

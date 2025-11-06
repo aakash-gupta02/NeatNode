@@ -1,13 +1,35 @@
+---
+title: Quickstart
+sidebarTitle: Quickstart
+description: Scaffold and run your first NeatNode project in under a minute.
+icon: PlayCircle
+---
+
 # Quickstart
 
-Create a new project using the CLI:
+Spin up a new Node.js project with NeatNode in seconds — no setup required.
+
+---
+
+## Create a New Project
+
+Run the CLI command:
 
 ```bash
 npx neatnode
-# follow prompts to choose project name and template
-```
+````
 
-After scaffolding:
+Follow the interactive prompts to choose:
+
+* **Project name**
+* **Template type** (`Basic`, `REST API`, or `Socket.io`)
+* **Include CRUD?** (Yes / No)
+
+---
+
+## After Scaffolding
+
+Once generation completes, enter your new project and start developing:
 
 ```bash
 cd <project-name>
@@ -15,24 +37,44 @@ npm install
 npm run dev
 ```
 
-Choose Basic for small services, REST API for a full backend, or Socket.IO for real-time apps.
-`````mdx
-# Quickstart
+> [!TIP]
+> You can also use `npm start` for production mode.
 
-Create a new project in seconds:
+---
+
+## Template Options
+
+| Template      | Description                                                          |
+| ------------- | -------------------------------------------------------------------- |
+| **Basic**     | Minimal Express starter for small services or learning.              |
+| **REST API**  | Full-featured Express API with CRUD, authentication, and validation. |
+| **Socket.io** | Real-time server setup using Express + Socket.io.                    |
+
+---
+
+## Example Workflow
 
 ```bash
-npx neatnode create my-app
+npx neatnode
+# Select: REST API
+# Include CRUD: No
 cd my-app
 npm install
-npm start
-````
+npm run dev
+```
 
-This uses the interactive CLI to scaffold a project. Choose a template (Basic, REST API, or Socket.io) and follow the prompts.
+Server starts automatically at:
 
-Tips:
-- Use the Basic template for tiny services.
-- Use REST API for Express-based APIs with CRUD scaffolding.
-- Use Socket.io for real-time examples.
+```
+http://localhost:3000
+```
 
-`````
+---
+
+## Next Steps
+
+* Review [CLI Usage](/getting-started/cli-usage)
+* Learn [Folder Structure](/guides/folder-structure)
+* Explore [REST API Template](/templates/rest-api)
+
+
