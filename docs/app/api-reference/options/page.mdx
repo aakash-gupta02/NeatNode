@@ -1,6 +1,24 @@
-# Options
+---
+title: CLI Options
+icon: Settings2Icon
+---
 
-CLI and template options (flags, prompts, defaults).
+# CLI Options
 
-To be documented.
+Customize how the NeatNode CLI behaves by passing flags.
+{/* 
+| Flag | Description | Example |
+|------|--------------|----------|
+| `--template <name>` | Specify a template (basic, rest-api, socket) | `npx neatnode create my-app --template rest-api` |
+| `--no-crud` | Skip CRUD setup for REST template | `npx neatnode create api --no-crud` |
+| `--typescript` | Generate project with TypeScript | `npx neatnode create app --typescript` |
+| `--force` | Overwrite existing folder if it exists | `npx neatnode create app --force` |
 
+---
+
+## Examples
+
+```bash
+npx neatnode create dashboard --template rest-api --no-crud */}
+
+Coming soon...
