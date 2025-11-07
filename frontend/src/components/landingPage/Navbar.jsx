@@ -1,15 +1,16 @@
 "use client";
 import { Github, Menu, X } from 'lucide-react'
+import Link from 'next/link';
 import React, { useState } from 'react'
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     const navItems = [
-        { href: "#features", label: "Features" },
-        { href: "#templates", label: "Templates" },
-        { href: "#usage", label: "Usage" },
-        { href: "#docs", label: "Docs" },
+        { href: "features", label: "Features" },
+        { href: "templates", label: "Templates" },
+        { href: "usage", label: "Usage" },
+        { href: "https://neatnodee-docs.vercel.app", label: "Docs" },
     ]
 
     const toggleMenu = () => {
@@ -34,24 +35,24 @@ const Navbar = () => {
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-8">
                             {navItems.map((item) => (
-                                <a
+                                <Link
                                     key={item.href}
                                     href={item.href}
                                     className="text-sm text-zinc-400 hover:text-emerald-400 transition-all duration-200 relative group/nav"
                                 >
                                     {item.label}
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover/nav:w-full transition-all duration-300"></span>
-                                </a>
+                                </Link>
                             ))}
-                            <a
-                                href="https://github.com/aakash/nodeneat"
+                            <Link
+                                href="https://github.com/aakash-gupta02/neatnode"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center space-x-2 text-sm text-zinc-400 hover:text-emerald-400 transition-all duration-200 border border-zinc-700 hover:border-emerald-400/50 px-3 py-1.5 rounded-lg hover:bg-emerald-400/5"
                             >
                                 <Github size={16} />
                                 <span>GitHub</span>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Mobile Menu Button */}
