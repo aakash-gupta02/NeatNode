@@ -105,7 +105,7 @@ export default async function RootLayout({ children }) {
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/aakash-gupta02NeatNode"
+          docsRepositoryBase="https://github.com/aakash-gupta02/NeatNode/tree/main/docs"
           footer={footer}
           darkMode={true}
 

@@ -23,7 +23,7 @@ const Hero = () => {
 
 
                 <h1
-                    className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight mb-6 bg-gradient-to-b from-emerald-100 to-emerald-400 bg-clip-text text-transparent">
+                    className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight mb-6 bg-linear-to-b from-emerald-100 to-emerald-400 bg-clip-text text-transparent">
                     Build Backend project<br />templates instantly.
                 </h1>
 
@@ -38,7 +38,7 @@ const Hero = () => {
                         <span>Get Started</span>
                         <ArrowRight className="w-5 h-5" />
                     </a>
-                    <a href="https://github.com"
+                    <a href="https://github.com/aakash-gupta02/NeatNode"
                         className="inline-flex items-center space-x-2 bg-zinc-900 border border-zinc-800 text-zinc-100 px-6 py-3 rounded-lg font-medium hover:bg-zinc-800 hover:border-zinc-700 transition-all">
                         <Github className="w-5 h-5" />
                         <span>View on GitHub</span>
@@ -59,12 +59,12 @@ const Hero = () => {
                         <div className="p-6 font-mono text-sm">
                             <div className="flex items-center space-x-2 mb-2">
                                 <span className="text-emerald-400">$</span>
-                                <span className="text-zinc-300">npx stackgen create my-app</span>
+                                <span className="text-zinc-300">npx neatnode my-app</span>
                             </div>
                             <div className="space-y-1 ml-4 text-zinc-500">
                                 <div className="flex items-center space-x-2">
                                     <span className="text-emerald-400">✔</span>
-                                    <span>Select a template: <span className="text-zinc-300">Fullstack</span></span>
+                                    <span>Select a template: <span className="text-zinc-300">REST API</span></span>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <span className="text-emerald-400">✔</span>

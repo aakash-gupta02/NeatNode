@@ -1,5 +1,6 @@
 "use client";
 import { Github, Menu, X } from 'lucide-react'
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
 
@@ -24,9 +25,13 @@ const Navbar = () => {
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
                         <div className="flex items-center space-x-2 group">
-                            <div className="bg-zinc-100 text-zinc-950 px-2.5 py-1.5 rounded-md font-semibold text-sm tracking-tight group-hover:bg-emerald-400 transition-colors duration-300">
-                                CLI
-                            </div>
+                                <Image
+                                    src="/logo.svg"
+                                    alt="NeatNode Logo"
+                                    width={32}
+                                    height={32}
+                                    className="group-hover:scale-110 transition-transform duration-300"
+                                />
                             <span className="font-semibold text-base group-hover:text-emerald-400 transition-colors duration-300">
                                 NeatNode
                             </span>

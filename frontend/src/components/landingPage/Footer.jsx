@@ -2,9 +2,9 @@ import React from 'react'
 import { Github, Twitter, Package } from 'lucide-react'
 
 const links = [
-    { href: "https://github.com/aakash", title: "GitHub", icon: Github },
-    { href: "https://twitter.com/aakash", title: "Twitter", icon: Twitter },
-    { href: "https://npmjs.com/package/nodeneat", title: "NPM Package", icon: Package },
+    { href: "https://github.com/aakash-gupta02", title: "GitHub", icon: Github },
+    { href: "https://x.com/AakashG99795", title: "Twitter", icon: Twitter },
+    { href: "https://npmjs.com/package/neatnode", title: "NPM Package", icon: Package },
 ]
 
 const FooterSubtle = () => {

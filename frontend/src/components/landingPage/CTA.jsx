@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { Download, Github, FolderTree, Copy, Share2, Check } from 'lucide-react'
+import Link from 'next/link'
 
 const CTAMinimalSimple = () => {
     const [copyState, setCopyState] = useState('idle')
@@ -55,17 +56,25 @@ const CTAMinimalSimple = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap gap-4 justify-center mb-8">
-                    <button className="bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-semibold px-6 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 hover:scale-105">
+                    
+                    <Link
+                    href={"https://neatnodee-docs.vercel.app/getting-started/installation"}
+                    target="_blank"
+                     className="bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-semibold px-6 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 hover:scale-105">
                         <Download className="w-5 h-5" />
-                        <span>Install CLI</span>
-                    </button>
+                        <span>Installation</span>
+                    </Link>
 
-                    <button className="border border-zinc-700 hover:border-zinc-600 text-zinc-300 hover:text-white font-medium px-5 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 hover:bg-zinc-800/50">
+                    <Link
+                        href="https://neatnodee-docs.vercel.app/guides/contributing"
+                        target='_blank'
+                        className="border border-zinc-700 hover:border-zinc-600 text-zinc-300 hover:text-white font-medium px-5 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 hover:bg-zinc-800/50"
+                    >
                         <Github className="w-5 h-5" />
                         <span>Contribute</span>
-                    </button>
+                    </Link>
 
-                    <button 
+                    <button
                         onClick={handleShare}
                         className={`border ${
                             shareState === 'shared' 
