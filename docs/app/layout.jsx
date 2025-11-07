@@ -19,11 +19,6 @@ export const metadata = {
     'guide',
     'tutorial'
   ],
-  colorScheme: 'dark light',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#10b981' },
-    { media: '(prefers-color-scheme: dark)', color: '#059669' }
-  ],
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
@@ -61,7 +56,8 @@ export const metadata = {
     index: true,
     follow: true,
     nocache: false
-  }
+  },
+  metadataBase: new URL('https://neatnodee-docs.vercel.app')
 }
 
 const navbar = (
