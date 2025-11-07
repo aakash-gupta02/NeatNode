@@ -1,4 +1,3 @@
-// app/layout.jsx
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
@@ -6,13 +5,70 @@ import 'nextra-theme-docs/style.css'
 
 export const metadata = {
   title: 'NeatNode Docs',
-  description: 'NeatNode Documentation',
+  description: 'NeatNode — documentation for the NeatNode library and ecosystem.',
+  applicationName: 'NeatNode Docs',
+  authors: [{ name: 'NeatNode', url: 'https://github.com/aakash-gupta02/NeatNode' }],
+  creator: 'Aakash Gupta',
+  publisher: 'NeatNode',
+  keywords: [
+    'NeatNode',
+    'documentation',
+    'Node.js',
+    'library',
+    'API',
+    'guide',
+    'tutorial'
+  ],
+  colorScheme: 'dark light',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#10b981' },
+    { media: '(prefers-color-scheme: dark)', color: '#059669' }
+  ],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png'
+  },
+  manifest: '/site.webmanifest',
+  alternates: {
+    canonical: 'https://neatnodee.vercel.app'
+  },
+  openGraph: {
+    title: 'NeatNode Docs',
+    description: 'Comprehensive documentation for NeatNode — setup, guides, and API reference.',
+    url: 'https://neatnodee-docs.vercel.app',
+    siteName: 'NeatNode',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'NeatNode — Docs'
+      }
+    ],
+    locale: 'en_US',
+    type: 'website'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NeatNode Docs',
+    description: 'Comprehensive documentation for NeatNode — setup, guides, and API reference.',
+    images: ['/og-image.png'],
+    site: '@neatnode',
+    creator: '@neatnode'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false
+  }
 }
 
 const navbar = (
   <Navbar
     logo={
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
+        <img src="/logo.svg" alt="NeatNode Logo" style={{ width: '40px', height: '40px' }} />
         <span style={{
           fontWeight: 700,
           fontSize: '18px',

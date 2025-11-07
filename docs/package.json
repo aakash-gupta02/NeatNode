@@ -2,6 +2,7 @@
   "name": "neatnode-docs",
   "version": "1.0.0",
   "type": "module",
+  "private": true,
   "description": "Official documentation for NeatNode — a Node.js CLI that scaffolds project templates like Basic, REST API, and Socket.io instantly.",
   "scripts": {
     "dev": "next dev",
@@ -15,5 +16,23 @@
     "nextra-theme-docs": "^4.6.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aakash-gupta02/NeatNode/tree/main/docs"
+  },
+  "bugs": {
+    "url": "https://github.com/aakash-gupta02/NeatNode/issues"
+  },
+  "homepage": "https://neatnodee.vercel.app",
+  "author": "Aakash Gupta",
+  "license": "MIT",
+  "keywords": [
+    "neatnode",
+    "nodejs",
+    "cli",
+    "docs",
+    "nextra",
+    "nextjs"
+  ]
 }
