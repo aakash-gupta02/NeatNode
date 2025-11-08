@@ -32,8 +32,6 @@ export async function createProject({ projectName, templatePath, includeCrud, cr
       console.log("🗑️ Removing CRUD files...");
       removeCrud(targetPath, crudName);
       removeCrudReferences(path.join(targetPath, "src", "app.js"));
-    } else {
-      console.log("✅ Including CRUD functionality...");
     }
 
     console.log(`✅ Project "${projectName}" created successfully!`);

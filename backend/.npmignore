@@ -5,6 +5,8 @@ docs
 test
 temp
 __tests__
+/logs
+
 
 # Build / IDE / system junk
 .DS_Store
