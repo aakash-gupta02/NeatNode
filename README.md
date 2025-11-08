@@ -141,14 +141,14 @@ Whether it’s improving the templates, enhancing CLI features, or reporting bug
 3. Make your changes
 4. Submit a pull request
 
-See the [Contribution Guide](https://neatnodee-docs.vercel.app/contributing) for more info.
+See the [Contribution Guide](https://neatnodee-docs.vercel.app/guides/contributing) for more info.
 
 ---
 
 ## Author
 
 **Aakash Gupta**
-[GitHub](https://github.com/aakash-gupta02) • [Website](https://neatnode.vercel.app)
+[GitHub](https://github.com/aakash-gupta02) • [Website](https://neatnodee.vercel.app)
 
 ---
 
