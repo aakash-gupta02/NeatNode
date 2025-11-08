@@ -43,13 +43,13 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   alternates: {
-    canonical: "https://neatnode.vercel.app"
+    canonical: "https://neatnodee.vercel.app"
   },
   openGraph: {
     title: "NeatNode — Instant Node.js Backend Scaffolding CLI",
     description:
       "Generate production-ready Node.js templates instantly. REST API, Socket.io, or basic setups — all with one CLI command.",
-    url: "https://neatnode.vercel.app",
+    url: "https://neatnodee.vercel.app",
     siteName: "NeatNode",
     images: [
       {
@@ -76,7 +76,7 @@ export const metadata = {
     follow: true,
     nocache: false
   },
-  metadataBase: new URL("https://neatnode.vercel.app")
+  metadataBase: new URL("https://neatnodee.vercel.app")
 }
 
 export default function RootLayout({ children }) {

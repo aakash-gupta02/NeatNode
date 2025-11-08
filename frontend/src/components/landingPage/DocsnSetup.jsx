@@ -1,6 +1,7 @@
 import React from 'react'
 import { FolderTree, Users, ArrowUpRight, Terminal, Download } from 'lucide-react'
 import SectionCommon from './SectionCommon'
+import Link from 'next/link'
 
 const DocsnSetup = () => {
     const docItems = [
@@ -8,25 +9,25 @@ const DocsnSetup = () => {
             icon: <Terminal className="w-6 h-6 text-emerald-500" />,
             title: "Documentation",
             description: "Get up and running in under 2 minutes with our step-by-step guide",
-            href: "#"
+            href: "https://neatnodee-docs.vercel.app"
         },
         {
             icon: <FolderTree className="w-6 h-6 text-emerald-500" />,
             title: "Template Structure",
             description: "Deep dive into the generated project architecture",
-            href: "#"
+            href: "https://neatnodee-docs.vercel.app/templates"
         },
         {
             icon: <Users className="w-6 h-6 text-emerald-500" />,
             title: "Contribution Guide",
             description: "How to contribute templates and improve the tool",
-            href: "#"
+            href: "https://neatnodee-docs.vercel.app/guides/contributing"
         },
         {
             icon: <Download className="w-6 h-6 text-emerald-500" />,
             title: "API Reference",
             description: "Programmatic API for advanced integrations",
-            href: "#"
+            href: "https://neatnodee-docs.vercel.app/api-reference"
         }
     ]
 
@@ -37,8 +38,9 @@ const DocsnSetup = () => {
         >
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
                 {docItems.map((item, index) => (
-                    <a
+                    <Link
                         key={index}
+                        target='_blank'
                         href={item.href}
                         className="relative bg-zinc-900/50 border border-zinc-800/50 p-6 rounded-xl hover:border-zinc-700 transition-all group overflow-hidden h-full flex flex-col"
                     >
@@ -63,7 +65,7 @@ const DocsnSetup = () => {
                                 <p className="text-sm text-zinc-400 leading-relaxed">{item.description}</p>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 ))}
             </div>
         </SectionCommon>
