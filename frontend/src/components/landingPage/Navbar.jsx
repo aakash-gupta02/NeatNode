@@ -1,5 +1,5 @@
 "use client"
-import { Github, Menu, X } from "lucide-react"
+import { Code2, DotSquareIcon, FileCodeCorner, Github, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState } from "react"
@@ -14,8 +14,8 @@ const Navbar = ({ onNavClick }) => {
   ]
 
   const externalNavItems = [
-    { href: "https://neatnodee-docs.vercel.app", label: "Docs" },
-    { href: "https://github.com/aakash-gupta02/neatnode", label: "GitHub" }
+    { href: "https://neatnodee-docs.vercel.app", label: "Docs", icon: FileCodeCorner },
+    { href: "https://github.com/aakash-gupta02/neatnode", label: "GitHub", icon: Github }
   ]
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
@@ -62,6 +62,8 @@ const Navbar = ({ onNavClick }) => {
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-400 hover:text-emerald-400 transition-all duration-200 relative group/nav"
                 >
+                  {item.icon && <item.icon className="inline mr-2 h-5 w-5 text-emerald-400 "/>}
+
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover/nav:w-full transition-all duration-300"></span>
                 </Link>
@@ -118,23 +120,14 @@ const Navbar = ({ onNavClick }) => {
                   }}
                   onClick={() => setIsMenuOpen(false)}
                 >
+                  {item.icon && <item.icon className="inline mr-2 h-5 w-5 text-emerald-400"/>}
                   {item.label}
                 </a>
               ))}
 
-              {/* GitHub CTA */}
-              <a
-                href="https://github.com/aakash-gupta02/neatnode"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-3 text-base text-zinc-400 hover:text-emerald-400 transition-all duration-300 py-3 mt-4 border border-zinc-700 hover:border-emerald-400/50 rounded-lg px-4 justify-center hover:bg-emerald-400/5"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Github size={18} />
-                <span>Star on GitHub</span>
-              </a>
             </div>
           </div>
+
         </div>
       </nav>
 
