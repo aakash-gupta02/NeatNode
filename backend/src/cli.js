@@ -75,7 +75,7 @@ async function main() {
   // STEP 5 — Create Project (Remote download logic inside)
   await createProject({
     projectName,
-    repoPath: chosen.repoPath, // <-- IMPORTANT: not chosen.path
+    repoPath: chosen.repoPath, 
     includeCrud,
     crudName,
     language: langKey,

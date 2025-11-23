@@ -33,7 +33,7 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
       "author": os.userInfo().username || "author",
     });
 
-    if (!includeCrud) {
+    if (includeCrud && crudName  ) {
       console.log("🗑 Removing CRUD files...");
       removeCrud(targetPath, crudName);
       removeCrudReferences(path.join(targetPath, "src", "app.js"));

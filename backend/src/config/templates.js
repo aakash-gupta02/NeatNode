@@ -6,7 +6,7 @@ export default {
   ],
 
   ts: [
-    { name: "Basic Express (TS)", repoPath: "templates/ts/basic" },
+    { name: "Basic Express (TS)", repoPath: "templates/ts/basic-express" },
     // { name: "REST API (TS)", repoPath: "templates/ts/express-rest-api" },
     // { name: "Socket.IO (TS)", repoPath: "templates/ts/express-socket" },
   ],
