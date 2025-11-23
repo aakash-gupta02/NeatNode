@@ -14,11 +14,11 @@ const repo = "NeatNode";
 // GitHub codeload URL
 const zipUrl = `https://codeload.github.com/${owner}/${repo}/zip/refs/heads/main`;
 
-export async function downloadTemplate(repoPath, destDir) {
+export async function downloadTemplate(repoPath) {
   const tempZip = path.join(__dirname, "repo.zip");
   const tempExtractDir = path.join(__dirname, "repo-extract");
+  const tempFinalDir = path.join(__dirname, "template-final");
 
-  // 1. Download ZIP
   const response = await axios({
     url: zipUrl,
     responseType: "arraybuffer",
@@ -26,21 +26,22 @@ export async function downloadTemplate(repoPath, destDir) {
 
   fs.writeFileSync(tempZip, response.data);
 
-  // 2. Extract to temp folder
   await extract(tempZip, { dir: tempExtractDir });
 
-  // repository folder after extraction → NeatNode-main
   const extractedRoot = path.join(tempExtractDir, `${repo}-main`);
+  const srcTemplatePath = path.join(extractedRoot, repoPath);
 
-  // 3. Locate template folder inside extracted repo
-  const templateDir = path.join(extractedRoot, repoPath);
+  // ensure final directory exists
+  fs.rmSync(tempFinalDir, { recursive: true, force: true });
+  fs.mkdirSync(tempFinalDir, { recursive: true });
 
-  // 4. Copy template to destination
-  fs.cpSync(templateDir, destDir, { recursive: true });
+  fs.cpSync(srcTemplatePath, tempFinalDir, { recursive: true });
 
-  // 5. Cleanup
+  // cleanup zip + extract folder
   fs.rmSync(tempZip);
   fs.rmSync(tempExtractDir, { recursive: true, force: true });
 
   console.log("✔ Template downloaded & extracted");
+  return tempFinalDir;
 }
+
