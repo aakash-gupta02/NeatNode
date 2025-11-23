@@ -1,74 +1,89 @@
 #!/usr/bin/env node
 import inquirer from "inquirer";
-import { createProject } from "./actions/createProject.js";
 import templates from "./config/templates.js";
+import { createProject } from "./actions/createProject.js";
 
 async function main() {
-  console.log("\n🚀 Welcome to NodeNeat CLI!\n");
+  console.log("\n🚀 Welcome to NeatNode CLI!\n");
 
-  // Step 1: Ask for project name
+  // STEP 1 — Project Name
   const { projectName } = await inquirer.prompt([
     {
-      name: "projectName",
       type: "input",
-      message: "Enter your project folder name:",
+      name: "projectName",
+      message: "Enter project folder name:",
       default: "my-app",
-      validate: (input) => input.trim() !== "" || "Project name cannot be empty."
-    }
+      validate: (v) => v.trim() !== "" || "Project name cannot be empty.",
+    },
   ]);
 
-  // Step 2: Choose template
+  // STEP 2 — Choose Language
+  const { language } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "language",
+      message: "Select language:",
+      choices: ["JavaScript", "TypeScript"],
+    },
+  ]);
+
+  const langKey = language === "JavaScript" ? "js" : "ts";
+  const templateList = templates[langKey];
+
+  // STEP 3 — Choose Template
   const { template } = await inquirer.prompt([
     {
-      name: "template",
       type: "list",
+      name: "template",
       message: "Choose a template:",
-      choices: templates.map((t) => t.name)
-    }
+      choices: templateList.map((t) => t.name),
+    },
   ]);
 
-  const chosen = templates.find((t) => t.name === template);
+  const chosen = templateList.find((t) => t.name === template);
 
-  // Step 3: Optional prompt if REST API
+  // STEP 4 — CRUD Optional (only for some templates)
   let includeCrud = false;
   let crudName = "";
+
   if (chosen.name === "Basic Express") {
-    const answer = await inquirer.prompt([
+    const { includeCrud: answer } = await inquirer.prompt([
       {
-        name: "includeCrud",
         type: "confirm",
-        message: "Include example Todo CRUD setup?",
-        default: true
-      }
+        name: "includeCrud",
+        message: "Include example Todo CRUD?",
+        default: true,
+      },
     ]);
-    includeCrud = answer.includeCrud;
+    includeCrud = answer;
     crudName = "todo";
   }
 
   if (chosen.name === "REST API") {
-    const answer = await inquirer.prompt([
+    const { includeCrud: answer } = await inquirer.prompt([
       {
-        name: "includeCrud",
         type: "confirm",
-        message: "Include example User CRUD setup?",
-        default: true
-      }
+        name: "includeCrud",
+        message: "Include example User CRUD?",
+        default: true,
+      },
     ]);
-    includeCrud = answer.includeCrud;
+    includeCrud = answer;
     crudName = "user";
   }
 
-  // Step 4: Create the project
+  // STEP 5 — Create Project (Remote download logic inside)
   await createProject({
     projectName,
-    templatePath: chosen.path,
+    repoPath: chosen.repoPath, // <-- IMPORTANT: not chosen.path
     includeCrud,
-    crudName
+    crudName,
+    language: langKey,
   });
 
-  console.log(`\n✅ Project "${projectName}" created successfully using "${chosen.name}" template.\n`);
+  console.log(`\n✅ Project "${projectName}" created successfully using "${chosen.name}".\n`);
 }
 
 main().catch((err) => {
-  console.error("❌ Error:", err.message);
+  console.error("❌ Error:", err.message || err);
 });

@@ -1,20 +1,13 @@
-import path from "path";
-import { fileURLToPath } from "url";
+export default {
+  js: [
+    { name: "Basic Express", repoPath: "templates/js/express-basic" },
+    { name: "REST API", repoPath: "templates/js/express-rest-api" },
+    { name: "Socket.IO", repoPath: "templates/js/express-socket" },
+  ],
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default [
-  {
-    name: "Basic Express",
-    path: path.join(__dirname, "../../templates/express-basic")
-  },
-  {
-    name: "REST API",
-    path: path.join(__dirname, "../../templates/express-rest-api")
-  },
-  {
-    name: "Socket.IO Setup",
-    path: path.join(__dirname, "../../templates/express-socket")
-  }
-];
+  ts: [
+    { name: "Basic Express (TS)", repoPath: "templates/ts/basic" },
+    // { name: "REST API (TS)", repoPath: "templates/ts/express-rest-api" },
+    // { name: "Socket.IO (TS)", repoPath: "templates/ts/express-socket" },
+  ],
+};
