@@ -75,13 +75,24 @@ async function main() {
   // STEP 5 — Create Project (Remote download logic inside)
   await createProject({
     projectName,
-    repoPath: chosen.repoPath, 
+    repoPath: chosen.repoPath,
     includeCrud,
     crudName,
     language: langKey,
   });
 
+  
   console.log(`\n✅ Project "${projectName}" created successfully using "${chosen.name}".\n`);
+
+  console.log("Next steps:");
+  console.log(`  cd ${projectName}`);
+  console.log("  npm install");
+  console.log("  npm run dev\n");
+
+  console.log("🎉 Happy Coding!\n");
+
+
+
 }
 
 main().catch((err) => {
