@@ -21,11 +21,11 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
     }
 
     if (projectName !== ".") {
-      console.log("📁 Creating project folder...");
+      console.log("Creating project folder...");
       fs.mkdirSync(targetPath);
     }
 
-    console.log("⬇️ Downloading template...");
+    console.log("Downloading template...");
     const localTemplatePath = await downloadTemplate(repoPath);
 
     await copyTemplate(localTemplatePath, targetPath, {
