@@ -1,0 +1,18 @@
+# Folders to ignore
+node_modules
+.git
+docs
+test
+temp
+__tests__
+logs
+
+# Build / IDE / system junk
+.DS_Store
+.vscode
+.env
+.env.local
+npm-debug.log
+
+# Anything else you don’t want to publish
+*.log
