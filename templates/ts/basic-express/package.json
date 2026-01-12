@@ -1,7 +1,7 @@
 {
-  "name": "basic-express",
+  "name": "project-name",
   "version": "1.0.0",
-  "description": "",
+  "description": "Minimal Express.js & TypeScript starter template — clean, fast, and beginner-friendly structure.",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
