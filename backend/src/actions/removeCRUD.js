@@ -2,16 +2,16 @@ import fs from "fs";
 import path from "path";
 
 
-export function removeCrud(targetPath, name) {
+export function removeCrud(targetPath, name, langKey) {
   try {
     const crudPaths = [
-      `src/models/${name}.model.js`,
-      `src/controllers/${name}.controller.js`,
-      `src/routes/${name}.route.js`,
-      `src/services/${name}.service.js`,
-      `src/validations/${name}.validation.js`,
-      "src/middlewares/auth.middleware.js",
-      `src/schemas/${name}.schema.js`
+      `src/models/${name}.model.${langKey}`,
+      `src/controllers/${name}.controller.${langKey}`,
+      `src/routes/${name}.route.${langKey}`,
+      `src/services/${name}.service.${langKey}`,
+      `src/validations/${name}.validation.${langKey}`,
+      `src/middlewares/auth.middleware.${langKey}`,
+      `src/schemas/${name}.schema.${langKey}`
     ];
 
     crudPaths.forEach(relPath => {

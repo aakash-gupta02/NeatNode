@@ -9,7 +9,7 @@ import { downloadTemplate } from "../utils/downloadRepoTemplate.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function createProject({ projectName, repoPath, includeCrud, crudName }) {
+export async function createProject({ projectName, repoPath, includeCrud, crudName, langKey }) {
   try {
     const targetPath = projectName === "."
       ? process.cwd()
@@ -35,8 +35,8 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
 
     if (!includeCrud && crudName  ) {
       console.log("🗑 Removing CRUD files...");
-      removeCrud(targetPath, crudName);
-      removeCrudReferences(path.join(targetPath, "src", "app.js"));
+      removeCrud(targetPath, crudName, langKey);
+      removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
     }
 
     console.log(`\n✅ Project "${projectName}" created successfully!\n`);

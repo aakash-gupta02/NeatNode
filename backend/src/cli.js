@@ -72,13 +72,26 @@ async function main() {
     crudName = "user";
   }
 
+  if (chosen.name === "Basic Express (TS)") {
+    const { includeCrud: answer } = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "includeCrud",
+        message: "Include example User CRUD?",
+        default: true,
+      },
+    ]);
+    includeCrud = answer;
+    crudName = "todo";
+  }
+
   // STEP 5 — Create Project (Remote download logic inside)
   await createProject({
     projectName,
     repoPath: chosen.repoPath,
     includeCrud,
     crudName,
-    language: langKey,
+    langKey,
   });
 
   
