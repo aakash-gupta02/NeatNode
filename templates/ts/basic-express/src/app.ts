@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 
 // ROUTE_IMPORTS_START
-import todoRoutes from './routes/todo.routes.js';
+import todoRoutes from './routes/todo.route.js';
 // ROUTE_IMPORTS_END
 
 // Initialize Express app
