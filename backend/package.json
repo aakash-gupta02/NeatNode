@@ -1,9 +1,9 @@
 {
   "name": "neatnode",
-  "version": "3.1.5",
+  "version": "3.1.6",
   "description": "Plug & Play Node.js backend starter templates — build REST APIs, socket servers, and more in seconds.",
   "bin": {
-    "neatnode": "./bin/index.js"
+    "neatnode": "bin/index.js"
   },
   "keywords": [
     "nodejs",
