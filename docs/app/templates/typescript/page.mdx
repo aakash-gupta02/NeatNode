@@ -1,0 +1,47 @@
+---
+asIndexPage: true
+sidebarTitle: TypeScript
+title: TypeScript Templates
+description: Explore the TypeScript templates available in NeatNode for various project types and use cases.
+icon: BoxIcon
+---
+
+import { BoxIcon, RocketIcon, SwatchBook, Terminal } from "lucide-react"
+import { OverviewPage } from "../../_components/Overviewpage"
+
+# TypeScript Templates
+
+NeatNode includes several prebuilt TypeScript templates to help you kickstart development fast — whether you’re building a simple microservice, a full REST API, or a real-time server.
+
+<OverviewPage
+  filePath={metadata.filePath}
+  icons={{
+    BoxIcon,
+    RocketIcon,
+    SwatchBook,
+    Terminal
+  }}
+/>
+
+---
+
+## Available Templates
+
+| Template | Description | Use Case |
+|-----------|--------------|-----------|
+| **Basic Template** | Minimal Express setup with optional CRUD routes. | For small services or quick prototypes. |
+| **REST API Template** | Coming Soon... |
+| **Socket.IO Template** | Coming Soon... |
+
+---
+
+> [!TIP]
+> All templates share the same project structure — once you learn one, you’ll understand them all.
+
+> [!NOTE]
+> You can choose a template directly in the CLI prompt:
+> ```bash
+> npx neatnode
+> ```
+> and switch later by copying or merging configurations.
+

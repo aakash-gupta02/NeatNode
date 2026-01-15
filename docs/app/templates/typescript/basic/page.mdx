@@ -1,0 +1,96 @@
+---
+asIndexPage: true
+sidebarTitle: Basic Template
+title: Basic Template
+description: Minimal Express + TypeScript setup with essential configurations for beginners and lightweight services.
+icon: BoxIcon
+---
+
+# Basic Template
+
+The **Basic Template (TS)** is a clean, minimal **Express + TypeScript** starter focused on clarity and type safety.  
+It’s ideal for developers who want a working backend with TypeScript without unnecessary complexity.
+
+---
+
+## Overview
+
+This template generates a fully functional **TypeScript-based Express server** in seconds.  
+It’s suitable for:
+
+- Developers learning Express with TypeScript  
+- Quick prototypes with type safety  
+- Lightweight services that don’t require advanced layers  
+
+You get a typed `server.ts`, a configured Express app, and essential middleware prewired.  
+No authentication, no complex services — just a clean, typed foundation.
+
+---
+
+## Folder Structure
+
+```bash
+<project-root>/
+├─ package.json
+├─ tsconfig.json
+└─ src/
+   ├─ app.ts
+   ├─ server.ts
+   ├─ config/
+   │  └─ database.ts
+   ├─ routes/
+   │  └─ todo.route.ts
+   ├─ controllers/
+   │  └─ todo.controller.ts
+   ├─ models/
+   │  └─ todo.model.ts
+````
+
+---
+
+## Features
+
+* Preconfigured **Express server with TypeScript**
+* Strict typing via **tsconfig**
+* Built-in **CORS** and **JSON body parsing**
+* Logging via **Morgan**
+* Example **Todo CRUD** with typed controllers and models
+* Clean and extendable structure
+
+You can remove the example CRUD automatically by selecting **“No”** when the CLI prompts for CRUD.
+NeatNode removes all related files for you.
+
+---
+
+## When to Use
+
+Use the **Basic Template (TS)** when you want to:
+
+* Learn Express with proper TypeScript patterns
+* Build small services with type safety
+* Prototype APIs without architectural overhead
+* Keep everything simple and understandable
+
+This template intentionally avoids advanced abstractions so you can scale it your way.
+
+---
+
+## Customization Ideas
+
+* Add more routes under `src/routes/`
+* Extend models with interfaces or types
+* Introduce a `modules/` folder later if the project grows
+* Plug in a database or ORM when needed
+
+---
+
+## Summary
+
+The **Basic Template (TypeScript)** helps you:
+
+* Start backend development with TypeScript the right way
+* Understand Express flow with clear typing
+* Build quickly without boilerplate overload
+* Migrate smoothly to advanced NeatNode TS templates later
+
+It’s a solid starting point for any TypeScript-based Node.js backend.

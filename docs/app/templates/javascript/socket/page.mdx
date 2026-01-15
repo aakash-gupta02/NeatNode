@@ -1,0 +1,131 @@
+---
+asIndexPage: true
+sidebarTitle: Socket.IO Template
+title: Socket.IO Template
+description: Build real-time Node.js servers with Express and Socket.IO using NeatNode’s preconfigured template.
+icon: Terminal
+---
+
+import { OverviewPage } from "../../../_components/Overviewpage"
+import { SignalHigh, RadioTower, Network } from "lucide-react"
+
+# Socket.IO Template
+
+The **Socket.IO Template** gives you a ready-to-run real-time backend built on **Express** and **Socket.IO**.  
+It’s ideal for chat apps, live dashboards, notifications, or multiplayer systems where low-latency updates matter.
+
+---
+
+## Overview
+
+This template extends the Basic Express setup to include real-time bidirectional communication.  
+It automatically configures:
+- A shared HTTP + Socket.IO server  
+- Centralized socket initialization (`src/config/socket.js`)  
+- A clean folder structure for organizing events and logic  
+- Support for both REST routes and Socket events in one project
+
+---
+
+## Folder Structure
+
+```
+
+<project-root>/
+├─ package.json
+├─ server.js
+└─ src/
+├─ app.js
+├─ config/
+│  └─ socket.js
+├─ events/
+│  └─ chat.js
+├─ controllers/
+├─ services/
+├─ middleware/
+└─ utils/
+
+````
+
+- `server.js` — creates an HTTP server and initializes Socket.IO  
+- `config/socket.js` — handles socket setup and event registration  
+- `events/` — your socket event handlers (e.g., chat, notifications)  
+
+---
+
+## Example Socket Initialization
+
+```js
+// src/config/socket.js
+import { Server } from "socket.io"
+
+export const initSocket = (server) => {
+  const io = new Server(server, {
+    cors: { origin: "*" }
+  })
+
+  io.on("connection", (socket) => {
+    console.log(`User connected: ${socket.id}`)
+    socket.on("disconnect", () => console.log("User disconnected"))
+  })
+
+  return io
+}
+````
+
+And in `server.js`:
+
+```js
+import http from "http"
+import app from "./src/app.js"
+import { initSocket } from "./src/config/socket.js"
+
+const server = http.createServer(app)
+initSocket(server)
+
+server.listen(5000, () => console.log("Server running on port 5000"))
+```
+
+---
+
+## Features
+
+* Real-time event-driven architecture
+* Shared HTTP and WebSocket layers
+* Event handlers organized by module
+* Compatible with REST routes in the same project
+* CORS and connection logging enabled by default
+
+---
+
+## Related Topics
+
+<OverviewPage
+filePath={metadata.filePath}
+icons={{
+SignalHigh,
+RadioTower,
+Network
+}}
+/>
+
+Explore:
+
+* **Events** — how to register and manage real-time listeners
+* **Socket Configuration** — customizing options in `socket.js`
+* **Integration** — mixing REST endpoints and real-time features
+
+---
+
+## When to Use
+
+Use this template when your project requires:
+
+* Real-time updates (chat, dashboards, notifications)
+* Persistent user sessions via websockets
+* Live collaboration features
+* Seamless REST + Socket integration in one backend
+
+This setup handles both HTTP and WebSocket traffic efficiently — ready to scale from prototype to production.
+
+Get started quickly with NeatNode’s Socket.IO Template and build your real-time Node.js server today!
