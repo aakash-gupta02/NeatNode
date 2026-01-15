@@ -129,32 +129,6 @@ You can add new configs (e.g., Redis, Mailer, etc.) and import them in `server.j
 
 ---
 
-## 5. Enable TypeScript (Optional)
-
-To switch a generated project to TypeScript:
-
-1. Install dependencies:
-
-   ```bash
-   npm i -D typescript @types/node ts-node
-   npx tsc --init
-   ```
-
-2. Rename files:
-
-   * `server.js` → `server.ts`
-   * `src/**/*.js` → `.ts`
-
-3. Update package.json:
-
-   ```json
-   "scripts": {
-     "dev": "ts-node server.ts"
-   }
-   ```
-
----
-
 ## Summary
 
 | Task              | File to Edit  | Description                                |

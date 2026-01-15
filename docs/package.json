@@ -34,5 +34,8 @@
     "docs",
     "nextra",
     "nextjs"
-  ]
+  ],
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.14"
+  }
 }

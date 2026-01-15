@@ -7,7 +7,7 @@ icon: PlayCircle
 
 # Quickstart
 
-Spin up a new Node.js project with NeatNode in seconds — no setup required.
+Spin up a new Node.js backend using **JavaScript or TypeScript** with NeatNode — no setup required.
 
 ---
 
@@ -21,15 +21,16 @@ npx neatnode
 
 Follow the interactive prompts to choose:
 
-* **Project name**
-* **Template type** (`Basic`, `REST API`, or `Socket.io`)
-* **Include CRUD?** (Yes / No)
+* **Project folder name**
+* **Language** (JavaScript or TypeScript)
+* **Template type** (Basic, REST API, or Socket.IO)
+* **Include example CRUD?** (Yes / No)
 
 ---
 
 ## After Scaffolding
 
-Once generation completes, enter your new project and start developing:
+Once generation completes, enter your project and start the dev server:
 
 ```bash
 cd <project-name>
@@ -38,34 +39,47 @@ npm run dev
 ```
 
 > [!TIP]
-> You can also use `npm start` for production mode.
+> Use `npm start` for production mode (if available in the template).
 
 ---
 
 ## Template Options
 
-| Template      | Description                                                          |
-| ------------- | -------------------------------------------------------------------- |
-| **Basic**     | Minimal Express starter for small services or learning.              |
-| **REST API**  | Full-featured Express API with CRUD, authentication, and validation. |
-| **Socket.io** | Real-time server setup using Express + Socket.io.                    |
+### JavaScript Templates
+
+| Template           | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| **Basic (JS)**     | Minimal Express starter for learning or small services. |
+| **REST API (JS)**  | Express API with CRUD, authentication, and validation.  |
+| **Socket.IO (JS)** | Real-time server using Express + Socket.IO.             |
+
+### TypeScript Templates
+
+| Template       | Description                                                                       |
+| -------------- | --------------------------------------------------------------------------------- |
+| **Basic (TS)** | Minimal Express setup with TypeScript, strict typing, and preconfigured tsconfig. |
+| REST API (TS)  | *(Coming soon)*                                                                   |
+| Socket.IO (TS) | *(Coming soon)*                                                                   |
 
 ---
 
-## Example Workflow
+## Example Workflow (TypeScript)
 
 ```bash
 npx neatnode
-# Select: REST API
+# Enter project folder name: my-ts-app
+# Select language: TypeScript
+# Choose template: Basic Express (TS)
 # Include CRUD: No
-cd my-app
+
+cd my-ts-app
 npm install
 npm run dev
 ```
 
-Server starts automatically at:
+Server starts at:
 
-```
+```text
 http://localhost:3000
 ```
 
@@ -74,7 +88,5 @@ http://localhost:3000
 ## Next Steps
 
 * Review [CLI Usage](/getting-started/cli-usage)
-* Learn [Folder Structure](/guides/folder-structure)
-* Explore [REST API Template](/templates/rest-api)
-
-
+* Learn the [Folder Structure](/guides/folder-structure)
+* Explore templates under [/templates](/templates)

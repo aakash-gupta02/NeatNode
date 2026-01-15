@@ -1,18 +1,19 @@
 ---
 title: Folder Structure
 sidebarTitle: Folder Structure
-description: Learn about the folder layout used by NeatNode templates and how to extend or modify it for custom projects.
+description: Learn about the folder layout used by NeatNode JavaScript and TypeScript templates and how to extend them.
 icon: FolderIcon
 ---
 
 # Folder Structure
 
-Each NeatNode template follows a **clean, predictable structure** designed for scalability and clarity.  
-This layout makes it easy to add routes, controllers, services, and utilities without clutter.
+NeatNode provides **different folder structures** for **JavaScript** and **TypeScript** templates, each optimized for clarity and scalability.
 
 ---
 
-## Typical Project Layout
+## JavaScript Templates — Typical Structure
+
+Used by **Basic (JS)**, **REST API (JS)**, and **Socket.IO (JS)** templates.
 
 ```bash
 <project-root>/
@@ -27,151 +28,161 @@ This layout makes it easy to add routes, controllers, services, and utilities wi
     ├── services/
     ├── middleware/
     └── utils/
-````
+```
+
+This structure follows a **layer-based architecture**, separating concerns clearly.
+
+---
+
+## JavaScript Template Folders `/src`
+
+`controllers/`
+
+Request handlers mapped to routes.
+
+`routes/`
+
+Defines API endpoints.
+
+`services/`
+
+Business logic and database interactions.
+
+`models/`
+
+Mongoose schemas or DB models.
+
+`middleware/`
+
+Auth, validation, and error handling.
+
+`utils/`
+
+Shared helpers like `ApiError`, `ApiResponse`, `CatchAsync`.
+
+---
+
+## TypeScript Templates — Module-Based Structure
+
+Used by **Basic (TS)** and all upcoming TypeScript templates.
+
+```bash
+<project-root>/
+├── package.json
+├── tsconfig.json
+├── src/
+│   ├── app.ts
+│   ├── server.ts
+│   ├── config/
+│   ├── modules/
+│   │   └── user/
+│   │       ├── user.controller.ts
+│   │       ├── user.service.ts
+│   │       ├── user.route.ts
+│   │       ├── user.model.ts
+│   │       └── user.types.ts
+│   ├── middleware/
+│   └── utils/
+└── dist/
+```
+
+Each **module owns its logic**, making large codebases easier to scale and maintain.
 
 ---
 
 ## Root Files
 
-| File                    | Purpose                                                              |
-| ----------------------- | -------------------------------------------------------------------- |
-| **package.json**        | Declares dependencies, scripts, and project metadata.                |
-| **server.js**           | Entry point — loads Express app, connects DB, and starts the server. |
-| **.env / .env.example** | Environment variables for local and production configs.              |
-
-> [!TIP]
-> You can rename `server.js` to `index.js` or `main.js` if you prefer, as long as package.json scripts are updated accordingly.
+| File                      | Purpose                           |
+| ------------------------- | --------------------------------- |
+| **package.json**          | Dependencies and scripts          |
+| **server.js / server.ts** | Application entry point           |
+| **app.js / app.ts**       | Express configuration             |
+| **tsconfig.json**         | TypeScript compiler configuration |
+| **.env / .env.example**   | Environment variables             |
 
 ---
 
-## `/src` Directory
+## TypeScript Template Folders `/src`
 
-This is where all your backend logic lives.
+`modules/`
 
-### `src/app.js`
+Feature-based modules.
+Each module contains its own controller, service, routes, and model.
 
-The core Express configuration file.
-Includes middleware setup, route registration, and error handling.
-Markers like `// ROUTE_IMPORTS_START` are used internally for optional CRUD removal.
-
-### `src/config/`
-
-Houses configuration modules:
-
-* `db.js` → MongoDB or database connection
-* `logger.js` → Winston or console logger
-* `socket.js` → Socket.IO initialization (in real-time templates)
-
-Add your own config files here (e.g., Redis, mail, or caching).
-
-### `src/controllers/`
-
-Contains request handler logic.
-Each controller matches a route and interacts with models/services.
-Example: `user.controller.js`, `todo.controller.js`.
-
-### `src/models/`
-
-Defines Mongoose schemas or database models.
 Example:
 
-```js
-const UserSchema = new mongoose.Schema({ name: String, email: String })
+```bash
+modules/user/
+├── user.controller.ts
+├── user.service.ts
+├── user.route.ts
+├── user.model.ts
+└── user.types.ts
 ```
 
-### `src/routes/`
+`config/`
 
-Express routers that map endpoints to controllers.
-Example:
+Database, logger, environment setup.
 
-```js
-router.get('/users', getUsers)
-router.post('/users', createUser)
-```
+`middleware/`
 
-> [!TIP]
-> Keep route definitions simple — offload logic to controllers or services.
+Typed middleware (auth, validation, errors).
 
-### `src/services/`
+`utils/`
 
-Reusable business logic and helpers — usually database or API interaction code.
-Example: `user.service.js` handles queries, validation, or aggregation logic.
-
-### `src/middleware/`
-
-Middleware used globally or per-route:
-
-* `auth.middleware.js` — JWT or session validation
-* `error.middleware.js` — global error handler
-* `validate.middleware.js` — schema validation (e.g., Joi)
-
-### `src/utils/`
-
-Utility functions and helper classes.
-Includes things like:
-
-* `ApiResponse.js`, `ApiError.js`
-* `CatchAsync.js`, `Token.js`
-* Response or formatting helpers
+Typed helpers, error classes, response wrappers.
 
 ---
 
 ## Template Variations
 
-| Template      | Notable Extras                                          |
-| ------------- | ------------------------------------------------------- |
-| **Basic**     | Minimal setup with optional Todo CRUD.                  |
-| **REST API**  | Includes services, auth, and schema validation layers.  |
-| **Socket.IO** | Adds `src/config/socket.js` and real-time event wiring. |
+| Template           | Structure Type | Notes                 |
+| ------------------ | -------------- | --------------------- |
+| **Basic (JS)**     | Layer-based    | Minimal Express setup |
+| **REST API (JS)**  | Layer-based    | Auth + validation     |
+| **Socket.IO (JS)** | Layer-based    | Adds socket config    |
+| **Basic (TS)**     | Module-based   | Strict typing         |
+| REST API (TS)      | Module-based   | _(Coming soon)_       |
+| Socket.IO (TS)     | Module-based   | _(Coming soon)_       |
 
 ---
 
 ## Extending the Structure
 
-You can safely add new folders:
+You can safely add new folders in both JS and TS templates:
 
-```
+```bash
 src/
- ┣ jobs/         # Background or scheduled tasks
- ┣ scripts/      # CLI scripts (e.g. database seeding)
- ┗ validators/   # Custom schema validators
+ ┣ jobs/        # Background jobs
+ ┣ validators/  # Custom schema validation
+ ┗ scripts/     # Seeding or CLI scripts
 ```
-
-> [!NOTE]
-> NeatNode doesn’t enforce structure beyond the basics — you can freely add or rename modules to fit your workflow.
 
 ---
 
-## Example Flow
+## Request Flow Comparison
 
-Typical request flow in a REST API template:
+### JavaScript (Layer-Based)
 
 ```
-Route  →  Controller  →  Service  →  Model  →  Response
+Route → Controller → Service → Model → Response
 ```
 
-Each layer handles one responsibility:
+### TypeScript (Module-Based)
 
-* Routes define endpoints
-* Controllers manage request logic
-* Services handle database or external API logic
-* Models define data structure
-* Utils handle formatting and response output
+```
+Route → Controller → Service → Model → Response
+(all inside one module)
+```
 
 ---
 
 ## ✅ Summary
 
-| Folder           | Purpose                                     |
-| ---------------- | ------------------------------------------- |
-| **config/**      | Environment, database, logger, socket setup |
-| **controllers/** | Request handlers                            |
-| **models/**      | Database schemas                            |
-| **routes/**      | API endpoints                               |
-| **services/**    | Business logic                              |
-| **middleware/**  | Request interceptors                        |
-| **utils/**       | Shared helpers and error classes            |
+- **JS templates** → layer-based structure
+- **TS templates** → module-based structure
+- Same concepts, different organization
+- Easy to scale, easy to understand
 
 > [!TIP]
-> The folder structure is consistent across all templates — once you learn one, you know them all.
-> Customize and extend as needed for your project’s complexity!
+> Once you understand one template, switching between JS and TS is straightforward.
