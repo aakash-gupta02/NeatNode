@@ -5,20 +5,55 @@ icon: Settings2Icon
 
 # CLI Options
 
-Customize how the NeatNode CLI behaves by passing flags.
-{/* 
-| Flag | Description | Example |
-|------|--------------|----------|
-| `--template <name>` | Specify a template (basic, rest-api, socket) | `npx neatnode create my-app --template rest-api` |
-| `--no-crud` | Skip CRUD setup for REST template | `npx neatnode create api --no-crud` |
-| `--typescript` | Generate project with TypeScript | `npx neatnode create app --typescript` |
-| `--force` | Overwrite existing folder if it exists | `npx neatnode create app --force` |
+NeatNode uses an **interactive prompt-based** interface. Currently, all configuration is done through prompts rather than command-line flags.
+
+---
+
+## Interactive Prompts
+
+When you run `npx neatnode`, you'll be prompted for:
+
+| Prompt | Options | Description |
+|--------|---------|-------------|
+| **Project name** | Any valid folder name | Directory name for your project |
+| **Language** | JavaScript, TypeScript | Choose your preferred language |
+| **Template** | Basic, REST API, Socket.IO | Select project template |
+| **Include CRUD?** | Yes, No | Include example CRUD files |
+
+---
+
+## Available Flags
+
+| Flag | Description |
+|------|-------------|
+| `--version`, `-v` | Display CLI version |
+| `--help`, `-h` | Show help information |
 
 ---
 
 ## Examples
 
 ```bash
-npx neatnode create dashboard --template rest-api --no-crud */}
+# Interactive mode (recommended)
+npx neatnode
 
-Coming soon...
+# Check version
+npx neatnode --version
+
+# Show help
+npx neatnode --help
+```
+
+---
+
+## Future Options
+
+Planned flags for upcoming releases:
+
+- `--template <name>` — Skip template prompt
+- `--typescript` / `--js` — Skip language prompt
+- `--no-crud` — Skip CRUD prompt
+- `--force` — Overwrite existing directory
+
+> [!NOTE]
+> These flags are planned but not yet implemented. Use interactive mode for now.

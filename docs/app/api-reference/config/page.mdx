@@ -5,13 +5,59 @@ icon: CogIcon
 
 # Configuration
 
-NeatNode automatically configures your project for you, but you can adjust key settings via config files or environment variables.
+NeatNode templates come preconfigured, but you can adjust settings via config files and environment variables.
 
-## Project Configuration
+---
 
-| File | Purpose |
-|------|----------|
-| `.env` | Environment variables (DB_URL, PORT, etc.) |
-| `package.json` | Scripts, dependencies, and metadata |
+## Environment Variables
+
+Each template includes a `.env.example` file. Copy and rename it:
+
+```bash
+cp .env.example .env
+```
+
+Common variables:
+
+| Variable | Description | Default |
+|----------|-------------|----------|
+| `PORT` | Server port | `5000` |
+| `NODE_ENV` | Environment mode | `development` |
+| `DB_URL` | Database connection string | — |
+| `JWT_SECRET` | Secret for JWT tokens | — |
+
+---
+
+## Config Files
+
+| File | Location | Purpose |
+|------|----------|----------|
+| `db.js` | `src/config/` | Database connection logic |
+| `logger.js` | `src/config/` | Winston or console logger |
+| `socket.js` | `src/config/` | Socket.IO initialization |
+| `cors.js` | `src/config/` | CORS options |
+
+---
+
+## TypeScript Config
+
+TypeScript templates include a `tsconfig.json` with:
+
+- Strict mode enabled
+- ES module output
+- Path aliases configured
+- Source maps for debugging
+
+---
+
+## Customizing Config
+
+All config files are in `src/config/`. You can:
+
+- Modify existing files directly
+- Add new config modules (Redis, mail, etc.)
+- Import them in `server.js` or `app.js`
+
+See [Customization Guide](/guides/customization) for detailed examples.
 
 

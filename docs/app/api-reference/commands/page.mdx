@@ -5,13 +5,70 @@ icon: Terminal
 
 # CLI Commands
 
-Learn how to use the NeatNode CLI to scaffold new projects and manage templates.
+NeatNode provides an interactive CLI to scaffold Node.js projects. Here's how to use it.
 
-## Basic Usage
+---
+
+## Main Command
 
 ```bash
-npx neatnode my-app
-cd my-app
-npm install
-npm start
+npx neatnode
 ```
+
+This launches the interactive project generator. No flags required — you'll be guided through prompts.
+
+---
+
+## Interactive Prompts
+
+When you run the CLI, you'll be asked:
+
+| Prompt | Description |
+|--------|-------------|
+| **Project name** | Folder name for your new project |
+| **Language** | JavaScript or TypeScript |
+| **Template** | Basic, REST API, or Socket.IO |
+| **Include CRUD?** | Whether to include example CRUD files |
+
+---
+
+## After Scaffolding
+
+Once the CLI finishes, follow these steps:
+
+```bash
+cd <project-name>
+npm install
+npm run dev
+```
+
+---
+
+## Global Installation
+
+If you prefer running without `npx`:
+
+```bash
+npm install -g neatnode
+neatnode
+```
+
+---
+
+## Version Check
+
+```bash
+neatnode --version
+```
+
+Prints the currently installed CLI version.
+
+---
+
+## Help
+
+```bash
+neatnode --help
+```
+
+Displays available commands and options.

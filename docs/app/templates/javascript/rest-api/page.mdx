@@ -1,4 +1,4 @@
----
+﻿---
 asIndexPage: true
 sidebarTitle: REST API Template
 title: REST API Template
@@ -7,63 +7,29 @@ icon: RocketIcon
 ---
 
 import { OverviewPage } from "../../../_components/Overviewpage"
-import { Terminal, ShieldCheck, GitBranch, Bug } from "lucide-react"
+import { Terminal, ShieldCheck, Bug } from "lucide-react"
 
 # REST API Template
 
 The **REST API Template** is a structured and production-ready Node.js setup.  
 It extends the Basic Template with authentication, validation, service layers, and centralized error handling.
 
-This is the template you’ll use when building real-world APIs — scalable, testable, and maintainable from day one.
+This is the template you'll use when building real-world APIs — scalable, testable, and maintainable from day one.
 
 ---
 
 ## Overview
 
-It’s designed for developers who want to:
+It's designed for developers who want to:
 - Skip repetitive boilerplate setup  
 - Follow best practices for Express architecture  
 - Implement CRUD operations cleanly  
 - Use layered structure for routes, controllers, services, and models  
 
-The template is already wired with everything you’d expect in a real backend — you just start coding your business logic.
+The template is already wired with everything you'd expect in a real backend — you just start coding your business logic.
 
----
-
-## Folder Structure
-
-```
-
-<project-root>/
-├─ package.json
-├─ server.js
-└─ src/
-├─ app.js
-├─ config/
-│  ├─ db.js
-│  ├─ logger.js
-│  └─ cors.js
-├─ controllers/
-│  └─ user.controller.js
-├─ services/
-│  └─ user.service.js
-├─ middleware/
-│  ├─ auth.middleware.js
-│  ├─ error.middleware.js
-│  └─ validate.middleware.js
-├─ schemas/
-│  └─ user.schema.js
-├─ routes/
-│  └─ user.route.js
-├─ utils/
-│  ├─ ApiError.js
-│  ├─ ApiResponse.js
-│  ├─ CatchAsync.js
-│  └─ Token.js
-└─ validations/
-└─ user.validation.js
-
-````
+> [!TIP]
+> See the [Folder Structure Guide](/guides/folder-structure) for detailed project layouts.
 
 ---
 
@@ -85,7 +51,7 @@ The template is already wired with everything you’d expect in a real backend �
 When you run:
 ```bash
 npx neatnode
-````
+```
 
 and select `REST API`, the CLI will:
 
@@ -99,13 +65,12 @@ and select `REST API`, the CLI will:
 ## Related Topics
 
 <OverviewPage
-filePath={metadata.filePath}
-icons={{
-Terminal,
-ShieldCheck,
-GitBranch,
-Bug
-}}
+  filePath={metadata.filePath}
+  icons={{
+    Terminal,
+    ShieldCheck,
+    Bug
+  }}
 />
 
 These pages dive deeper into each part of the REST API Template:
@@ -126,5 +91,3 @@ Choose the **REST API Template** if you:
 * Prefer a scalable folder architecture out of the box
 
 This is the go-to template for production-quality Node.js projects.
-
-

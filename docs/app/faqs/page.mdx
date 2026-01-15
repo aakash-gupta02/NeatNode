@@ -25,10 +25,11 @@ npx neatnode
 You’ll be prompted for:
 
 * **Project name**
-* **Template type** (Basic, REST API, or Socket)
+* **Language** (JavaScript or TypeScript)
+* **Template type** (Basic, REST API, or Socket.IO)
 * **Whether to include CRUD modules**
 
-After generation, follow the next steps:
+After generation:
 
 ```bash
 cd my-app
@@ -107,14 +108,18 @@ To restore them, either:
 <details>
   <summary><strong>Can I use TypeScript with NeatNode?</strong></summary>
 
-Currently, templates are **JavaScript-based**, but the structure is TS-friendly.
-A future update will include:
+Yes! NeatNode supports both **JavaScript and TypeScript** templates.
+
+During the CLI prompts, select **TypeScript** when asked for your preferred language:
 
 ```bash
---typescript
+? Select language › TypeScript
 ```
 
-flag support for generating `.ts` files.
+Available TypeScript templates:
+- **Basic Express (TS)** — minimal setup with strict typing
+- **REST API (TS)** — *(coming soon)*
+- **Socket.IO (TS)** — *(coming soon)*
 
 </details>
 
