@@ -41,6 +41,8 @@ app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {
     sendResponse(res, StatusCodes.OK, "API is running...");
 });
+app.get("/favicon.ico", (req, res) => res.status(204).end());
+
 
 // health check route with rate limiting
 app.get("/health", rateLimiter(20), (req, res) => {

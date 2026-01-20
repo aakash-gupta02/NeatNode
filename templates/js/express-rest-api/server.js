@@ -9,6 +9,6 @@ connectDB();
 
 // Start the server
 app.listen(PORT, () => {
-  logger.info(`Server is running on port ${PORT}`);
+  logger.info(`Server is running on http://localhost:${PORT}`);
 });
 
