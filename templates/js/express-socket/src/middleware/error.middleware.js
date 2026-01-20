@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { config } from "../config/env.config.js";
-import logger from "../config/logger.config.js";
+import logger from "../config/logger.js"
 import ApiError from "../utils/ApiError.js";
 
 
