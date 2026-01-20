@@ -1,10 +1,10 @@
 import { StatusCodes } from "http-status-codes";
 import { createUserService, getUserService, loginUserService } from "../services/user.service.js";
 import sendResponse from "../utils/ApiResponse.js";
-import catchAsync from "../utils/catchAsync.js";
+import CatchAsync from "../utils/CatchAsync.js";
 
 // Controller to create a new user
-export const createUser = catchAsync(async (req, res, next) => {
+export const registerUser = CatchAsync(async (req, res, next) => {
     const { name, email, password } = req.body;
 
     // Create a new user
@@ -15,7 +15,7 @@ export const createUser = catchAsync(async (req, res, next) => {
 });
 
 // Controller to login user
-export const loginUser = catchAsync(async (req, res, next) => {
+export const loginUser = CatchAsync(async (req, res, next) => {
     const { email, password } = req.body;
 
     //   Login user
@@ -26,7 +26,7 @@ export const loginUser = catchAsync(async (req, res, next) => {
 });
 
 // Controller to get user by logged in User ID
-export const getUser = catchAsync(async (req, res, next) => {
+export const getUser = CatchAsync(async (req, res, next) => {
     const userId = req.user.userid;
 
     const user = await getUserService(userId);

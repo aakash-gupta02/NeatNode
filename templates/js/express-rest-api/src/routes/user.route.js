@@ -1,5 +1,5 @@
 import express from "express";
-import { getUser, createUser, loginUser } from "../controllers/user.controller.js";
+import { getUser, registerUser, loginUser } from "../controllers/user.controller.js";
 import { createUserSchema, loginSchema } from "../schemas/user.schema.js";
 import validate from "../middleware/validateRequest.middleware.js";
 import { protect } from "../middleware/auth.middleware.js";
@@ -7,7 +7,7 @@ import { protect } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.get("/me", protect, getUser);
-router.post("/create", validate(createUserSchema), createUser);
+router.post("/register", validate(createUserSchema), registerUser);
 router.post("/login", validate(loginSchema), loginUser);
 
 
