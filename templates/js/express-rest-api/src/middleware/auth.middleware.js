@@ -1,3 +1,5 @@
+import { StatusCodes } from "http-status-codes";
+import ApiError from "../utils/ApiError.js";
 import { verifyAccessToken } from "../utils/Token.js";
 
 
@@ -7,7 +9,7 @@ export const protect = (req, res, next) => {
 
     // Check for token
     if (!token || !token.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return next(new ApiError(StatusCodes.UNAUTHORIZED, 'Unauthorized'));
     }
 
     // Verify token
@@ -15,7 +17,7 @@ export const protect = (req, res, next) => {
 
     // Check if token is valid
     if (!decoded) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return next(new ApiError(StatusCodes.UNAUTHORIZED, 'Unauthorized'));
     }
 
     // Attach token
@@ -27,7 +29,7 @@ export const protect = (req, res, next) => {
 export const restrictTo = (...roles) => {
     return (req, res, next) => {
         if (!roles.includes(req.user.role)) {
-            return res.status(403).json({ message: 'Forbidden' });
+            return next(new ApiError(StatusCodes.FORBIDDEN, 'Forbidden'));
         }
         next();
     };

@@ -1,3 +1,4 @@
+import { StatusCodes } from "http-status-codes";
 import { createUserService, getUserService, loginUserService } from "../services/user.service.js";
 import sendResponse from "../utils/ApiResponse.js";
 import catchAsync from "../utils/catchAsync.js";
@@ -10,7 +11,7 @@ export const createUser = catchAsync(async (req, res, next) => {
     const user = await createUserService({ name, email, password });
 
     // Send response
-    sendResponse(res, 201, "User created successfully", { user });
+    sendResponse(res, StatusCodes.CREATED, "User created successfully", { user });
 });
 
 // Controller to login user
@@ -21,7 +22,7 @@ export const loginUser = catchAsync(async (req, res, next) => {
     const { user, token } = await loginUserService({ email, password });
 
     // Send response
-    sendResponse(res, 200, "Login successful", { user, token });
+    sendResponse(res, StatusCodes.OK, "Login successful", { user, token });
 });
 
 // Controller to get user by logged in User ID
@@ -31,5 +32,5 @@ export const getUser = catchAsync(async (req, res, next) => {
     const user = await getUserService(userId);
     if (!user) return next(new ApiError(404, "User not found"));
 
-    sendResponse(res, 200, "User retrieved successfully", { user });
+    sendResponse(res, StatusCodes.OK, "User retrieved successfully", { user });
 });
