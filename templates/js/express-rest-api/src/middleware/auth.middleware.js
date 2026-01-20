@@ -5,25 +5,28 @@ import { verifyAccessToken } from "../utils/Token.js";
 
 // Middleware to protect routes
 export const protect = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+  const authHeader = req.headers.authorization;
 
-    // Check for token
-    if (!token || !token.startsWith('Bearer ')) {
-        return next(new ApiError(StatusCodes.UNAUTHORIZED, 'Unauthorized'));
-    }
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return next(
+      new ApiError(StatusCodes.UNAUTHORIZED, "Unauthorized")
+    );
+  }
 
-    // Verify token
-    const decoded = verifyAccessToken(token);
+  const token = authHeader.split(" ")[1];
 
-    // Check if token is valid
-    if (!decoded) {
-        return next(new ApiError(StatusCodes.UNAUTHORIZED, 'Unauthorized'));
-    }
+  const decoded = verifyAccessToken(token);
 
-    // Attach token
-    req.user = decoded;
-    next();
+  if (!decoded) {
+    return next(
+      new ApiError(StatusCodes.UNAUTHORIZED, "Unauthorized")
+    );
+  }
+
+  req.user = decoded;
+  next();
 };
+
 
 // Middleware to restrict access based on user roles
 export const restrictTo = (...roles) => {
