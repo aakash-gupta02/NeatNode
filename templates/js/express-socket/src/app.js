@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import { errorHandler, notFound } from './middleware/error.middleware.js';
 import { rateLimiter } from './middleware/rateLimiter.js';
+import sendResponse from './utils/ApiResponse.js';
+import { StatusCodes } from 'http-status-codes';
 
 
 // instance 
@@ -18,13 +20,17 @@ app.use(helmet());
 
 // health check route with rate limiting
 app.get("/health", rateLimiter(20), (req, res) => {
-    res.status(200).json({ status: "OK", message: "ALL IS WELL😂..." });
+    sendResponse(res, StatusCodes.OK, "API is running...");
 });
 
 // default route
 app.get("/", (req, res) => {
-    res.send("API is running...");
+    sendResponse(res, StatusCodes.OK, "API is running...");
 });
+
+// To avoid unnecessary favicon errors
+app.get("/favicon.ico", (req, res) => res.status(204).end());
+
 
 // error handling middlewares
 app.use(notFound);

@@ -1,31 +1,40 @@
+import { StatusCodes } from "http-status-codes";
 import { config } from "../config/env.config.js";
+import logger from "../config/logger.config.js";
 import ApiError from "../utils/ApiError.js";
 
 
 // Global error handling middleware
 export const errorHandler = (err, req, res, next) => {
-  console.error("Error 💥", err);
+  const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+  const isDev = config.nodeEnv === "development";
 
-  let { statusCode, message } = err;
-  if (!statusCode) statusCode = 500;
+  logger.error(
+    `Error 💥
+    Message: ${err.message}
+    StatusCode: ${statusCode}
+    Operational: ${err.isOperational}
+    Stack: ${err.stack}`
+  );
 
-  // Handle operational errors
+  // Operational (trusted) errors
   if (err.isOperational) {
-    return res.status(err.statusCode).json({
+    return res.status(statusCode).json({
       success: false,
-      message: err.message,
+      message: err.message || "Something went wrong!",
     });
   }
 
-  // For unexpected errors (like coding bugs, db crashes, etc.)
+  // Programmer / unknown errors
   res.status(statusCode).json({
     success: false,
-    message,
+    message: isDev ? err.message : "Internal Server Error",
   });
 };
 
+
 // Handle invalid routes
 export const notFound = (req, res, next) => {
-  const error = new ApiError(404, `Not Found - ${req.originalUrl}`);
+  const error = new ApiError(StatusCodes.NOT_FOUND, `Not Found - ${req.originalUrl}`);
   next(error);
 };
