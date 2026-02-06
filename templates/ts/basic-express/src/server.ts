@@ -1,10 +1,10 @@
-import app from "./app.js"; 
+import app from "./app.js";
 import dotenv from 'dotenv';
 import connectDB from "./config/database.js";
 
 // Load environment variables
-dotenv.config({quiet: true});
-const PORT = process.env.PORT || 3000;
+dotenv.config({ quiet: true });
+const PORT = process.env.PORT || 4000;
 
 // Connect to the database
 connectDB();

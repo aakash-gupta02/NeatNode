@@ -5,7 +5,7 @@ import { initSocket } from "./src/config/socket.js";
 import logger from "./src/config/logger.js";
 import { connectDB } from "./src/config/db.config.js";
 
-const PORT = config.port || 3000;
+const PORT = config.port;
 const server = http.createServer(app);
 
 initSocket(server);
