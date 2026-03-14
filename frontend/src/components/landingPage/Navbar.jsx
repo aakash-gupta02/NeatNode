@@ -1,5 +1,5 @@
 "use client"
-import { Code2, DotSquareIcon, FileCodeCorner, Github, Menu, X } from "lucide-react"
+import { FileCodeCorner, Github, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState } from "react"
@@ -10,133 +10,113 @@ const Navbar = ({ onNavClick }) => {
   const internalNavItems = [
     { label: "Features", onClick: onNavClick?.featuresRef },
     { label: "Templates", onClick: onNavClick?.templateRef },
-    { label: "Usage", onClick: onNavClick?.usageRef }
+    { label: "Usage", onClick: onNavClick?.usageRef },
   ]
 
   const externalNavItems = [
-    { href: "https://neatnodee-docs.vercel.app", label: "Docs", icon: FileCodeCorner },
-    { href: "https://github.com/aakash-gupta02/neatnode", label: "GitHub", icon: Github }
+    { href: "https://docs.neatnode.codes", label: "Docs", icon: FileCodeCorner },
+    { href: "https://github.com/aakash-gupta02/neatnode", label: "GitHub", icon: Github },
   ]
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800/50 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <div className="flex items-center space-x-2 group">
-              <Image
-                src="/logo.svg"
-                alt="NeatNode Logo"
-                width={32}
-                height={32}
-                className="group-hover:scale-110 transition-transform duration-300"
-              />
-              <span className="font-semibold text-base group-hover:text-emerald-400 transition-colors duration-300">
+      <nav className="fixed inset-x-0 top-0 z-50 py-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-6">
+            
+            {/* 1. Left: Logo Section */}
+            <Link href="/" className="group flex items-center gap-3 shrink-0">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-400/10 shadow-[0_0_20px_rgba(52,211,153,0.1)] transition-all duration-300 group-hover:border-emerald-400/40 group-hover:bg-emerald-400/20">
+                <Image
+                  src="/logo.svg"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                  className="transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110"
+                />
+              </div>
+              <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-emerald-400">
                 NeatNode
               </span>
-            </div>
+            </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {/* Internal scroll links */}
+            {/* 2. Middle: Center Links Capsule */}
+            <div className="hidden lg:flex items-center gap-1 rounded-full border border-white/5 bg-zinc-900/40 p-1.5 backdrop-blur-md shadow-2xl">
               {internalNavItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={item.onClick}
-                  className="text-sm text-zinc-400 hover:text-emerald-400 transition-all duration-200 relative group/nav"
+                  className="rounded-full px-5 py-2 text-[13px] font-medium text-zinc-400 transition-all hover:bg-white/5 hover:text-emerald-300"
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover/nav:w-full transition-all duration-300"></span>
                 </button>
               ))}
+            </div>
 
-              {/* External links */}
+            {/* 3. Right: Buttons with Icon + Label */}
+            <div className="hidden md:flex items-center gap-4 shrink-0">
               {externalNavItems.map((item) => (
                 <Link
-                  key={item.href}
+                  key={item.label}
                   href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 hover:text-emerald-400 transition-all duration-200 relative group/nav"
+                  target="_blank"
+                  className="group flex items-center gap-2 rounded-full border border-white/5 bg-zinc-900/40 px-4 py-2 transition-all hover:border-emerald-500/40 hover:bg-emerald-500/10"
                 >
-                  {item.icon && <item.icon className="inline mr-2 h-5 w-5 text-emerald-400 "/>}
-
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover/nav:w-full transition-all duration-300"></span>
+                  <item.icon 
+                    size={16} 
+                    className="text-zinc-400 transition-colors group-hover:text-emerald-400" 
+                  />
+                  <span className="text-[13px] font-medium text-zinc-400 transition-colors group-hover:text-white">
+                    {item.label}
+                  </span>
                 </Link>
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-zinc-400 hover:text-emerald-400 transition-all duration-200 p-2 rounded-lg hover:bg-zinc-800/50"
-              onClick={toggleMenu}
+            {/* Mobile Toggle */}
+            <button 
+              className="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-zinc-900/60 text-white" 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden transition-all duration-500 ease-in-out ${
-            isMenuOpen
-              ? "max-h-96 opacity-100 translate-y-0"
-              : "max-h-0 opacity-0 -translate-y-4"
-          } overflow-hidden bg-zinc-950/95 backdrop-blur-xl border-t border-zinc-800/50`}
-        >
-          <div className="px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col space-y-4">
-              {/* Internal links */}
-              {internalNavItems.map((item, index) => (
+        {/* Mobile Menu (Same as before) */}
+        <div className={`absolute top-24 left-4 right-4 md:hidden transition-all duration-300 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
+          <div className="rounded-3xl border border-white/10 bg-zinc-950/95 p-4 backdrop-blur-2xl shadow-2xl">
+            <div className="flex flex-col gap-2">
+              {internalNavItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => {
-                    setIsMenuOpen(false)
-                    item.onClick?.()
-                  }}
-                  className="text-base text-zinc-400 hover:text-emerald-400 transition-all duration-300 py-3 border-b border-zinc-800/50 hover:border-emerald-400/30 hover:pl-4 text-left"
-                  style={{
-                    transitionDelay: isMenuOpen ? `${index * 100}ms` : "0ms"
-                  }}
+                  onClick={() => { setIsMenuOpen(false); item.onClick?.(); }}
+                  className="w-full rounded-xl px-4 py-3 text-left text-zinc-400 hover:bg-emerald-500/10 hover:text-emerald-400 transition-all"
                 >
                   {item.label}
                 </button>
               ))}
-
-              {/* External links */}
-              {externalNavItems.map((item, index) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base text-zinc-400 hover:text-emerald-400 transition-all duration-300 py-3 border-b border-zinc-800/50 hover:border-emerald-400/30 hover:pl-4"
-                  style={{
-                    transitionDelay: isMenuOpen ? `${index * 100}ms` : "0ms"
-                  }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.icon && <item.icon className="inline mr-2 h-5 w-5 text-emerald-400"/>}
-                  {item.label}
-                </a>
-              ))}
-
+              <div className="h-px bg-white/5 my-2" />
+              <div className="grid grid-cols-2 gap-2">
+                {externalNavItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    className="flex items-center justify-center gap-2 rounded-xl bg-white/5 py-3 text-sm text-zinc-400 hover:bg-white/10 hover:text-white transition-all"
+                  >
+                    <item.icon size={16} />
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-
         </div>
       </nav>
 
-      {/* Overlay for mobile */}
       {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"
-          onClick={() => setIsMenuOpen(false)}
-        />
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden" onClick={() => setIsMenuOpen(false)} />
       )}
     </>
   )
