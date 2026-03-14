@@ -1,20 +1,23 @@
 import Image from "next/image";
 
+const GRID_COLUMNS = 12;
+const GRID_ROWS = 10;
+
 const gridIcons = [
-  // Left side icons (using same pattern as right side but mirrored)
-  { row: 2, col: 2, src: "/file.svg" },
-  { row: 3, col: 1, src: "/globe.svg" },
-  { row: 4, col: 3, src: "/next.svg" },
-  { row: 5, col: 2, src: "/vercel.svg" },
-  { row: 6, col: 1, src: "/window.svg" },
-  { row: 7, col: 3, src: "/logo.svg" },
-  // Right side icons (columns 6-8)
-  { row: 2, col: 7, src: "/file.svg" },
-  { row: 3, col: 8, src: "/globe.svg" },
-  { row: 4, col: 6, src: "/vercel.svg" },
-  { row: 5, col: 7, src: "/window.svg" },
-  { row: 6, col: 8, src: "/next.svg" },
-  { row: 7, col: 6, src: "/logo.svg" },
+  // Left side icons
+  { row: 2, col: 1, src: "/file.svg" },
+  { row: 3, col: 2, src: "/globe.svg" },
+  { row: 4, col: 1, src: "/next.svg" },
+  { row: 5, col: 3, src: "/vercel.svg" },
+  { row: 6, col: 2, src: "/window.svg" },
+  { row: 7, col: 1, src: "/logo.svg" },
+  // Right side icons
+  { row: 2, col: 10, src: "/file.svg" },
+  { row: 3, col: 11, src: "/globe.svg" },
+  { row: 4, col: 12, src: "/next.svg" },
+  { row: 5, col: 10, src: "/vercel.svg" },
+  { row: 6, col: 11, src: "/window.svg" },
+  { row: 7, col: 12, src: "/logo.svg" },
 ];
 
 export default function GridBackground() {
@@ -26,20 +29,19 @@ export default function GridBackground() {
         <div
           className="grid w-full h-fit border-t border-l border-white/5"
           style={{
-            // Using 8 columns for perfect symmetry
-            gridTemplateColumns: "repeat(8, minmax(0, 1fr))",
-            gridTemplateRows: "repeat(10, minmax(0, 1fr))",
+            gridTemplateColumns: `repeat(${GRID_COLUMNS}, minmax(0, 1fr))`,
+            gridTemplateRows: `repeat(${GRID_ROWS}, minmax(0, 1fr))`,
           }}
         >
           {/* Generate Grid Cells with perfect squares */}
-          {Array.from({ length: 8 * 10 }).map((_, i) => (
+          {Array.from({ length: GRID_COLUMNS * GRID_ROWS }).map((_, i) => (
             <div
               key={i}
               className="border-r border-b border-white/5 aspect-square"
             />
           ))}
 
-          {/* Icons positioned within grid cells */}
+          {/* Icons positioned absolutely within grid cells */}
           {gridIcons.map((icon, i) => (
             <div
               key={i}
