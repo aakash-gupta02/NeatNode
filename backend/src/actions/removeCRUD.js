@@ -29,7 +29,6 @@ export function removeCrud(targetPath, name, langKey) {
   }
 }
 
-
 export function removeCrudReferences(appJsPath) {
   let content = fs.readFileSync(appJsPath, "utf8");
 
@@ -46,4 +45,18 @@ export function removeCrudReferences(appJsPath) {
   );
 
   fs.writeFileSync(appJsPath, content, "utf8");
+}
+
+export function removeCrudModule(targetPath, name) {
+  try {
+    const modulePath = path.join(targetPath, `src/modules/${name}`);
+    if (fs.existsSync(modulePath)) {
+      fs.rmSync(modulePath, { recursive: true, force: true });
+      console.log(`✔ Removed module: ${name}`);
+    } else {
+      console.log(`Skipped module (not found): ${name}`);
+    }
+  } catch (err) {
+    console.error("❌ Error while removing CRUD module:", err.message);
+  }
 }

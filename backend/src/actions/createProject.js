@@ -3,13 +3,13 @@ import path from "path";
 import os from "os";
 import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
-import { removeCrud, removeCrudReferences } from "./removeCRUD.js";
+import { removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
 import { downloadTemplate } from "../utils/downloadRepoTemplate.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function createProject({ projectName, repoPath, includeCrud, crudName, langKey }) {
+export async function createProject({ projectName, repoPath, includeCrud, crudName, langKey, isModular }) {
   try {
     const targetPath = projectName === "."
       ? process.cwd()
@@ -33,8 +33,15 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
       "author": os.userInfo().username || "author",
     });
 
-    if (!includeCrud && crudName  ) {
+    if (!includeCrud && crudName) {
       console.log("🗑 Removing CRUD files...");
+
+      if (isModular) {
+        removeCrudModule(targetPath, crudName);
+        removeCrudReferences(path.join(targetPath, "src", `routes/index.route.${langKey}`));
+
+      }
+
       removeCrud(targetPath, crudName, langKey);
       removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
     }

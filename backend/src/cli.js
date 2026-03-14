@@ -44,6 +44,7 @@ async function main() {
 
   // STEP 4 — CRUD Optional (only for some templates)
   let includeCrud = false;
+  let isModular = chosen.isModular || false;
   let crudName = "";
 
   if (chosen.name === "Basic Express") {
@@ -77,12 +78,25 @@ async function main() {
       {
         type: "confirm",
         name: "includeCrud",
-        message: "Include example User CRUD?",
+        message: "Include example Todo CRUD?",
         default: true,
       },
     ]);
     includeCrud = answer;
     crudName = "todo";
+  }
+  if (chosen.name === "REST API (TS)") {
+    const { includeCrud: answer } = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "includeCrud",
+        message: "Include example Auth CRUD?",
+        default: true,
+      },
+    ]);
+    includeCrud = answer;
+    crudName = "auth";
+    isModular = chosen.isModular;
   }
 
   // STEP 5 — Create Project (Remote download logic inside)
@@ -92,6 +106,7 @@ async function main() {
     includeCrud,
     crudName,
     langKey,
+    isModular,
   });
 
   
