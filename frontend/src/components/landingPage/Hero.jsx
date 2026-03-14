@@ -3,6 +3,7 @@ import React from 'react'
 import Background from './Background'
 import Link from 'next/link'
 import { useState } from 'react'
+import GridBackground from './GridBackground'
 const Hero = () => {
 
     const [language, setLanguage] = useState('js');
@@ -25,7 +26,8 @@ const Hero = () => {
     return (
         <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden isolate ">
 
-            <Background />
+            {/* <Background /> */}
+            <GridBackground />
 
             <div className="max-w-5xl mx-auto text-center">
 
