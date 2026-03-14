@@ -2,8 +2,8 @@ import { StatusCodes } from "http-status-codes";
 
 import ApiError from "../../utils/ApiError.js";
 import { createAccessToken } from "../../utils/Token.js";
-import { User } from "../user/user.model.js";
 import type { LoginInput, RegisterInput } from "./auth.validation.js";
+import { User } from "./user.model.js";
 
 type SafeUser = {
   id: string;
