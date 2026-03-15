@@ -25,17 +25,17 @@ const Navbar = ({ onNavClick }) => {
           <div className="flex items-center justify-between gap-6">
             
             {/* 1. Left: Logo Section */}
-            <Link href="/" className="group flex items-center gap-3 shrink-0">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-400/10 shadow-[0_0_20px_rgba(52,211,153,0.1)] transition-all duration-300 group-hover:border-emerald-400/40 group-hover:bg-emerald-400/20">
+            <Link href="/" className="group flex items-center shrink-0">
+              <div className="flex items-center justify-center">
                 <Image
                   src="/logo.svg"
                   alt="Logo"
-                  width={28}
-                  height={28}
+                  width={40}
+                  height={40}
                   className="transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110"
                 />
               </div>
-              <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-emerald-400">
+              <span className="text-xl font-bold tracking-tight text-white transition-colors group-hover:text-emerald-400">
                 NeatNode
               </span>
             </Link>
