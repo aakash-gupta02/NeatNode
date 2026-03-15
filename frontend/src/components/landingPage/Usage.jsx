@@ -1,93 +1,72 @@
 "use client";
-import React, { useState } from "react";
-import { Download, Terminal, CheckSquare, Rocket, Copy } from "lucide-react";
+import React from "react";
+import { Download, Terminal, CheckSquare, Rocket } from "lucide-react";
 import SectionCommon from "./SectionCommon";
-
+import CopyCommand from "./CopyCommand";
 
 const steps = [
     {
         id: 1,
         title: "Install globally",
-        icon: <Download className="w-6 h-6" />,
+        icon: <Download className="w-6 h-6 text-emerald-500" />,
         command: "npm i -g neatnode",
     },
     {
         id: 2,
         title: "Run the CLI",
-        icon: <Terminal className="w-6 h-6" />,
+        icon: <Terminal className="w-6 h-6 text-emerald-500" />,
         command: "npx neatnode",
     },
     {
         id: 3,
         title: "Choose template",
-        icon: <CheckSquare className="w-6 h-6" />,
+        icon: <CheckSquare className="w-6 h-6 text-emerald-500" />,
         desc: "Select from Basic, REST API, or Socket template options.",
     },
     {
         id: 4,
         title: "Start building",
-        icon: <Rocket className="w-6 h-6" />,
+        icon: <Rocket className="w-6 h-6 text-emerald-500" />,
         desc: "Your backend structure is generated and ready to run.",
     },
 ];
 
 const Usage = () => {
-    const [copiedId, setCopiedId] = useState(null);
-
-    const copyToClipboard = async (text, id) => {
-        try {
-            await navigator.clipboard.writeText(text);
-            setCopiedId(id);
-            setTimeout(() => setCopiedId(null), 2000);
-        } catch (e) {
-            console.error("Failed to copy text: ", e);
-        }
-    };
-
     return (
         <SectionCommon title="How It Works" desc="Get started with NeatNode in four simple steps">
             {/* Steps Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {steps.map((step) => (
-                    <div key={step.id} className="relative">
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-all">
-                            <div className="absolute -top-3 -left-3 bg-emerald-500 text-zinc-950 w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm">
+                    <div key={step.id} className="relative group">
+                        <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6 hover:border-zinc-700 transition-all relative">
+                            {/* Hover gradient overlay */}
+                            <div className="absolute inset-0 bg-linear-to-br from-emerald-600/6 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                            
+                            {/* Step number badge */}
+                            <div className="absolute -top-3 -left-3 bg-emerald-500 text-zinc-950 w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm shadow-lg shadow-emerald-500/20">
                                 {step.id}
                             </div>
-                            <div className="bg-zinc-800 border border-zinc-700 w-12 h-12 rounded-lg flex items-center justify-center mb-4 mt-2 text-emerald-400">
-                                {step.icon}
+                            
+                            {/* Icon */}
+                            <div className="relative mb-4 mt-2">
+                                <div className="border border-zinc-700 w-12 h-12 rounded-lg flex items-center justify-center transition-all group-hover:from-emerald-500/10 group-hover:to-emerald-300/10">
+                                    {step.icon}
+                                </div>
+                                <div className="absolute -inset-1 bg-emerald-500/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                             </div>
-                            <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                            
+                            <h3 className="text-lg font-semibold mb-2 relative z-10">{step.title}</h3>
 
                             {step.command ? (
-                                <div className="relative">
-                                    <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3 pr-12 font-mono text-xs text-zinc-400 overflow-x-auto">
-                                        {step.command}
-                                    </div>
-
-                                    <button
-                                        onClick={() => copyToClipboard(step.command, step.id)}
-                                        className="absolute top-2 right-2 inline-flex items-center gap-1 bg-zinc-800/40 hover:bg-zinc-700 text-zinc-300 rounded px-2 py-1 text-xs"
-                                        aria-label={`Copy command for step ${step.id}`}
-                                    >
-                                        {copiedId === step.id ? (
-                                            <span className="text-emerald-400">Copied</span>
-                                        ) : (
-                                            <>
-                                                <Copy className="w-4 h-4" />
-                                            </>
-                                        )}
-                                    </button>
-                                </div>
+                                <CopyCommand command={step.command} stepId={step.id} />
                             ) : (
-                                <p className="text-sm text-zinc-400">{step.desc}</p>
+                                <p className="text-sm text-zinc-400 relative z-10">{step.desc}</p>
                             )}
                         </div>
                     </div>
                 ))}
             </div>
         </SectionCommon>
-
     );
 };
 
