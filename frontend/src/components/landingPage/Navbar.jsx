@@ -8,9 +8,9 @@ const Navbar = ({ onNavClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const internalNavItems = [
-    { label: "Features", onClick: onNavClick?.featuresRef },
-    { label: "Templates", onClick: onNavClick?.templateRef },
-    { label: "Usage", onClick: onNavClick?.usageRef },
+    { label: "Features", href: "#features", onClick: onNavClick?.featuresRef },
+    { label: "Templates", href: "#templates", onClick: onNavClick?.templateRef },
+    { label: "Usage", href: "#usage", onClick: onNavClick?.usageRef },
   ]
 
   const externalNavItems = [
@@ -43,13 +43,14 @@ const Navbar = ({ onNavClick }) => {
             {/* 2. Middle: Center Links Capsule */}
             <div className="hidden lg:flex items-center gap-1 rounded-full border border-white/5 bg-zinc-900/40 p-1.5 backdrop-blur-md shadow-2xl">
               {internalNavItems.map((item) => (
-                <button
+                <Link
                   key={item.label}
+                  href={item.href}
                   onClick={item.onClick}
                   className="rounded-full px-5 py-2 text-[13px] font-medium text-zinc-400 transition-all hover:bg-white/5 hover:text-emerald-300"
                 >
                   {item.label}
-                </button>
+                </Link>
               ))}
             </div>
 
@@ -88,13 +89,14 @@ const Navbar = ({ onNavClick }) => {
           <div className="rounded-3xl border border-white/10 bg-zinc-950/95 p-4 backdrop-blur-2xl shadow-2xl">
             <div className="flex flex-col gap-2">
               {internalNavItems.map((item) => (
-                <button
+                <Link
                   key={item.label}
+                  href={item.href}
                   onClick={() => { setIsMenuOpen(false); item.onClick?.(); }}
                   className="w-full rounded-xl px-4 py-3 text-left text-zinc-400 hover:bg-emerald-500/10 hover:text-emerald-400 transition-all"
                 >
                   {item.label}
-                </button>
+                </Link>
               ))}
               <div className="h-px bg-white/5 my-2" />
               <div className="grid grid-cols-2 gap-2">

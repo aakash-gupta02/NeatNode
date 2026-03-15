@@ -1,4 +1,3 @@
-"use client";
 import CTA from "@/components/landingPage/CTA"
 import DocsnSetup from "@/components/landingPage/DocsnSetup"
 import Features from "@/components/landingPage/Features"
@@ -7,38 +6,23 @@ import Hero from "@/components/landingPage/Hero"
 import Navbar from "@/components/landingPage/Navbar"
 import Templates from "@/components/landingPage/Templates"
 import Usage from "@/components/landingPage/Usage"
-import { useEffect, useRef } from "react"
 
 export default function Home() {
-
-  const FeaturesRef = useRef(null);
-  const TemplateRef = useRef(null);
-  const UsageRef = useRef(null);
-
-  const scrollTo = (ref) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <main className="bg-zinc-950 text-zinc-100 antialiased overflow-x-hidden">
-      <Navbar
-        onNavClick={{
-          templateRef: () => scrollTo(TemplateRef),
-          usageRef: () => scrollTo(UsageRef),
-          featuresRef: () => scrollTo(FeaturesRef),
-        }}
+      <Navbar />
 
-      />
       <Hero />
-      <div ref={TemplateRef}>
+      
+      <div id="templates">
         <Templates />
       </div>
 
-      <div ref={UsageRef}>
+      <div id="usage">
         <Usage />
       </div>
 
-      <div ref={FeaturesRef}>
+      <div id="features">
         <Features />
       </div>
 

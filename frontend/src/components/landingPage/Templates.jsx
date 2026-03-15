@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import SectionCommon from "./SectionCommon";
 import { Check, Code2, Server, Radio, Type, FileCode } from "lucide-react";
