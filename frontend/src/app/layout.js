@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "NeatNode — Node.js Project Scaffolding CLI",
+    default: "NeatNode - Node.js Project Scaffolding CLI",
     template: "%s | NeatNode"
   },
   description:
-    "NeatNode is a plug-and-play CLI that scaffolds clean, production-ready Node.js backends in seconds. Build REST APIs, Socket.io servers, or basic templates instantly — no setup, no hassle.",
+    "NeatNode is a plug-and-play CLI that scaffolds clean, production-ready Node.js backends in seconds. Build REST APIs, Socket.io servers, or basic templates instantly - no setup, no hassle.",
   applicationName: "NeatNode",
   authors: [
     { name: "Aakash Gupta", url: "https://github.com/aakash-gupta02" }
@@ -47,9 +47,9 @@ export const metadata = {
     canonical: "https://neatnodee.vercel.app"
   },
   openGraph: {
-    title: "NeatNode — Instant Node.js Backend Scaffolding CLI",
+    title: "NeatNode - Instant Node.js Backend Scaffolding CLI",
     description:
-      "Generate production-ready Node.js templates instantly. REST API, Socket.io, or basic setups — all with one CLI command.",
+      "Generate production-ready Node.js templates instantly. REST API, Socket.io, or basic setups - all with one CLI command.",
     url: "https://neatnodee.vercel.app",
     siteName: "NeatNode",
     images: [
@@ -57,7 +57,7 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NeatNode CLI — Build Node.js backends instantly"
+        alt: "NeatNode CLI - Build Node.js backends instantly"
       }
     ],
     locale: "en_US",
@@ -65,7 +65,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NeatNode — Node.js Project Scaffolding CLI",
+    title: "NeatNode - Node.js Project Scaffolding CLI",
     description:
       "Create ready-to-use Node.js templates in seconds using NeatNode CLI.",
     images: ["/og-image.png"],

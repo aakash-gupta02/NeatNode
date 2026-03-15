@@ -120,7 +120,7 @@ const Templates = () => {
   return (
     <SectionCommon
       title="Choose your Structure."
-      desc="Pre-configured templates for every project type. — plug, code, and go."
+      desc="Pre-configured templates for every project type. - plug, code, and go."
     >
       {/* Language Toggle */}
       <div className="flex justify-center mb-8">
