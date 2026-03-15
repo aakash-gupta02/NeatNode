@@ -1,23 +1,25 @@
 import Image from "next/image";
+import { isValidElement } from "react";
+import ExpressJS from "../icons/ExpressJS";
+import MongoDB from "../icons/MongoDB";
+import NeatNodeLogo from "../icons/NeatNodeLogo";
+import NodeJS from "../icons/NodeJS";
+import PostgreSQL from "../icons/PostgreSQL";
+import Prisma from "../icons/Prisma";
+import Redis from "../icons/Redis";
 
 const GRID_COLUMNS = 12;
 const GRID_ROWS = 10;
 
 const gridIcons = [
-  // Left side icons
-  { row: 2, col: 1, src: "/file.svg" },
-  { row: 3, col: 2, src: "/globe.svg" },
-  { row: 4, col: 1, src: "/next.svg" },
-  { row: 5, col: 3, src: "/vercel.svg" },
-  { row: 6, col: 2, src: "/window.svg" },
-  { row: 7, col: 1, src: "/logo.svg" },
-  // Right side icons
-  { row: 2, col: 10, src: "/file.svg" },
-  { row: 3, col: 11, src: "/globe.svg" },
-  { row: 4, col: 12, src: "/next.svg" },
-  { row: 5, col: 10, src: "/vercel.svg" },
-  { row: 6, col: 11, src: "/window.svg" },
-  { row: 7, col: 12, src: "/logo.svg" },
+  { row: 2, col: 2, src: <MongoDB className="w-full h-full" /> },
+  { row: 3, col: 1, src: <NodeJS className="w-full h-full" /> },
+  { row: 4, col: 2, src: <ExpressJS className="w-full h-full" /> },
+  { row: 3, col: 3, src: <NeatNodeLogo className="w-full h-full" /> },
+  { row: 3, col: 10, src: <NeatNodeLogo className="w-full h-full" /> },
+  { row: 4, col: 11, src: <PostgreSQL className="w-full h-full" /> },
+  { row: 3, col: 12, src: <Redis className="w-full h-full" /> },
+  { row: 2, col: 11, src: <Prisma className="w-full h-full" /> },
 ];
 
 export default function GridBackground() {
@@ -54,13 +56,19 @@ export default function GridBackground() {
               }}
             >
               <div className="relative group p-2 sm:p-3 md:p-4 border border-white/10 rounded-lg bg-zinc-900/50 aspect-square flex items-center justify-center">
-                <Image
-                  src={icon.src}
-                  alt="tech icon"
-                  width={24}
-                  height={24}
-                  className="opacity-40 group-hover:opacity-100 transition-opacity grayscale invert w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
-                />
+                {isValidElement(icon.src) ? (
+                  <div className="opacity-60 group-hover:opacity-100 transition-opacity w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7">
+                    {icon.src}
+                  </div>
+                ) : (
+                  <Image
+                    src={icon.src}
+                    alt="tech icon"
+                    width={24}
+                    height={24}
+                    className="opacity-40 group-hover:opacity-100 transition-opacity grayscale invert w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
+                  />
+                )}
               </div>
             </div>
           ))}

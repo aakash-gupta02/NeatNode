@@ -20,7 +20,7 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-[#090c0b] text-zinc-100 antialiased overflow-x-hidden">
+    <main className="bg-zinc-950 text-zinc-100 antialiased overflow-x-hidden">
       <Navbar
         onNavClick={{
           templateRef: () => scrollTo(TemplateRef),
