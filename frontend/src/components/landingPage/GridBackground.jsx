@@ -12,14 +12,19 @@ const GRID_COLUMNS = 12;
 const GRID_ROWS = 10;
 
 const gridIcons = [
-  { row: 2, col: 2, src: <MongoDB className="w-full h-full" /> },
-  { row: 3, col: 1, src: <NodeJS className="w-full h-full" /> },
-  { row: 4, col: 2, src: <ExpressJS className="w-full h-full" /> },
-  { row: 3, col: 3, src: <NeatNodeLogo className="w-full h-full" /> },
-  { row: 3, col: 10, src: <NeatNodeLogo className="w-full h-full" /> },
-  { row: 4, col: 11, src: <PostgreSQL className="w-full h-full" /> },
-  { row: 3, col: 12, src: <Redis className="w-full h-full" /> },
-  { row: 2, col: 11, src: <Prisma className="w-full h-full" /> },
+  // left side
+  { row: 2, col: 3, src: <MongoDB className="w-full h-full" /> },
+  { row: 3, col: 2, src: <NodeJS className="w-full h-full" /> },
+  { row: 4, col: 3, src: <ExpressJS className="w-full h-full" /> },
+
+  // Neatnode logo
+  { row: 5, col: 4, src: <NeatNodeLogo className="w-full h-full" /> },
+  { row: 1, col: 9, src: <NeatNodeLogo className="w-full h-full" /> },
+
+  // right side
+  { row: 4, col: 10, src: <PostgreSQL className="w-full h-full" /> },
+  { row: 3, col: 11, src: <Redis className="w-full h-full" /> },
+  { row: 2, col: 10, src: <Prisma className="w-full h-full" /> },
 ];
 
 export default function GridBackground() {
