@@ -3,31 +3,33 @@ import { FolderTree, Users, ArrowUpRight, Terminal, Download } from 'lucide-reac
 import SectionCommon from './SectionCommon'
 import Link from 'next/link'
 
+export const docsUrl = "https://docs.neatnode.codes"
+
 const DocsnSetup = () => {
     const docItems = [
         {
             icon: <Terminal className="w-6 h-6 text-emerald-500" />,
             title: "Documentation",
             description: "Get up and running in under 2 minutes with our step-by-step guide",
-            href: "https://neatnodee-docs.vercel.app"
+            href: `${docsUrl}`
         },
         {
             icon: <FolderTree className="w-6 h-6 text-emerald-500" />,
             title: "Template Structure",
             description: "Deep dive into the generated project architecture",
-            href: "https://neatnodee-docs.vercel.app/templates"
+            href: `${docsUrl}/templates`
         },
         {
             icon: <Users className="w-6 h-6 text-emerald-500" />,
             title: "Contribution Guide",
             description: "How to contribute templates and improve the tool",
-            href: "https://neatnodee-docs.vercel.app/guides/contributing"
+            href: `${docsUrl}/guides/contributing`
         },
         {
             icon: <Download className="w-6 h-6 text-emerald-500" />,
             title: "API Reference",
             description: "Programmatic API for advanced integrations",
-            href: "https://neatnodee-docs.vercel.app/api-reference"
+            href: `${docsUrl}/api-reference`
         }
     ]
 

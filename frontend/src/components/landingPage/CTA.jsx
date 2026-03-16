@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Download, Github, FolderTree, Copy, Share2, Check } from 'lucide-react'
 import Link from 'next/link'
+import { docsUrl } from './DocsnSetup'
 
 const CTAMinimalSimple = () => {
     const [copyState, setCopyState] = useState('idle')
@@ -58,7 +59,7 @@ const CTAMinimalSimple = () => {
                 <div className="flex flex-wrap gap-4 justify-center mb-8">
                     
                     <Link
-                    href={"https://neatnodee-docs.vercel.app/getting-started/installation"}
+                    href={`${docsUrl}/getting-started/installation`}
                     target="_blank"
                      className="bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-semibold px-6 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 hover:scale-105">
                         <Download className="w-5 h-5" />
@@ -66,7 +67,7 @@ const CTAMinimalSimple = () => {
                     </Link>
 
                     <Link
-                        href="https://neatnodee-docs.vercel.app/guides/contributing"
+                        href={`${docsUrl}/guides/contributing`}
                         target='_blank'
                         className="border border-zinc-700 hover:border-zinc-600 text-zinc-300 hover:text-white font-medium px-5 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 hover:bg-zinc-800/50"
                     >
