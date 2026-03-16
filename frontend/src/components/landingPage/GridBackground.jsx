@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { isValidElement } from "react";
+import { isValidElement, useEffect, useMemo, useState } from "react";
 import ExpressJS from "../icons/ExpressJS";
 import MongoDB from "../icons/MongoDB";
 import NeatNodeLogo from "../icons/NeatNodeLogo";
@@ -8,40 +10,108 @@ import PostgreSQL from "../icons/PostgreSQL";
 import Prisma from "../icons/Prisma";
 import Redis from "../icons/Redis";
 
-const GRID_COLUMNS = 12;
-const GRID_ROWS = 10;
+const ICONS = {
+  mongodb: <MongoDB className="w-full h-full" />,
+  nodejs: <NodeJS className="w-full h-full" />,
+  express: <ExpressJS className="w-full h-full" />,
+  neatnode: <NeatNodeLogo className="w-full h-full" />,
+  postgresql: <PostgreSQL className="w-full h-full" />,
+  redis: <Redis className="w-full h-full" />,
+  prisma: <Prisma className="w-full h-full" />,
+};
 
-const gridIcons = [
-  // left side
-  { row: 2, col: 3, src: <MongoDB className="w-full h-full" /> },
-  { row: 3, col: 2, src: <NodeJS className="w-full h-full" /> },
-  { row: 4, col: 3, src: <ExpressJS className="w-full h-full" /> },
+const GRID_CONFIGS = {
+  mobile: {
+    columns: 6,
+    rows: 6,
+    icons: [
+      { row: 2, col: 1, src: ICONS.mongodb },
+      { row: 5, col: 1, src: ICONS.nodejs },
+      { row: 5, col: 6, src: ICONS.neatnode },
+      { row: 1, col: 2, src: ICONS.neatnode },
+      { row: 2, col: 6, src: ICONS.prisma },
+      { row: 7, col: 1, src: ICONS.redis },
+      { row: 1, col: 5, src: ICONS.postgresql },
+      { row: 7, col: 6, src: ICONS.express },
+    ],
+  },
+  tablet: {
+    columns: 8,
+    rows: 8,
+    icons: [
+      { row: 2, col: 2, src: ICONS.mongodb },
+      { row: 3, col: 1, src: ICONS.nodejs },
+      { row: 4, col: 2, src: ICONS.express },
+      { row: 5, col: 1, src: ICONS.neatnode },
+      { row: 5, col: 8, src: ICONS.neatnode },
+      { row: 2, col: 7, src: ICONS.prisma },
+      { row: 3, col: 8, src: ICONS.redis },
+      { row: 4, col: 7, src: ICONS.postgresql },
+    ],
+  },
+  desktop: {
+    columns: 12,
+    rows: 10,
+    icons: [
+      { row: 2, col: 3, src: ICONS.mongodb },
+      { row: 3, col: 2, src: ICONS.nodejs },
+      { row: 4, col: 3, src: ICONS.express },
+      { row: 5, col: 4, src: ICONS.neatnode },
+      { row: 1, col: 9, src: ICONS.neatnode },
+      { row: 4, col: 10, src: ICONS.postgresql },
+      { row: 3, col: 11, src: ICONS.redis },
+      { row: 2, col: 10, src: ICONS.prisma },
+    ],
+  },
+};
 
-  // Neatnode logo
-  { row: 5, col: 4, src: <NeatNodeLogo className="w-full h-full" /> },
-  { row: 1, col: 9, src: <NeatNodeLogo className="w-full h-full" /> },
+function getLayoutKey(viewportWidth) {
+  if (viewportWidth < 640) {
+    return "mobile";
+  }
 
-  // right side
-  { row: 4, col: 10, src: <PostgreSQL className="w-full h-full" /> },
-  { row: 3, col: 11, src: <Redis className="w-full h-full" /> },
-  { row: 2, col: 10, src: <Prisma className="w-full h-full" /> },
-];
+  if (viewportWidth < 1024) {
+    return "tablet";
+  }
+
+  return "desktop";
+}
 
 export default function GridBackground() {
+  const [viewportWidth, setViewportWidth] = useState(1024);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const gridConfig = useMemo(() => {
+    const layoutKey = getLayoutKey(viewportWidth);
+    return GRID_CONFIGS[layoutKey];
+  }, [viewportWidth]);
+
+  const gridCellsCount = gridConfig.columns * gridConfig.rows;
+
   return (
     <div className="absolute inset-0 -z-10 bg-zinc-950 overflow-hidden">
       {/* Outer container with edge fade */}
-      <div className="relative w-full h-full flex justify-center [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_60%,transparent_100%)]">
+      <div className="relative w-full h-full flex justify-center mask-[radial-gradient(ellipse_80%_80%_at_50%_0%,#000_60%,transparent_100%)]">
         {/* Responsive grid - square cells at all sizes */}
         <div
           className="grid w-full h-fit border-t border-l border-white/5"
           style={{
-            gridTemplateColumns: `repeat(${GRID_COLUMNS}, minmax(0, 1fr))`,
-            gridTemplateRows: `repeat(${GRID_ROWS}, minmax(0, 1fr))`,
+            gridTemplateColumns: `repeat(${gridConfig.columns}, minmax(0, 1fr))`,
+            gridTemplateRows: `repeat(${gridConfig.rows}, minmax(0, 1fr))`,
           }}
         >
           {/* Generate Grid Cells with perfect squares */}
-          {Array.from({ length: GRID_COLUMNS * GRID_ROWS }).map((_, i) => (
+          {Array.from({ length: gridCellsCount }).map((_, i) => (
             <div
               key={i}
               className="border-r border-b border-white/5 aspect-square"
@@ -49,10 +119,10 @@ export default function GridBackground() {
           ))}
 
           {/* Icons positioned absolutely within grid cells */}
-          {gridIcons.map((icon, i) => (
+          {gridConfig.icons.map((icon, i) => (
             <div
               key={i}
-              className="flex items-center justify-center bg-white/[0.02] backdrop-blur-sm z-10"
+              className="flex items-center justify-center bg-white/2 backdrop-blur-sm z-10"
               style={{
                 gridColumnStart: icon.col,
                 gridRowStart: icon.row,
