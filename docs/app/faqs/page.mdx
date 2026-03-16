@@ -118,8 +118,8 @@ During the CLI prompts, select **TypeScript** when asked for your preferred lang
 
 Available TypeScript templates:
 - **Basic Express (TS)** - minimal setup with strict typing
-- **REST API (TS)** - *(coming soon)*
-- **Socket.IO (TS)** - *(coming soon)*
+- **REST API (TS)** - modular production-ready API with auth, validation, and middleware
+- **Socket.IO (TS)** - planned for a future release
 
 </details>
 
@@ -135,10 +135,10 @@ Copy it and rename to `.env`, then adjust values like:
 
 ```bash
 PORT=5000
-DB_URL=mongodb://localhost:27017/mydb
+MONGODB_URI=mongodb://127.0.0.1:27017/mydb
 ```
 
-Your app automatically loads these via **dotenv** in `server.js`.
+Your app loads these values in the startup flow (for example via `dotenv` and typed env config in TypeScript templates).
 
 </details>
 
@@ -147,10 +147,10 @@ Your app automatically loads these via **dotenv** in `server.js`.
 <details>
   <summary><strong>How do I change the default port?</strong></summary>
 
-Open `server.js` in your generated project and modify:
+Open your server entry file (`server.js` or `server.ts`) and modify:
 
-```js
-const PORT = process.env.PORT || 5000;
+```ts
+const PORT = process.env.PORT || 5000
 ```
 
 Then update `.env` accordingly.

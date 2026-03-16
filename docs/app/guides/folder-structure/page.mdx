@@ -62,31 +62,34 @@ Shared helpers like `ApiError`, `ApiResponse`, `CatchAsync`.
 
 ---
 
-## TypeScript Templates - Module-Based Structure
+## TypeScript Templates - Layered + Modular Patterns
 
-Used by **Basic (TS)** and all upcoming TypeScript templates.
+NeatNode TypeScript templates currently use two patterns:
+- **Basic (TS)** uses a clean layer-based structure
+- **REST API (TS)** uses a modular feature-based structure
 
 ```bash
 <project-root>/
 ├── package.json
 ├── tsconfig.json
-├── src/
-│   ├── app.ts
-│   ├── server.ts
-│   ├── config/
-│   ├── modules/
-│   │   └── user/
-│   │       ├── user.controller.ts
-│   │       ├── user.service.ts
-│   │       ├── user.route.ts
-│   │       ├── user.model.ts
-│   │       └── user.types.ts
-│   ├── middleware/
-│   └── utils/
-└── dist/
+└── src/
+    ├── app.ts
+    ├── server.ts
+    ├── config/
+    ├── middlewares/
+    ├── modules/
+    │   └── auth/
+    │       ├── auth.controller.ts
+    │       ├── auth.route.ts
+    │       ├── auth.service.ts
+    │       ├── auth.validation.ts
+    │       └── user.model.ts
+    ├── routes/
+    ├── types/
+    └── utils/
 ```
 
-Each **module owns its logic**, making large codebases easier to scale and maintain.
+This keeps TypeScript projects strongly typed while still easy to evolve.
 
 ---
 
@@ -104,27 +107,26 @@ Each **module owns its logic**, making large codebases easier to scale and maint
 
 ## TypeScript Template Folders `/src`
 
-`modules/`
+`modules/` (REST API TS)
 
-Feature-based modules.
-Each module contains its own controller, service, routes, and model.
+Feature-based modules that group domain logic.
 
 Example:
 
 ```bash
-modules/user/
-├── user.controller.ts
-├── user.service.ts
-├── user.route.ts
-├── user.model.ts
-└── user.types.ts
+modules/auth/
+├── auth.controller.ts
+├── auth.service.ts
+├── auth.route.ts
+├── auth.validation.ts
+└── user.model.ts
 ```
 
 `config/`
 
-Database, logger, environment setup.
+Database, logger, and typed environment setup.
 
-`middleware/`
+`middlewares/`
 
 Typed middleware (auth, validation, errors).
 
@@ -141,9 +143,9 @@ Typed helpers, error classes, response wrappers.
 | **Basic (JS)**     | Layer-based    | Minimal Express setup |
 | **REST API (JS)**  | Layer-based    | Auth + validation     |
 | **Socket.IO (JS)** | Layer-based    | Adds socket config    |
-| **Basic (TS)**     | Module-based   | Strict typing         |
-| REST API (TS)      | Module-based   | _(Coming soon)_       |
-| Socket.IO (TS)     | Module-based   | _(Coming soon)_       |
+| **Basic (TS)**     | Layer-based    | Strict typing         |
+| **REST API (TS)**  | Module-based   | JWT + Zod + typed middleware |
+| Socket.IO (TS)     | Planned        | Not shipped yet       |
 
 ---
 
@@ -180,7 +182,7 @@ Route → Controller → Service → Model → Response
 ## ✅ Summary
 
 - **JS templates** → layer-based structure
-- **TS templates** → module-based structure
+- **TS templates** → layer-based (Basic) and module-based (REST API)
 - Same concepts, different organization
 - Easy to scale, easy to understand
 

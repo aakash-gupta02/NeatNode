@@ -1,0 +1,115 @@
+---
+asIndexPage: true
+sidebarTitle: REST API Template
+title: REST API Template
+description: Production-ready TypeScript REST API template with modular architecture, JWT auth, Zod validation, and MongoDB support.
+icon: RocketIcon
+---
+
+# REST API Template (TS)
+
+The **REST API Template (TS)** is a production-oriented, modular Express template built with TypeScript.
+It is designed for real-world APIs where structure, type safety, and maintainability matter from day one.
+
+---
+
+## Overview
+
+This template is ideal when you want to:
+
+- Build a scalable API with clear module boundaries
+- Use TypeScript end-to-end across routes, services, and middleware
+- Start with authentication, validation, and error handling already wired
+
+It includes a working auth module, shared middleware, and config utilities so you can focus on domain logic.
+
+---
+
+## Folder Structure
+
+```bash
+<project-root>/
+├─ package.json
+├─ tsconfig.json
+└─ src/
+   ├─ app.ts
+   ├─ server.ts
+   ├─ config/
+   │  ├─ db.ts
+   │  ├─ env.ts
+   │  └─ logger.ts
+   ├─ middlewares/
+   │  ├─ auth.middleware.ts
+   │  ├─ error.middleware.ts
+   │  ├─ notFound.middleware.ts
+   │  ├─ rateLimiter.middleware.ts
+   │  ├─ requestLogger.ts
+   │  └─ validateRequest.middleware.ts
+   ├─ modules/
+   │  └─ auth/
+   │     ├─ auth.controller.ts
+   │     ├─ auth.route.ts
+   │     ├─ auth.service.ts
+   │     ├─ auth.validation.ts
+   │     └─ user.model.ts
+   ├─ routes/
+   │  └─ index.route.ts
+   ├─ types/
+   │  └─ express.d.ts
+   └─ utils/
+      ├─ ApiError.ts
+      ├─ ApiResponse.ts
+      ├─ CatchAsync.ts
+      └─ Token.ts
+```
+
+---
+
+## Key Features
+
+- **Modular architecture** using `modules/<feature>`
+- **JWT authentication** with protected route middleware
+- **Zod validation** for request payloads
+- **Rate limiting** (global + auth-specific)
+- **Security headers** via Helmet and CORS setup
+- **Typed error handling** with unified API error responses
+- **MongoDB + Mongoose** integration with startup DB connection
+- **Typed environment validation** via Zod in `config/env.ts`
+
+---
+
+## Default API Endpoints
+
+- `GET /` - health response
+- `POST /api/v1/auth/register`
+- `POST /api/v1/auth/login`
+- `GET /api/v1/auth/me` (protected)
+
+---
+
+## How It Works In CLI
+
+When you run:
+
+```bash
+npx neatnode
+```
+
+then choose **TypeScript** and **REST API (TS)**, NeatNode will:
+
+1. Copy the template into your project folder
+2. Replace project placeholders in `package.json`
+3. Install-ready scripts for dev, build, and start workflows
+
+---
+
+## When To Use
+
+Choose this template when you need:
+
+- Production-ready API foundations
+- Strong typing across API layers
+- Built-in auth and validation primitives
+- A structure that scales as features grow
+
+For very small prototypes, start with **Basic (TS)** and move to this template when requirements grow.
