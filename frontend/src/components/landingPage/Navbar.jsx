@@ -1,4 +1,5 @@
 "use client"
+import { docsUrl } from "@/app/metadata"
 import { FileCodeCorner, Github, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -14,7 +15,7 @@ const Navbar = ({ onNavClick }) => {
   ]
 
   const externalNavItems = [
-    { href: "https://docs.neatnode.codes", label: "Docs", icon: FileCodeCorner },
+    { href: docsUrl, label: "Docs", icon: FileCodeCorner },
     { href: "https://github.com/aakash-gupta02/neatnode", label: "GitHub", icon: Github },
   ]
 

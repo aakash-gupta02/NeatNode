@@ -1,4 +1,5 @@
-const siteUrl = "https://www.neatnode.codes";
+const siteUrl = "https://neatnode.codes";
+export const docsUrl = "https://docs.neatnode.codes"
 
 export const siteConfig = {
   name: "NeatNode",
@@ -10,7 +11,8 @@ export const siteConfig = {
   author: {
     name: "Aakash Gupta",
     github: "https://github.com/aakash-gupta02",
-    twitter: "@aakashgupta02"
+    twitter: "@aakashgupta02",
+    portfolio: "https://aakashgupta.dev"
   },
   keywords: [
     "NeatNode",

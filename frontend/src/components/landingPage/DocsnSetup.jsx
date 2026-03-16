@@ -2,8 +2,7 @@ import React from 'react'
 import { FolderTree, Users, ArrowUpRight, Terminal, Download } from 'lucide-react'
 import SectionCommon from './SectionCommon'
 import Link from 'next/link'
-
-export const docsUrl = "https://docs.neatnode.codes"
+import { docsUrl } from '@/app/metadata'
 
 const DocsnSetup = () => {
     const docItems = [

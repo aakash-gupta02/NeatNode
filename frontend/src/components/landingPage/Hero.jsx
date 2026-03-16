@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import GridBackground from './GridBackground'
 import Terminal from './Terminal'
+import { docsUrl } from '@/app/metadata'
 const Hero = () => {
 
 
@@ -39,7 +40,7 @@ const Hero = () => {
 
                 {/* get started & github button */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Link href="https://neatnodee-docs.vercel.app"
+                    <Link href={`${docsUrl}`}
                         target='_blank'
                         className="inline-flex items-center space-x-2 bg-zinc-100 text-zinc-950 px-6 py-3 rounded-lg font-medium hover:bg-zinc-200 transition-all hover:scale-105">
                         <span>Get Started</span>

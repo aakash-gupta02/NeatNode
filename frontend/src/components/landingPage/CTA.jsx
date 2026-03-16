@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Download, Github, FolderTree, Copy, Share2, Check } from 'lucide-react'
 import Link from 'next/link'
-import { docsUrl } from './DocsnSetup'
+import { docsUrl } from '@/app/metadata'
 
 const CTAMinimalSimple = () => {
     const [copyState, setCopyState] = useState('idle')
