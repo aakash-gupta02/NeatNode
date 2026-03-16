@@ -8,7 +8,7 @@ icon: Network
 # Events
 
 The **Socket.IO Template** gives you full control over how real-time events are registered and managed.  
-It doesn’t ship with many default events — instead, you define your own handlers under `src/events/` and wire them inside the socket initializer.
+It doesn’t ship with many default events - instead, you define your own handlers under `src/events/` and wire them inside the socket initializer.
 
 ---
 
@@ -70,7 +70,7 @@ export const initSocket = (server) => {
 }
 ```
 
-This modular approach keeps your socket logic clean, testable, and easy to scale — add one file per event group, and import them all into the socket initializer.
+This modular approach keeps your socket logic clean, testable, and easy to scale - add one file per event group, and import them all into the socket initializer.
 
 ---
 
@@ -78,7 +78,7 @@ This modular approach keeps your socket logic clean, testable, and easy to scale
 
 * Group related events in the same file (e.g., `chat.js`, `notifications.js`)
 * Always handle disconnect events to clean up listeners
-* Keep socket logic lightweight — move heavy operations to services
+* Keep socket logic lightweight - move heavy operations to services
 * Use `socket.broadcast.emit()` carefully to avoid unnecessary network traffic
 
 ---
@@ -91,7 +91,7 @@ This modular approach keeps your socket logic clean, testable, and easy to scale
 | `events/chat.js`   | Example event registration module                   |
 | `server.js`        | Passes HTTP server to `initSocket()`                |
 
-Each event file is fully modular — just import it, register it, and start emitting.
+Each event file is fully modular - just import it, register it, and start emitting.
 
 ---
 

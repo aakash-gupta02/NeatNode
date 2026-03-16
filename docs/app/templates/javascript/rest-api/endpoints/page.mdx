@@ -86,7 +86,7 @@ app.use("/api/users", userRouter)
 // ROUTE_USES_END
 ```
 
-When the CLI removes CRUD examples, these sections are automatically stripped clean — keeping your app.js organized.
+When the CLI removes CRUD examples, these sections are automatically stripped clean - keeping your app.js organized.
 
 To add your own routes, simply add new imports between those markers or below them.
 
@@ -107,7 +107,7 @@ Example: Add a `products` resource.
    app.use("/api/products", productRouter)
    ```
 
-That’s it — your new API endpoints are ready.
+That’s it - your new API endpoints are ready.
 
 ---
 
@@ -128,7 +128,7 @@ Each resource typically follows this pattern:
 ## Notes
 
 * Controllers should handle **business logic** and return formatted responses using `ApiResponse`.
-* Avoid direct DB logic inside route files — always delegate to controllers or services.
+* Avoid direct DB logic inside route files - always delegate to controllers or services.
 * Group routes by resource for maintainability.
 
 ---

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "description": "Official documentation for NeatNode — a Node.js CLI that scaffolds project templates like Basic, REST API, and Socket.io instantly.",
+  "description": "Official documentation for NeatNode - a Node.js CLI that scaffolds project templates like Basic, REST API, and Socket.io instantly.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

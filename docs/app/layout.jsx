@@ -2,10 +2,18 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
+import './globals.css'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap'
+})
 
 export const metadata = {
   title: 'NeatNode Docs',
-  description: 'NeatNode — documentation for the NeatNode library and ecosystem.',
+  description: 'NeatNode - documentation for the NeatNode library and ecosystem.',
   applicationName: 'NeatNode Docs',
   authors: [{ name: 'NeatNode', url: 'https://github.com/aakash-gupta02/NeatNode' }],
   creator: 'Aakash Gupta',
@@ -30,7 +38,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'NeatNode Docs',
-    description: 'Comprehensive documentation for NeatNode — setup, guides, and API reference.',
+    description: 'Comprehensive documentation for NeatNode - setup, guides, and API reference.',
     url: 'https://neatnodee-docs.vercel.app',
     siteName: 'NeatNode',
     images: [
@@ -38,7 +46,7 @@ export const metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'NeatNode — Docs'
+        alt: 'NeatNode - Docs'
       }
     ],
     locale: 'en_US',
@@ -47,7 +55,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'NeatNode Docs',
-    description: 'Comprehensive documentation for NeatNode — setup, guides, and API reference.',
+    description: 'Comprehensive documentation for NeatNode - setup, guides, and API reference.',
     images: ['/og-image.png'],
     site: '@neatnode',
     creator: '@neatnode'
@@ -103,7 +111,7 @@ export default async function RootLayout({ children }) {
       >
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <body>
+      <body className={`${inter.variable} antialiased selection:bg-emerald-500 selection:text-black`}>
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
