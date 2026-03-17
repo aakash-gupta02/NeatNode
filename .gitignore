@@ -60,3 +60,4 @@ coverage/
 *.bak
 *.old
 *.orig
+_pagefind/

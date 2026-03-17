@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
     "start": "next start"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
     "nextjs"
   ],
   "devDependencies": {
-    "baseline-browser-mapping": "^2.9.14"
+    "baseline-browser-mapping": "^2.9.14",
+    "pagefind": "^1.4.0"
   }
 }

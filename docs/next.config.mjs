@@ -2,7 +2,9 @@ import nextra from 'nextra'
  
 // Set up Nextra with its configuration
 const withNextra = nextra({
-  // ... Add Nextra-specific options here
+  search: {
+    codeblocks: false // don't index code blocks, only prose content
+  }
 })
  
 // Export the final Next.js config with Nextra included
