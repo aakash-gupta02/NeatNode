@@ -1,3 +1,7 @@
 body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
+
+code, kbd, pre, samp {
+  font-family: var(---jetbrains-mono), ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+}

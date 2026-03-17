@@ -3,11 +3,17 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap'
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
   display: 'swap'
 })
 
@@ -111,7 +117,7 @@ export default async function RootLayout({ children }) {
       >
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <body className={`${inter.variable} antialiased selection:bg-emerald-500 selection:text-black`}>
+      <body className={`${inter.variable} ${jetBrainsMono.variable} antialiased selection:bg-emerald-500 selection:text-black`}>
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
