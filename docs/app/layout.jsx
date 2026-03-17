@@ -1,10 +1,11 @@
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { metadata, viewport } from './metadata'
+import DocsFooter from './_components/Footer'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,8 +20,6 @@ const jetBrainsMono = JetBrains_Mono({
 })
 
 export { metadata, viewport }
-
-// deployment check commit
 
 const navbar = (
   <Navbar
@@ -42,11 +41,7 @@ const navbar = (
   />
 )
 
-const footer = (
-  <Footer>
-    MIT {new Date().getFullYear()} © NeatNode. Built with Nextra.
-  </Footer>
-)
+const footer = <DocsFooter />
 
 export default async function RootLayout({ children }) {
   return (
