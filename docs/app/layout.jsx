@@ -4,6 +4,7 @@ import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
 import { Inter, JetBrains_Mono } from 'next/font/google'
+import { metadata, viewport } from './metadata'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,62 +18,7 @@ const jetBrainsMono = JetBrains_Mono({
   display: 'swap'
 })
 
-export const metadata = {
-  title: 'NeatNode Docs',
-  description: 'NeatNode - documentation for the NeatNode library and ecosystem.',
-  applicationName: 'NeatNode Docs',
-  authors: [{ name: 'NeatNode', url: 'https://github.com/aakash-gupta02/NeatNode' }],
-  creator: 'Aakash Gupta',
-  publisher: 'NeatNode',
-  keywords: [
-    'NeatNode',
-    'documentation',
-    'Node.js',
-    'library',
-    'API',
-    'guide',
-    'tutorial'
-  ],
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png'
-  },
-  manifest: '/site.webmanifest',
-  alternates: {
-    canonical: 'https://neatnodee.vercel.app'
-  },
-  openGraph: {
-    title: 'NeatNode Docs',
-    description: 'Comprehensive documentation for NeatNode - setup, guides, and API reference.',
-    url: 'https://neatnodee-docs.vercel.app',
-    siteName: 'NeatNode',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'NeatNode - Docs'
-      }
-    ],
-    locale: 'en_US',
-    type: 'website'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'NeatNode Docs',
-    description: 'Comprehensive documentation for NeatNode - setup, guides, and API reference.',
-    images: ['/og-image.png'],
-    site: '@neatnode',
-    creator: '@neatnode'
-  },
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false
-  },
-  metadataBase: new URL('https://neatnodee-docs.vercel.app')
-}
+export { metadata, viewport }
 
 // deployment check commit
 
@@ -115,7 +61,6 @@ export default async function RootLayout({ children }) {
           }
         }}
       >
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <body className={`${inter.variable} ${jetBrainsMono.variable} antialiased selection:bg-emerald-500 selection:text-black`}>
         <Layout
