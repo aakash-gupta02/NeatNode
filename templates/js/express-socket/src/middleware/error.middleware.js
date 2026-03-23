@@ -1,12 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import { config } from "../config/env.config.js";
-import logger from "../config/logger.config.js";
+import logger from "../config/logger.js";
 import ApiError from "../utils/ApiError.js";
 
 // Global error handling middleware
 export const errorHandler = (err, req, res, next) => {
-  const statusCode =
-    err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+  const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
 
   const isDev = config.nodeEnv === "development";
   const isOperational = err.isOperational === true;
@@ -51,10 +50,5 @@ export const errorHandler = (err, req, res, next) => {
 
 /* -------------------- 404 HANDLER -------------------- */
 export const notFound = (req, res, next) => {
-  next(
-    new ApiError(
-      StatusCodes.NOT_FOUND,
-      `Not Found - ${req.originalUrl}`
-    )
-  );
+  next(new ApiError(StatusCodes.NOT_FOUND, `Not Found - ${req.originalUrl}`));
 };

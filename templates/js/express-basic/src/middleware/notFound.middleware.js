@@ -1,5 +1,5 @@
 import { errorResponse } from "../utils/responseHandler.js";
 
 export default (req, res) => {
-errorResponse(res, `Route ${req.originalUrl} not found`, 404);
+  errorResponse(res, 404, `Route ${req.originalUrl} not found`);
 };
