@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-
 export function removeCrud(targetPath, name, langKey) {
   try {
     const crudPaths = [
@@ -11,10 +10,10 @@ export function removeCrud(targetPath, name, langKey) {
       `src/services/${name}.service.${langKey}`,
       `src/validations/${name}.validation.${langKey}`,
       `src/middlewares/auth.middleware.${langKey}`,
-      `src/schemas/${name}.schema.${langKey}`
+      `src/schemas/${name}.schema.${langKey}`,
     ];
 
-    crudPaths.forEach(relPath => {
+    crudPaths.forEach((relPath) => {
       const absPath = path.join(targetPath, relPath);
 
       if (fs.existsSync(absPath)) {
@@ -30,21 +29,25 @@ export function removeCrud(targetPath, name, langKey) {
 }
 
 export function removeCrudReferences(appJsPath) {
+  if (!fs.existsSync(appJsPath)) {
+    return false;
+  }
   let content = fs.readFileSync(appJsPath, "utf8");
 
   // Remove imports block
   content = content.replace(
     /\/\/ ROUTE_IMPORTS_START[\s\S]*?\/\/ ROUTE_IMPORTS_END/,
-    ""
+    "",
   );
 
   // Remove route usage block
   content = content.replace(
     /\/\/ ROUTE_USES_START[\s\S]*?\/\/ ROUTE_USES_END/,
-    ""
+    "",
   );
 
   fs.writeFileSync(appJsPath, content, "utf8");
+  return true;
 }
 
 export function removeCrudModule(targetPath, name) {
