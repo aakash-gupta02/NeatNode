@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend_checks:
+    name: Backend Checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test
+
+  template_smoke:
+    name: Template Smoke (${{ matrix.template.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        template:
+          - { name: js-basic, dir: templates/js/express-basic, type: js }
+          - { name: js-rest-api, dir: templates/js/express-rest-api, type: js }
+          - { name: js-socket, dir: templates/js/express-socket, type: js }
+          - { name: ts-basic, dir: templates/ts/basic-express, type: ts }
+          - { name: ts-rest-api, dir: templates/ts/express-rest-api, type: ts }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+        working-directory: ${{ matrix.template.dir }}
+      - name: Run lint
+        run: npm run lint
+        working-directory: ${{ matrix.template.dir }}
+      - name: Run tests
+        run: npm test
+        working-directory: ${{ matrix.template.dir }}
+      - name: JS import smoke
+        if: matrix.template.type == 'js'
+        run: node --input-type=module -e "import('./src/app.js')"
+        working-directory: ${{ matrix.template.dir }}
+      - name: TS build smoke
+        if: matrix.template.type == 'ts'
+        run: npm run build
+        working-directory: ${{ matrix.template.dir }}
+
+  web_builds:
+    name: Web Build Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Frontend install
+        run: npm install --no-audit --no-fund
+        working-directory: frontend
+      - name: Frontend build
+        run: npm run build
+        working-directory: frontend
+      - name: Docs install
+        run: npm install --no-audit --no-fund
+        working-directory: docs
+      - name: Docs build
+        run: npm run build
+        working-directory: docs

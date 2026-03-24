@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "node -e \"console.log('Lint not configured for this template yet')\"",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,7 @@ Production-ready modular Express template with TypeScript and ESM imports.
 ## Features
 
 - Modular structure with `modules/<feature>`
-- JWT auth (register, login, me)
+- JWT auth (`register`, `login`, `me`)
 - Zod request validation
 - Helmet + rate limiting
 - Centralized error handler
@@ -27,7 +27,9 @@ src/
   middlewares/
     auth.middleware.ts
     error.middleware.ts
+    notFound.middleware.ts
     rateLimiter.middleware.ts
+    requestLogger.ts
     validateRequest.middleware.ts
   modules/
     auth/
@@ -35,12 +37,7 @@ src/
       auth.route.ts
       auth.service.ts
       auth.validation.ts
-    user/
-      user.controller.ts
       user.model.ts
-      user.route.ts
-      user.service.ts
-      user.validation.ts
   routes/
     index.route.ts
   utils/
@@ -77,6 +74,8 @@ npm run dev
 - `npm run dev` - Run in watch mode
 - `npm run build` - Build to `dist`
 - `npm start` - Start compiled server
+- `npm run lint` - Placeholder lint command
+- `npm test` - Run Node.js test runner
 
 ## API Endpoints
 
@@ -84,4 +83,3 @@ npm run dev
 - `POST /api/v1/auth/register`
 - `POST /api/v1/auth/login`
 - `GET /api/v1/auth/me` (protected)
-- `GET /api/v1/users/profile` (protected)
