@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "lint": "node -e \"console.log('Lint not configured for this template yet')\"",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",

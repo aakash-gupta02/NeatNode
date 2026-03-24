@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "node -e \"console.log('Lint not configured for this template yet')\"",
+    "test": "node --test"
   },
   "dependencies": {
     "cors": "^2.8.5",

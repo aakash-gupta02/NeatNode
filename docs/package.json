@@ -8,7 +8,9 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "test": "node --test"
   },
   "dependencies": {
     "lucide-react": "^0.552.0",
