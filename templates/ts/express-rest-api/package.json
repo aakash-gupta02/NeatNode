@@ -8,7 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "lint": "node -e \"console.log('Lint not configured for this template yet')\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "node --test"
   },
   "keywords": [
@@ -35,13 +36,17 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.5.2",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "tsx": "^4.21.0",
+    "typescript-eslint": "^8.0.0",
     "typescript": "^5.9.2"
   }
 }

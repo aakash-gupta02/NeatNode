@@ -7,7 +7,8 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "lint": "node -e \"console.log('Lint not configured for this template yet')\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "node --test"
   },
   "keywords": [],
@@ -21,12 +22,16 @@
     "morgan": "^1.10.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.6",
     "@types/mongoose": "^5.11.96",
     "@types/morgan": "^1.9.10",
     "@types/node": "^25.0.6",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "tsx": "^4.21.0",
+    "typescript-eslint": "^8.0.0",
     "typescript": "^5.9.3"
   }
 }
