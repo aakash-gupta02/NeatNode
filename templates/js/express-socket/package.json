@@ -1,5 +1,5 @@
 {
-  "name": "project-name",
+  "name": "{{project-name}}",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,7 +8,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "{{author}}",
   "license": "ISC",
   "type": "module",
   "dependencies": {

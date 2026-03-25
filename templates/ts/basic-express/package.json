@@ -1,5 +1,5 @@
 {
-  "name": "project-name",
+  "name": "{{project-name}}",
   "version": "1.0.0",
   "description": "Minimal Express.js & TypeScript starter template — clean, fast, and beginner-friendly structure.",
   "main": "dist/server.js",
@@ -9,7 +9,7 @@
     "start": "node dist/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "{{author}}",
   "license": "ISC",
   "type": "module",
   "dependencies": {

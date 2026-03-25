@@ -1,5 +1,5 @@
 {
-  "name": "project-name",
+  "name": "{{project-name}}",
   "version": "1.0.0",
   "description": "Minimal Express.js starter template — clean, fast, and production-ready structure.",
   "main": "server.js",
@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
+  "author": "{{author}}",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

@@ -31,10 +31,10 @@ export async function copyTemplate(srcDir, destDir, replacements = {}) {
       if (["package.json"].includes(item.name)) {
         let content = fs.readFileSync(srcPath, "utf-8");
 
-        // Replace all configured placeholder keys with their values.
+        // Replace all configured {{key}} placeholders with their values.
         for (const [key, value] of Object.entries(replacements)) {
           const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-          const regex = new RegExp(escapedKey, "g");
+          const regex = new RegExp(`\\{\\{\\s*${escapedKey}\\s*\\}\\}`, "g");
           content = content.replace(regex, String(value));
         }
 

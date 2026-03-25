@@ -1,5 +1,5 @@
 {
-  "name": "project-name",
+  "name": "{{project-name}}",
   "version": "1.0.0",
   "description": "Production-grade modular Express REST API starter with TypeScript.",
   "main": "dist/server.js",
@@ -16,7 +16,7 @@
     "jwt",
     "zod"
   ],
-  "author": "author",
+  "author": "{{author}}",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
