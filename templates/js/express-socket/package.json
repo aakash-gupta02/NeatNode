@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "lint": "node -e \"console.log('Lint not configured for this template yet')\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "node --test"
   },
   "keywords": [],
@@ -29,6 +30,9 @@
     "winston": "^3.18.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "nodemon": "^3.1.10"
   }
 }

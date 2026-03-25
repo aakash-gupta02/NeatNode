@@ -39,7 +39,8 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "lint": "node -e \"console.log('Lint not configured for backend package yet')\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "node --test"
   },
   "dependencies": {
@@ -47,5 +48,10 @@
     "extract-zip": "^2.0.1",
     "fs-extra": "^11.3.2",
     "inquirer": "^12.10.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0"
   }
 }
