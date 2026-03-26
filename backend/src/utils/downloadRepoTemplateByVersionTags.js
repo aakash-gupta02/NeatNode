@@ -17,7 +17,7 @@ const getPackageVersion = () => {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
     return pkg.version;
   } catch {
-    return "3.1.7";
+    return null;
   }
 };
 
@@ -25,7 +25,14 @@ const getTemplateRef = () => {
   if (process.env.NEATNODE_TEMPLATE_REF) {
     return process.env.NEATNODE_TEMPLATE_REF;
   }
-  return `v${getPackageVersion()}`;
+
+  const version = getPackageVersion();
+
+  if (!version) {
+    return "main";
+  }
+
+  return `v${version}`;
 };
 
 const getZipUrl = (ref, refType = "tag") => {
