@@ -4,7 +4,7 @@ import os from "os";
 import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
 import { removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
-import { downloadTemplate } from "../utils/downloadRepoTemplate.js";
+import { downloadTemplate } from "../utils/downloadRepoTemplateByVersionTags.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

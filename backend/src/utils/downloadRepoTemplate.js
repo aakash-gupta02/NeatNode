@@ -35,6 +35,12 @@ export async function downloadTemplate(repoPath) {
   const extractedRoot = path.join(tempExtractDir, `${repo}-main`);
   const srcTemplatePath = path.join(extractedRoot, repoPath);
 
+  if (!fs.existsSync(srcTemplatePath)) {
+    throw new Error(
+      `Template path not found in downloaded archive: ${repoPath}`,
+    );
+  }
+
   // copy template
   fs.mkdirSync(tempFinalDir, { recursive: true });
   fs.cpSync(srcTemplatePath, tempFinalDir, { recursive: true });
