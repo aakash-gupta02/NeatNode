@@ -26,6 +26,7 @@ logs/
 tmp/
 temp/
 testhtml/
+testcodes/
 
 # ─────────────────────────────
 # Build / Output / Cache
