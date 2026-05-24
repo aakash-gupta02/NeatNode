@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
-import User from "../models/user.model.js";
-import ApiError from "../utils/ApiError.js";
-import { generateToken } from "../utils/Token.js";
 import { StatusCodes } from "http-status-codes";
+import User from "./user.model.js";
+import ApiError from "../../core/utils/ApiError.js";
+import { generateToken } from "../../core/utils/Token.js";
 
 export const createUserService = async ({ name, email, password }) => {
   // Check if user exists
@@ -30,23 +30,23 @@ export const createUserService = async ({ name, email, password }) => {
 };
 
 export const loginUserService = async ({ email, password }) => {
-    // Find user by email
-    const user = await User.findOne({ email });
-    if (!user) throw new ApiError(StatusCodes.NOT_FOUND, "Invalid Email or password");
+  // Find user by email
+  const user = await User.findOne({ email });
+  if (!user) throw new ApiError(StatusCodes.NOT_FOUND, "Invalid Email or password");
 
-    // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) throw new ApiError(StatusCodes.UNAUTHORIZED, "Invalid email or Password"); // notice the capitals, can be used for testing else keep it consistent
-    // Generate JWT token
-    const token = generateToken({userid: user._id, role: user.role}, '7h');
+  // Check password
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) throw new ApiError(StatusCodes.UNAUTHORIZED, "Invalid email or Password"); // notice the capitals, can be used for testing else keep it consistent
+  // Generate JWT token
+  const token = generateToken({ userid: user._id, role: user.role }, '7h');
 
-    const userObj = user.toObject(); // Convert Mongoose document to plain object
-    delete userObj.password; // Remove password field
-    delete userObj.__v;
-    delete userObj.createdAt;
-    delete userObj.updatedAt;
+  const userObj = user.toObject(); // Convert Mongoose document to plain object
+  delete userObj.password; // Remove password field
+  delete userObj.__v;
+  delete userObj.createdAt;
+  delete userObj.updatedAt;
 
-    return { user: userObj, token };
+  return { user: userObj, token };
 };
 
 export const getUserService = async (userId) => {

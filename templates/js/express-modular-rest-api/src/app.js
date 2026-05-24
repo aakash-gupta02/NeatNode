@@ -1,17 +1,14 @@
-import express from 'express';
 import cors from 'cors';
-import morgan from 'morgan';
-import { StatusCodes } from 'http-status-codes';
+import express from 'express';
 import helmet from 'helmet';
+import { StatusCodes } from 'http-status-codes';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
-import { errorHandler, notFound } from './middleware/error.middleware.js';
 import { config } from './config/env.config.js';
-import { rateLimiter } from './middleware/rateLimiter.js';
-import sendResponse from './utils/ApiResponse.js';
-
-// ROUTE_IMPORTS_START
-import authRoutes from './routes/user.route.js'
-// ROUTE_IMPORTS_END
+import { errorHandler, notFound } from './core/middleware/error.middleware.js';
+import sendResponse from './core/utils/ApiResponse.js';
+import indexRoute from './routes/index.route.js';
 
 
 
@@ -21,33 +18,25 @@ const app = express();
 // middlewares
 app.use(cors({
     origin: config.allowedOrigins,
-    // { credentials: true } // uncomment this if you need to work with cookies
+    credentials: true
 }));
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(helmet());
 
 // routes
-
-// ROUTE_USES_START
-app.use("/api/auth", authRoutes);
-// ROUTE_USES_END
+app.use("/api/v1", indexRoute);
 
 
 // default route
 app.get("/", (req, res) => {
     sendResponse(res, StatusCodes.OK, "API is running...");
 });
-app.get("/favicon.ico", (req, res) => res.status(204).end());
+app.get("/favicon.ico", (req, res) => res.status(StatusCodes.NO_CONTENT).end()); // to prevent favicon requests from showing up in logs
 
 
-// health check route with rate limiting
-app.get("/health", rateLimiter(20), (req, res) => {
-    sendResponse(res, StatusCodes.OK, "ALL IS WELL😂...");
-});
 
 
 // error handling middlewares
