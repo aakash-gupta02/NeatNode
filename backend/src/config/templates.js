@@ -1,7 +1,13 @@
 export default {
   js: [
     { name: "Basic Express", repoPath: "templates/js/express-basic" },
-    { name: "REST API", repoPath: "templates/js/express-rest-api" },
+    {
+      name: "REST API",
+      architecture: {
+        mvc: "templates/js/express-rest-api",
+        modular: "templates/js/express-modular-rest-api"
+      }
+    },
     { name: "Socket.IO", repoPath: "templates/js/express-socket" },
   ],
 

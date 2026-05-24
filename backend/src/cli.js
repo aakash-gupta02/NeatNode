@@ -42,9 +42,28 @@ async function main() {
 
   const chosen = templateList.find((t) => t.name === template);
 
+  let isModular = chosen.isModular || false;
+  let architecture = null;
+
+  if (chosen.architecture) {
+    const answer = await inquirer.prompt([
+      {
+        type: "list",
+        name: "architecture",
+        message: "Select architecture:",
+        choices: ["mvc", "modular"],
+      },
+    ]);
+
+    architecture = answer.architecture;
+    isModular = architecture === "modular";
+
+    chosen.repoPath = chosen.architecture[architecture];
+
+  }
+
   // STEP 4 — CRUD Optional (only for some templates)
   let includeCrud = false;
-  let isModular = chosen.isModular || false;
   let crudName = "";
 
   if (chosen.name === "Basic Express") {
@@ -109,7 +128,7 @@ async function main() {
     isModular,
   });
 
-  
+
   console.log(`\n✅ Project "${projectName}" created successfully using "${chosen.name}".\n`);
 
   console.log("Next steps:");
