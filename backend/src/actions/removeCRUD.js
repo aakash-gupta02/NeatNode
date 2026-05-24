@@ -26,29 +26,52 @@ export function removeCrud(targetPath, name, langKey) {
   } catch (err) {
     console.error("❌ Error while removing CRUD files:", err.message);
   }
-}
+};
+
+export function cleanupTemplateMarkers(filePath) {
+  if (!fs.existsSync(filePath)) {
+    return false;
+  }
+
+  let content = fs.readFileSync(filePath, "utf8");
+
+  content = content
+    .replace(/^\s*\/\/ ROUTE_IMPORTS_START\s*$/gm, "")
+    .replace(/^\s*\/\/ ROUTE_IMPORTS_END\s*$/gm, "")
+    .replace(/^\s*\/\/ ROUTE_USES_START\s*$/gm, "")
+    .replace(/^\s*\/\/ ROUTE_USES_END\s*$/gm, "");
+
+  // Remove excessive blank lines
+  content = content.replace(/\n{3,}/g, "\n\n");
+
+  fs.writeFileSync(filePath, content, "utf8");
+
+  return true;
+};
 
 export function removeCrudReferences(appJsPath) {
   if (!fs.existsSync(appJsPath)) {
     return false;
   }
+
   let content = fs.readFileSync(appJsPath, "utf8");
 
-  // Remove imports block
+  // Remove imports block + surrounding blank lines
   content = content.replace(
-    /\/\/ ROUTE_IMPORTS_START[\s\S]*?\/\/ ROUTE_IMPORTS_END/,
-    "",
+    /\s*\/\/ ROUTE_IMPORTS_START[\s\S]*?\/\/ ROUTE_IMPORTS_END\s*/g,
+    "\n",
   );
 
-  // Remove route usage block
+  // Remove route usage block + surrounding blank lines
   content = content.replace(
-    /\/\/ ROUTE_USES_START[\s\S]*?\/\/ ROUTE_USES_END/,
-    "",
+    /\s*\/\/ ROUTE_USES_START[\s\S]*?\/\/ ROUTE_USES_END\s*/g,
+    "\n",
   );
 
   fs.writeFileSync(appJsPath, content, "utf8");
+
   return true;
-}
+};
 
 export function removeCrudModule(targetPath, name) {
   try {
@@ -62,4 +85,4 @@ export function removeCrudModule(targetPath, name) {
   } catch (err) {
     console.error("❌ Error while removing CRUD module:", err.message);
   }
-}
+};

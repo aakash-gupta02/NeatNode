@@ -3,7 +3,7 @@ import path from "path";
 import os from "os";
 import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
-import { removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
+import { cleanupTemplateMarkers, removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
 import { downloadTemplate } from "../utils/downloadRepoTemplateByVersionTags.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,12 +38,28 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
 
       if (isModular) {
         removeCrudModule(targetPath, crudName);
-        removeCrudReferences(path.join(targetPath, "src", `routes/index.route.${langKey}`));
 
+        removeCrudReferences(
+          path.join(targetPath, "src", `routes/index.route.${langKey}`)
+        );
       }
 
       removeCrud(targetPath, crudName, langKey);
-      removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
+
+      removeCrudReferences(
+        path.join(targetPath, "src", `app.${langKey}`)
+      );
+    }
+
+    // ALWAYS CLEANUP MARKERS
+    cleanupTemplateMarkers(
+      path.join(targetPath, "src", `app.${langKey}`)
+    );
+
+    if (isModular) {
+      cleanupTemplateMarkers(
+        path.join(targetPath, "src", `routes/index.route.${langKey}`)
+      );
     }
 
     console.log(`\n✅ Project "${projectName}" created successfully!\n`);
