@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
 import { cleanupTemplateMarkers, removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
 import { downloadTemplate } from "../utils/downloadRepoTemplateByVersionTags.js";
+import { addEnv } from "./addEnv.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,6 +33,8 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
       "project-name": projectName === "." ? path.basename(process.cwd()) : projectName,
       "author": os.userInfo().username || "author",
     });
+
+    await addEnv({ targetPath });
 
     if (!includeCrud && crudName) {
       console.log("🗑 Removing CRUD files...");
