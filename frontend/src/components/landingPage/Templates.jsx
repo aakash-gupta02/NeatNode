@@ -21,13 +21,14 @@ const jsTemplates = [
     title: "REST API Template",
     icon: <Server className="w-6 h-6 text-emerald-500" />,
     language: "JavaScript",
-    desc: "Production-grade REST API boilerplate built on Express.",
+    desc: "Production-ready Express REST API starter with MVC and Modular architecture support.",
+
     features: [
-      "Controllers, routes & middleware pre-wired",
-      "Centralized response & error handlers",
+      "MVC or Modular architecture options",
+      "Centralized response & error handling",
       "MongoDB connection with config setup",
       "Request validation support",
-      "Ready-to-extend scalable structure",
+      "Scalable production-ready structure",
     ],
   },
   {
@@ -157,8 +158,12 @@ const Templates = () => {
             key={idx}
             className={`bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-700 transition-all group`}
           >
-            <div className={`bg-gradient-to-br ${classes.bgGradient} p-6 border-b border-zinc-800`}>
-              <div className={`${classes.iconBg} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+            <div
+              className={`bg-gradient-to-br ${classes.bgGradient} p-6 border-b border-zinc-800`}
+            >
+              <div
+                className={`${classes.iconBg} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}
+              >
                 {temp.icon}
               </div>
 
