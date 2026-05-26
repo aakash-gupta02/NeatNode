@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "lucide-react": "^0.552.0",
-    "next": "16.0.10",
-    "nextra": "^4.6.0",
-    "nextra-theme-docs": "^4.6.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "next": "15.5.0",
+"react": "19.1.0",
+"react-dom": "19.1.0",
+"nextra": "4.6.0",
+"nextra-theme-docs": "4.6.0"
   },
   "repository": {
     "type": "git",
