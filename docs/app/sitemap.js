@@ -27,7 +27,7 @@ const routes = [
   '/api-reference/config',
   '/api-reference/options',
   '/faqs',
-  '/_changelog'
+  '/changelog'
 ]
 
 export default function sitemap() {
