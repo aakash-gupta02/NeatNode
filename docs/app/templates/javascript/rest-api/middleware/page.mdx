@@ -7,7 +7,7 @@ icon: ShieldCheck
 
 # Middleware
 
-The **REST API Template** groups all middleware under `src/middleware/` for clear organization and reusability.  
+The **REST API Template** groups all middleware under `src/middleware/` (in MVC) or `src/core/middleware/` (in Modular) for clear organization and reusability.  
 Each file handles a specific responsibility and can be applied globally or per-route.
 
 ---
@@ -49,11 +49,18 @@ Add your own middleware here (logging, compression, etc.) as needed.
 
 Apply middleware directly on a route to protect or validate it:
 
-```js
+```javascript
 import express from "express"
-import { auth } from "../middleware/auth.middleware.js"
-import { validateRequest } from "../middleware/validateRequest.middleware.js"
-import { createUserSchema } from "../schemas/user.schema.js"
+// Adjust relative path depending on MVC vs Modular structure:
+// MVC:
+import { auth } from "../../middleware/auth.middleware.js"
+import { validateRequest } from "../../middleware/validateRequest.middleware.js"
+import { createUserSchema } from "../../schemas/user.schema.js"
+
+// Modular:
+// import { auth } from "../../core/middleware/auth.middleware.js"
+// import { validateRequest } from "../../core/middleware/validateRequest.middleware.js"
+// import { createUserSchema } from "./user.validation.js"
 
 const router = express.Router()
 

@@ -13,25 +13,22 @@ The **REST API Template** uses a centralized error handler to ensure consistent 
 
 ## Middleware Location
 
-```
-
-src/middleware/error.middleware.js
-
-````
+- **MVC**: `src/middleware/error.middleware.js`
+- **Modular**: `src/core/middleware/error.middleware.js`
 
 ---
 
 ## Example
 
-```js
-// src/middleware/error.middleware.js
+```javascript
+// Example error middleware
 export default function errorHandler(err, req, res, next) {
   res.status(err.status || 500).json({
     success: false,
     message: err.message || "Internal Server Error"
   })
 }
-````
+```
 
 ---
 
@@ -39,7 +36,8 @@ export default function errorHandler(err, req, res, next) {
 
 Registered at the bottom of `src/app.js`, after all route definitions:
 
-```js
+```javascript
+// Adjust path for MVC vs Modular:
 import errorHandler from "./middleware/error.middleware.js"
 app.use(errorHandler)
 ```
