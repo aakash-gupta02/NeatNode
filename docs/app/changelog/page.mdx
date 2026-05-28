@@ -1,0 +1,62 @@
+---
+title: Changelog
+sidebarTitle: Changelog
+description: Track changes, releases, and migration notes for NeatNode.
+icon: ClipboardList
+---
+
+# Changelog
+
+Stay up to date with the latest features, improvements, and bug fixes in NeatNode.
+
+---
+
+## 🚧 v3.3.0
+
+**Architecture & Developer Experience (DX) Update**
+
+* **Flexible REST Architectures**: You can now choose between **MVC (Layered)** or **Modular (Feature-based)** folder structures when scaffolding the REST API template.
+* **Instant Environment**: Automatically generates a ready-to-use `.env` file at runtime to speed up DX.
+* **Cleaner Code**: Improved cleanup of internal route markers (e.g., `// ROUTE_IMPORTS_START`) when you choose to scaffold without example CRUD files.
+
+---
+
+## 🌟 v3.2.0
+
+**The Contributor Milestone!**  
+A huge thank you to our community. NeatNode is officially receiving external contributions, taking the project from a solo build to a maintained tool.
+
+* **Version-Based Fetching**: Template fetching now relies on Git tags for much more predictable and stable scaffolding.
+* **ESLint Included**: Added ESLint configurations into the generated templates for cleaner code right out of the box.
+* **Automated CI**: Added GitHub CI for automated checks across the project.
+* **Fixes & Safety**: Safer placeholder replacements and various template/runtime fixes.
+
+---
+
+## 🚀 v3.1.7 
+
+**TypeScript & Documentation Overhaul**
+
+* **TypeScript Templates Added**: Scaffold heavily requested strictly-typed TS backends.
+* **Docs Search**: Implemented fast, integrated search for the NeatNode documentation.
+* **UI Enhancements**: Significant Hero & Navbar UI improvements on the [homepage](https://neatnode.codes).
+
+---
+
+## 📦 v3.1.3 
+
+**The Great Architecture Shift (Skipped v2)**
+
+* **Dynamic Template Fetching**: Removed static templates from the NPM package bundle to drastically reduce the CLI's installation size.
+* Templates are now fetched dynamically as zip files directly from GitHub at runtime.
+
+---
+
+## 🌱 v1.0.0
+
+**Initial Release**
+
+* CLI scaffolding with interactive prompts
+* Bundled 3 core JavaScript templates directly inside the NPM package (Basic, REST API, and Socket.IO)
+* Optional CRUD removal during project generation
+* Automatic placeholder replacement in `package.json`
