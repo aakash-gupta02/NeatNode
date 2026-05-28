@@ -128,8 +128,8 @@ Next steps:
 
 ## Learn More
 
-* 📄 [Documentation](https://neatnodee-docs.vercel.app)
-* 💻 [Website](https://neatnodee.vercel.app)
+* 📄 [Documentation](https://neatnode,codes)
+* 💻 [Website](https://docs.neatnode.codes)
 * 🧰 [NPM Package](https://www.npmjs.com/package/neatnode)
 
 ## Contributing
@@ -147,7 +147,7 @@ See the [Contribution Guide](https://neatnodee-docs.vercel.app/guides/contributi
 ## Author
 
 **Aakash Gupta**  
-[GitHub](https://github.com/aakash-gupta02) • [Website](https://neatnodee.vercel.app)
+[GitHub](https://github.com/aakash-gupta02) • [Portfolio](https://aakashgupta.app)
 
 ## License
 
