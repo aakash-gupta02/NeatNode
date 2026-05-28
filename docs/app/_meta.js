@@ -13,5 +13,8 @@ export default {
   },
   faqs: {
     title: 'FAQs'
+  },
+  changelog: {
+    title: 'Change log'
   }
 }

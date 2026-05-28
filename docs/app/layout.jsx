@@ -43,7 +43,7 @@ export default async function RootLayout({ children }) {
       logo={
         <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <img
-            src="/logo.svg"
+            src="/icons/logo.svg"
             alt="NeatNode Logo"
             style={{ width: "40px", height: "40px" }}
           />
