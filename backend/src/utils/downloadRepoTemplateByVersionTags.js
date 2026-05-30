@@ -45,8 +45,6 @@ const getZipUrl = (ref, refType = "tag") => {
 const downloadFromRef = async ({ repoPath, ref, refType }) => {
   const zipUrl = getZipUrl(ref, refType);
 
-  console.log(`Attempting to download template from ${refType} "${ref}"...& path: ${zipUrl}`);
-
   const tmpBase = fs.mkdtempSync(path.join(os.tmpdir(), "neatnode-"));
   const tempZip = path.join(tmpBase, "repo.zip");
   const tempExtractDir = path.join(tmpBase, "repo-extract");
@@ -116,9 +114,6 @@ export async function downloadTemplate(repoPath) {
         refType: candidate.refType,
       });
 
-      console.log(
-        `Template downloaded and extracted from ${candidate.refType} "${candidate.ref}"`,
-      );
       return templatePath;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
