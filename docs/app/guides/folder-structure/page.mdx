@@ -11,30 +11,70 @@ NeatNode provides **different folder structures** for **JavaScript** and **TypeS
 
 ---
 
-## JavaScript Templates - Typical Structure
+## JavaScript Templates - Structure Options
 
 Used by **Basic (JS)**, **REST API (JS)**, and **Socket.IO (JS)** templates.
 
-```bash
+For the **REST API (JS)** template, you have the choice between two architectures:
+1. **MVC (Layer-based):** Separates files globally by type (controllers, models, routes).
+2. **Modular (Feature-based):** Groups files by domain/feature inside a `modules/` folder (e.g., `modules/user/`).
+
+### 1. MVC / Layer-based Structure
+
+```text
 <project-root>/
+├── .env
+├── .env.example
+├── eslint.config.js
 ├── package.json
 ├── server.js
 └── src/
     ├── app.js
     ├── config/
     ├── controllers/
+    ├── middleware/
     ├── models/
     ├── routes/
+    ├── schemas/
     ├── services/
-    ├── middleware/
     └── utils/
 ```
 
-This structure follows a **layer-based architecture**, separating concerns clearly.
+This structure follows a **layer-based architecture**, separating concerns globally.
+
+### 2. Modular Structure
+
+```text
+<project-root>/
+├── .env
+├── .env.example
+├── eslint.config.js
+├── package.json
+├── server.js
+└── src/
+    ├── app.js
+    ├── config/
+    ├── core/
+    │   ├── middleware/
+    │   └── utils/
+    ├── modules/
+    │   └── user/
+    │       ├── user.controller.js
+    │       ├── user.model.js
+    │       ├── user.route.js
+    │       ├── user.service.js
+    │       └── user.validation.js
+    └── routes/
+        └── index.route.js
+```
+
+This structure keeps related feature logic bundled together, with shared utilities in `core/`.
 
 ---
 
 ## JavaScript Template Folders `/src`
+
+### MVC Architecture
 
 `controllers/`
 
@@ -52,6 +92,10 @@ Business logic and database interactions.
 
 Mongoose schemas or DB models.
 
+`schemas/`
+
+Validation schemas (e.g., Joi).
+
 `middleware/`
 
 Auth, validation, and error handling.
@@ -59,6 +103,24 @@ Auth, validation, and error handling.
 `utils/`
 
 Shared helpers like `ApiError`, `ApiResponse`, `CatchAsync`.
+
+### Modular Architecture
+
+`modules/<feature>/`
+
+Groups related logic by feature. Contains its own controller, route, service, model, and validation.
+
+`routes/`
+
+Contains `index.route.js` which collects and registers all module routes.
+
+`core/middleware/`
+
+Global middlemare for auth, generic error handling, and rate limiting.
+
+`core/utils/`
+
+Shared global helpers like `ApiError`, `ApiResponse`, `CatchAsync`.
 
 ---
 
@@ -141,7 +203,7 @@ Typed helpers, error classes, response wrappers.
 | Template           | Structure Type | Notes                 |
 | ------------------ | -------------- | --------------------- |
 | **Basic (JS)**     | Layer-based    | Minimal Express setup |
-| **REST API (JS)**  | Layer-based    | Auth + validation     |
+| **REST API (JS)**  | MVC or Modular | User's choice of structure |
 | **Socket.IO (JS)** | Layer-based    | Adds socket config    |
 | **Basic (TS)**     | Layer-based    | Strict typing         |
 | **REST API (TS)**  | Module-based   | JWT + Zod + typed middleware |

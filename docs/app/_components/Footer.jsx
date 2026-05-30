@@ -1,10 +1,9 @@
-import { Footer } from 'nextra-theme-docs'
 import Link from 'next/link'
 
 const DocsFooter = () => {
 
     const Links = [
-        { name: 'NeatNode', href: 'https://neatnode.vercel.app' },
+        { name: 'NeatNode', href: 'https://neatnode.codes' },
         { name: 'GitHub', href: 'https://github.com/aakash-gupta02/NeatNode' },
         { name: 'NPM', href: 'https://npmjs.com/package/neatnode' },
         { name: 'Twitter', href: 'https://x.com/AakashG99795' }
@@ -12,7 +11,7 @@ const DocsFooter = () => {
 
 
     return (
-        <Footer>
+        <footer className="nx-bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:nx-bg-neutral-900">
             <style>{`
                 .nn-footer-wrap {
                     display: flex;
@@ -21,7 +20,17 @@ const DocsFooter = () => {
                     flex-wrap: wrap;
                     gap: 12px;
                     width: 100%;
-                    padding: 4px 0;
+                    max-width: 90rem;
+                    margin: 0 auto;
+                    padding: 1.5rem 1rem;
+                }
+                .nn-footer-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    gap: 12px;
                 }
                 .nn-footer-links {
                     display: flex;
@@ -60,32 +69,39 @@ const DocsFooter = () => {
                 .nn-footer-author:hover {
                     opacity: 0.8;
                 }
+                html[class~="dark"] .nn-footer-wrap {
+                    border-top: 1px solid rgba(255,255,255,0.1);
+                }
+                html:not([class~="dark"]) .nn-footer-wrap {
+                    border-top: 1px solid rgba(0,0,0,0.05);
+                }
             `}</style>
 
             <div className="nn-footer-wrap">
-                <div className="nn-footer-links">
-                    {Links.map((link, index) => (
-                        <Link key={index} href={link.href} target="_blank" rel="noopener noreferrer" className="nn-footer-link">
-                            {link.name}
-                        </Link>
-                    ))}
+                <div className="nn-footer-content">
+                    <div className="nn-footer-copy">
+                        <span>
+                            MIT {new Date().getFullYear()} © <span className="nn-footer-accent">NeatNode</span>
+                        </span>
+                        <span>·</span>
+                        <span>
+                            Built with Love by{' '}
+                            <Link href="https://aakashgupta.app/" target="_blank" rel="noopener noreferrer" className="nn-footer-author">
+                                Aakash Gupta
+                            </Link>
+                        </span>
+                    </div>
+
+                    <div className="nn-footer-links">
+                        {Links.map((link, index) => (
+                            <Link key={index} href={link.href} target="_blank" rel="noopener noreferrer" className="nn-footer-link">
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
-
             </div>
-
-            <div className="nn-footer-copy">
-                <span>
-                    MIT {new Date().getFullYear()} © <span className="nn-footer-accent">NeatNode</span>
-                </span>
-                <span>·</span>
-                <span>
-                    Built with Love by{' '}
-                    <Link href="https://aakashgupta.app/" target="_blank" rel="noopener noreferrer" className="nn-footer-author">
-                        Aakash Gupta
-                    </Link>
-                </span>
-            </div>
-        </Footer>
+        </footer>
     )
 }
 

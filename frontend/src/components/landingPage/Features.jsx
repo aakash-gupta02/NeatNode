@@ -10,39 +10,39 @@ import {
   Cpu,
   Plug,
   Activity,
-  Type
+  Type,
 } from "lucide-react";
 
 const features = [
   {
     icon: <Rocket className="w-6 h-6 text-emerald-500" />,
     title: "Instant Project Setup",
-    desc: "Spin up a full Node.js project with one command - folder structure, routes, configs, and utils ready."
+    desc: "Spin up a full Node.js project with one command - folder structure, routes, configs, and utils ready.",
   },
   {
     icon: <Type className="w-6 h-6 text-emerald-500" />,
     title: "Full TypeScript Support",
-    desc: "Complete TypeScript configuration with type definitions, tsconfig, and type-safe modules out of the box."
+    desc: "Complete TypeScript configuration with type definitions, tsconfig, and type-safe modules out of the box.",
   },
   {
     icon: <Settings className="w-6 h-6 text-emerald-500" />,
     title: "Dynamic Template Logic",
-    desc: "Choose to include or remove CRUD setups dynamically, no manual file editing needed."
+    desc: "Choose to include or remove CRUD setups dynamically, no manual file editing needed.",
   },
   {
     icon: <FolderTree className="w-6 h-6 text-emerald-500" />,
-    title: "Ready-to-Code MVC",
-    desc: "Prebuilt MVC architecture for maintainable and scalable codebases."
+    title: "Scalable Project Architecture",
+    desc: "Supports both MVC and modular Express structures for clean and maintainable backend systems.",
   },
   {
     icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />,
     title: "Security First",
-    desc: "Includes Helmet, Rate Limiter, and CORS - secure defaults baked in."
+    desc: "Includes Helmet, Rate Limiter, and CORS - secure defaults baked in.",
   },
   {
     icon: <Activity className="w-6 h-6 text-emerald-500" />,
     title: "Production Error & Logging",
-    desc: "Centralized error handlers, Winston logger, Morgan setup, and validation - production-ready from day one."
+    desc: "Centralized error handlers, Winston logger, Morgan setup, and validation - production-ready from day one.",
   },
 ];
 
@@ -73,7 +73,6 @@ const Features = () => {
                 <p className="text-sm text-zinc-400">{feature.desc}</p>
               </div>
             </div>
-
           </div>
         ))}
       </div>

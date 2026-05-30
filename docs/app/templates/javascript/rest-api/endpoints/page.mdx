@@ -7,7 +7,9 @@ icon: Terminal
 
 # Endpoints
 
-In the **REST API Template**, all endpoints are defined inside `src/routes`, and each route connects to a matching controller in `src/controllers`.
+In the **REST API Template**, endpoint organization depends on the architecture you chose:
+- **MVC**: Routes are defined inside `src/routes`, mapped to controllers in `src/controllers`.
+- **Modular**: Routes and controllers are grouped by feature in `src/modules/<feature>`.
 
 This structure makes it easy to expand your API without cluttering your main app file.
 
@@ -15,16 +17,24 @@ This structure makes it easy to expand your API without cluttering your main app
 
 ## Folder Overview
 
-```
-
+### MVC Structure
+```text
 src/
 ├── routes/
 │   ├── user.route.js
 │   └── health.route.js
 └── controllers/
-└── user.controller.js
+    └── user.controller.js
+```
 
-````
+### Modular Structure
+```text
+src/
+└── modules/
+    └── user/
+        ├── user.route.js
+        └── user.controller.js
+```
 
 - **Routes** define the HTTP endpoints (`GET /users`, `POST /users`, etc.)
 - **Controllers** hold the logic that runs when those endpoints are called
@@ -33,9 +43,8 @@ src/
 
 ## Example Route File
 
-`src/routes/posts.route.js`
-
-```js
+### MVC (`src/routes/posts.route.js`)
+```javascript
 import express from "express"
 import { createPost, getPosts } from "../controllers/posts.controller.js"
 
@@ -45,16 +54,29 @@ router.get("/", getPosts)
 router.post("/", createPost)
 
 export default router
-````
+```
+
+### Modular (`src/modules/posts/posts.route.js`)
+```javascript
+import express from "express"
+import { createPost, getPosts } from "./posts.controller.js"
+
+const router = express.Router()
+
+router.get("/", getPosts)
+router.post("/", createPost)
+
+export default router
+```
 
 ---
 
 ## Example Controller File
 
-`src/controllers/posts.controller.js`
+Depending on your architecture, this would be in `src/controllers/posts.controller.js` (MVC) or `src/modules/posts/posts.controller.js` (Modular).
 
-```js
-import { ApiResponse } from "../utils/ApiResponse.js"
+```javascript
+import { ApiResponse } from "../../utils/ApiResponse.js" // Adjust path as needed
 
 export const getPosts = (req, res) => {
   const posts = [
@@ -74,11 +96,14 @@ export const createPost = (req, res) => {
 
 ## Route Registration
 
-All route files are automatically registered inside `src/app.js` under the comment markers:
+All route files are registered inside `src/app.js` under the comment markers:
 
-```js
+```javascript
 // ROUTE_IMPORTS_START
+// MVC example:
 import userRouter from "./routes/user.route.js"
+// Modular example:
+// import userRouter from "./modules/user/user.route.js"
 // ROUTE_IMPORTS_END
 
 // ROUTE_USES_START
