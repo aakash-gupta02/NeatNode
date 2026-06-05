@@ -100,13 +100,13 @@ Next steps:
 
 > Official landing page for NeatNode
 >
-> <img width="1426" height="781" alt="NeatNode Landing Page" src="https://github.com/user-attachments/assets/cf7e3ae3-8830-44a3-bce2-74064545b2e5" />
+> <img alt="NeatNode Landing Page" src="https://raw.githubusercontent.com/aakash-gupta02/NeatNode/refs/heads/main/assets/images/landingPage.png" />
 
 ### **Documentation Website**
 
 > Comprehensive docs built with Nextra
 >
-> <img width="1429" height="781" alt="NeatNode Docs" src="https://github.com/user-attachments/assets/59b1708f-d81c-405c-9bf7-3e8ee40bed85" />
+> <img alt="NeatNode Docs" src="https://raw.githubusercontent.com/aakash-gupta02/NeatNode/refs/heads/main/assets/images/docs.png" />
 
 ## Build With
 
