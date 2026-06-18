@@ -21,9 +21,7 @@ const app = express();
 // middlewares
 app.use(cors({
     origin: config.allowedOrigins,
-    // { credentials: true } // uncomment this if you need to work with cookies
 }));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

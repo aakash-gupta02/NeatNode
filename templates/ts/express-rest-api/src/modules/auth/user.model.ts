@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import mongoose, { type Model, Schema, type InferSchemaType } from "mongoose";
 
 const userSchema = new Schema(
@@ -26,6 +25,10 @@ const userSchema = new Schema(
       enum: ["USER", "ADMIN"],
       default: "USER",
     },
+    refreshToken: {
+      type: String,
+      select: true,
+    },
   },
   {
     timestamps: true,
@@ -33,25 +36,7 @@ const userSchema = new Schema(
   },
 );
 
-userSchema.pre("save", async function hashPassword(next) {
-  if (!this.isModified("password")) {
-    next();
-    return;
-  }
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
-type UserMethods = {
-  comparePassword(candidatePassword: string): Promise<boolean>;
-};
-
-type UserDocument = InferSchemaType<typeof userSchema> & UserMethods;
+type UserDocument = InferSchemaType<typeof userSchema>;
 type UserModel = Model<UserDocument>;
 
-userSchema.methods.comparePassword = async function comparePassword(candidatePassword: string): Promise<boolean> {
-  return bcrypt.compare(candidatePassword, this.password);
-};
-
-export const User =
-  (mongoose.models.User as UserModel | undefined) ?? mongoose.model<UserDocument, UserModel>("User", userSchema);
+export const User = mongoose.model<UserDocument, UserModel>("User", userSchema);
