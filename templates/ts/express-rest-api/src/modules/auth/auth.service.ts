@@ -95,7 +95,7 @@ export const loginService = async (payload: LoginInput) => {
 
 // Get current user profile
 export const meService = async (userId: string) => {
-  const user = await User.findById(userId).select("name email role").lean();
+  const user = await User.findById(userId).select("name email role _id").lean();
   if (!user) {
     throw new ApiError(StatusCodes.NOT_FOUND, "User not found");
   }
