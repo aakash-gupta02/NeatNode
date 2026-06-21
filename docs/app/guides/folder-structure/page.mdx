@@ -124,21 +124,23 @@ Shared global helpers like `ApiError`, `ApiResponse`, `CatchAsync`.
 
 ---
 
-## TypeScript Templates - Layered + Modular Patterns
+## TypeScript Templates - Modular Architecture
 
-NeatNode TypeScript templates currently use two patterns:
-- **Basic (TS)** uses a clean layer-based structure
-- **REST API (TS)** uses a modular feature-based structure
+NeatNode TypeScript templates follow a **feature-based modular architecture** with a clear separation between application infrastructure, shared utilities, and business modules.
 
-```bash
+```text
 <project-root>/
 ├── package.json
 ├── tsconfig.json
 └── src/
     ├── app.ts
     ├── server.ts
-    ├── config/
-    ├── middlewares/
+    ├── core/
+    │   ├── config/
+    │   └── middlewares/
+    ├── shared/
+    │   ├── types/
+    │   └── utils/
     ├── modules/
     │   └── auth/
     │       ├── auth.controller.ts
@@ -146,99 +148,157 @@ NeatNode TypeScript templates currently use two patterns:
     │       ├── auth.service.ts
     │       ├── auth.validation.ts
     │       └── user.model.ts
-    ├── routes/
-    ├── types/
-    └── utils/
+    └── routes/
+        └── index.route.ts
 ```
 
-This keeps TypeScript projects strongly typed while still easy to evolve.
-
----
-
-## Root Files
-
-| File                      | Purpose                           |
-| ------------------------- | --------------------------------- |
-| **package.json**          | Dependencies and scripts          |
-| **server.js / server.ts** | Application entry point           |
-| **app.js / app.ts**       | Express configuration             |
-| **tsconfig.json**         | TypeScript compiler configuration |
-| **.env / .env.example**   | Environment variables             |
+This structure separates framework-level concerns from business logic, making projects easier to scale and maintain.
 
 ---
 
 ## TypeScript Template Folders `/src`
 
-`modules/` (REST API TS)
+### `core/`
 
-Feature-based modules that group domain logic.
+Contains application-wide infrastructure and framework-related code.
+
+```text
+core/
+├── config/
+└── middlewares/
+```
+
+**config/**
+
+Application configuration such as:
+
+* Database connection
+* Environment configuration
+* Logger setup
+* Third-party service configuration
+
+**middlewares/**
+
+Reusable middleware shared across the application:
+
+* Authentication
+* Authorization
+* Request validation
+* Error handling
+* Rate limiting
+
+---
+
+### `shared/`
+
+Contains reusable code shared across modules.
+
+```text
+shared/
+├── types/
+└── utils/
+```
+
+**types/**
+
+Global TypeScript types and interfaces.
+
+Examples:
+
+* Express request extensions
+* JWT payload types
+* Shared DTOs
+
+**utils/**
+
+Reusable helpers and utility classes.
+
+Examples:
+
+* ApiError
+* CatchAsync
+* sendResponse
+* Token helpers
+* Pagination utilities
+
+---
+
+### `modules/`
+
+Contains feature-based business modules.
+
+Each module owns its controller, service, route, validation, and model files.
 
 Example:
 
-```bash
+```text
 modules/auth/
 ├── auth.controller.ts
-├── auth.service.ts
 ├── auth.route.ts
+├── auth.service.ts
 ├── auth.validation.ts
 └── user.model.ts
 ```
 
-`config/`
+Benefits:
 
-Database, logger, and typed environment setup.
-
-`middlewares/`
-
-Typed middleware (auth, validation, errors).
-
-`utils/`
-
-Typed helpers, error classes, response wrappers.
+* Better scalability
+* Easier navigation
+* Clear ownership of business logic
+* Reduced coupling between features
 
 ---
 
-## Template Variations
+### `routes/`
 
-| Template           | Structure Type | Notes                 |
-| ------------------ | -------------- | --------------------- |
-| **Basic (JS)**     | Layer-based    | Minimal Express setup |
-| **REST API (JS)**  | MVC or Modular | User's choice of structure |
-| **Socket.IO (JS)** | Layer-based    | Adds socket config    |
-| **Basic (TS)**     | Layer-based    | Strict typing         |
-| **REST API (TS)**  | Module-based   | JWT + Zod + typed middleware |
-| Socket.IO (TS)     | Planned        | Not shipped yet       |
+Contains route registration and aggregation.
+
+Example:
+
+```text
+routes/
+└── index.route.ts
+```
+
+Responsible for mounting all module routes into the Express application.
 
 ---
 
-## Extending the Structure
+## Request Flow
 
-You can safely add new folders in both JS and TS templates:
-
-```bash
-src/
- ┣ jobs/        # Background jobs
- ┣ validators/  # Custom schema validation
- ┗ scripts/     # Seeding or CLI scripts
+```text
+Route
+  ↓
+Controller
+  ↓
+Service
+  ↓
+Model
+  ↓
+Response
 ```
+
+Infrastructure concerns such as authentication, validation, and error handling are managed through the `core/` layer, while reusable helpers live inside `shared/`.
 
 ---
 
-## Request Flow Comparison
+## Why This Structure?
 
-### JavaScript (Layer-Based)
+The TypeScript template separates concerns into three clear areas:
 
+```text
+core/
+    ↓
+Application Infrastructure
+
+shared/
+    ↓
+Reusable Utilities & Types
+
+modules/
+    ↓
+Business Features
 ```
-Route → Controller → Service → Model → Response
-```
-
-### TypeScript (Module-Based)
-
-```
-Route → Controller → Service → Model → Response
-(all inside one module)
-```
-
 ---
 
 ## ✅ Summary

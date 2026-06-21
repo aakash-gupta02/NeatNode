@@ -9,7 +9,8 @@ icon: RocketIcon
 # REST API Template (TS)
 
 The **REST API Template (TS)** is a production-oriented, modular Express template built with TypeScript.
-It is designed for real-world APIs where structure, type safety, and maintainability matter from day one.
+
+It follows a **Core + Shared + Modules** architecture that separates infrastructure, reusable utilities, and business features, making projects easier to scale and maintain as they grow.
 
 ---
 
@@ -17,34 +18,44 @@ It is designed for real-world APIs where structure, type safety, and maintainabi
 
 This template is ideal when you want to:
 
-- Build a scalable API with clear module boundaries
-- Use TypeScript end-to-end across routes, services, and middleware
-- Start with authentication, validation, and error handling already wired
+* Build scalable APIs with clear feature boundaries
+* Use TypeScript end-to-end across routes, services, middleware, and utilities
+* Start with authentication, validation, and error handling already configured
+* Follow a modular architecture suitable for production applications
 
-It includes a working auth module, shared middleware, and config utilities so you can focus on domain logic.
+It includes a working authentication module, shared utilities, global middleware, and configuration management so you can focus on building business features.
 
 ---
 
 ## Folder Structure
 
-```bash
+```text
 <project-root>/
 ├─ package.json
 ├─ tsconfig.json
 └─ src/
    ├─ app.ts
    ├─ server.ts
-   ├─ config/
-   │  ├─ db.ts
-   │  ├─ env.ts
-   │  └─ logger.ts
-   ├─ middlewares/
-   │  ├─ auth.middleware.ts
-   │  ├─ error.middleware.ts
-   │  ├─ notFound.middleware.ts
-   │  ├─ rateLimiter.middleware.ts
-   │  ├─ requestLogger.ts
-   │  └─ validateRequest.middleware.ts
+   ├─ core/
+   │  ├─ config/
+   │  │  ├─ db.ts
+   │  │  ├─ env.ts
+   │  │  └─ logger.ts
+   │  └─ middlewares/
+   │     ├─ auth.middleware.ts
+   │     ├─ error.middleware.ts
+   │     ├─ notFound.middleware.ts
+   │     ├─ rateLimiter.middleware.ts
+   │     ├─ requestLogger.middleware.ts
+   │     └─ validateRequest.middleware.ts
+   ├─ shared/
+   │  ├─ types/
+   │  │  └─ express.d.ts
+   │  └─ utils/
+   │     ├─ ApiError.ts
+   │     ├─ ApiResponse.ts
+   │     ├─ CatchAsync.ts
+   │     └─ Token.ts
    ├─ modules/
    │  └─ auth/
    │     ├─ auth.controller.ts
@@ -52,38 +63,142 @@ It includes a working auth module, shared middleware, and config utilities so yo
    │     ├─ auth.service.ts
    │     ├─ auth.validation.ts
    │     └─ user.model.ts
-   ├─ routes/
-   │  └─ index.route.ts
-   ├─ types/
-   │  └─ express.d.ts
-   └─ utils/
-      ├─ ApiError.ts
-      ├─ ApiResponse.ts
-      ├─ CatchAsync.ts
-      └─ Token.ts
+   └─ routes/
+      └─ index.route.ts
 ```
+
+---
+
+## Architecture Overview
+
+The template separates concerns into three dedicated layers:
+
+```text
+core/
+    ↓
+Application Infrastructure
+
+shared/
+    ↓
+Reusable Utilities & Types
+
+modules/
+    ↓
+Business Features
+```
+
+### Core Layer
+
+Contains framework-level and application-wide infrastructure.
+
+Examples:
+
+* Database connection
+* Environment configuration
+* Logging
+* Authentication middleware
+* Validation middleware
+* Error handling middleware
+
+### Shared Layer
+
+Contains reusable code shared across the application.
+
+Examples:
+
+* Utility functions
+* Error classes
+* Response helpers
+* Token helpers
+* Global TypeScript types
+
+### Modules Layer
+
+Contains feature-based business logic.
+
+Each module owns its:
+
+* Routes
+* Controllers
+* Services
+* Validation
+* Models
+
+Example:
+
+```text
+modules/auth/
+├─ auth.controller.ts
+├─ auth.route.ts
+├─ auth.service.ts
+├─ auth.validation.ts
+└─ user.model.ts
+```
+
+This keeps related functionality together and prevents large, hard-to-maintain codebases.
+
+---
+
+## Request Flow
+
+A typical request follows this flow:
+
+```text
+Route
+  ↓
+Middleware
+  ↓
+Controller
+  ↓
+Service
+  ↓
+Model
+  ↓
+Response
+```
+
+Infrastructure concerns such as authentication, validation, logging, and error handling are managed through the **Core** layer, while reusable helpers live in **Shared**.
 
 ---
 
 ## Key Features
 
-- **Modular architecture** using `modules/<feature>`
-- **JWT authentication** with protected route middleware
-- **Zod validation** for request payloads
-- **Rate limiting** (global + auth-specific)
-- **Security headers** via Helmet and CORS setup
-- **Typed error handling** with unified API error responses
-- **MongoDB + Mongoose** integration with startup DB connection
-- **Typed environment validation** via Zod in `config/env.ts`
+* **Modular architecture** using `modules/<feature>`
+* **Core + Shared architecture** for better separation of concerns
+* **JWT authentication** with protected route middleware
+* **Refresh token authentication flow**
+* **Zod validation** for request payloads
+* **Rate limiting** (global + auth-specific)
+* **Security headers** via Helmet and CORS setup
+* **Typed error handling** with unified API error responses
+* **MongoDB + Mongoose** integration
+* **Typed environment validation** using Zod
+* **Request logging middleware**
+* **Centralized utility layer**
 
 ---
 
 ## Default API Endpoints
 
-- `GET /` - health response
-- `POST /api/v1/auth/register`
-- `POST /api/v1/auth/login`
-- `GET /api/v1/auth/me` (protected)
+### Authentication
+
+```http
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+POST /api/v1/auth/refresh-token
+```
+
+### Protected Routes
+
+```http
+GET /api/v1/auth/me
+```
+
+### Health Check
+
+```http
+GET /
+```
 
 ---
 
@@ -95,11 +210,22 @@ When you run:
 npx neatnode
 ```
 
-then choose **TypeScript** and **REST API (TS)**, NeatNode will:
+and select:
 
-1. Copy the template into your project folder
-2. Replace project placeholders in `package.json`
-3. Install-ready scripts for dev, build, and start workflows
+```text
+TypeScript
+↓
+REST API (TS)
+```
+
+NeatNode will:
+
+1. Generate the project structure
+2. Configure TypeScript and tooling
+3. Set up authentication and validation
+4. Configure MongoDB integration
+5. Prepare development and production scripts
+6. Create a modular architecture ready for feature development
 
 ---
 
@@ -107,9 +233,28 @@ then choose **TypeScript** and **REST API (TS)**, NeatNode will:
 
 Choose this template when you need:
 
-- Production-ready API foundations
-- Strong typing across API layers
-- Built-in auth and validation primitives
-- A structure that scales as features grow
+* Production-ready API foundations
+* Strong typing across all layers
+* JWT authentication out of the box
+* Request validation with Zod
+* Modular architecture for growing applications
+* Shared utilities and centralized middleware
+* Scalable project organization
 
-For very small prototypes, start with **Basic (TS)** and move to this template when requirements grow.
+For quick prototypes and smaller projects, consider **Basic (TS)**. For production applications and long-term projects, **REST API (TS)** provides a stronger architectural foundation.
+
+---
+
+## Why This Template?
+
+As applications grow, maintaining a clear separation between infrastructure, shared logic, and business features becomes increasingly important.
+
+The REST API (TS) template provides:
+
+* Better scalability
+* Easier onboarding for teams
+* Cleaner feature organization
+* Consistent project structure
+* Reduced coupling between modules
+
+This allows you to focus on building features rather than repeatedly setting up project architecture.
