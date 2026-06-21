@@ -3,12 +3,14 @@ import express, { type Request, type Response } from "express";
 import helmet from "helmet";
 import { StatusCodes } from "http-status-codes";
 
-import { env } from "./config/env.js";
-import { globalRateLimiter } from "./middlewares/rateLimiter.middleware.js";
-import { errorMiddleware } from "./middlewares/error.middleware.js";
-import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
+
+import { env } from "./core/config/env.js";
+import { errorMiddleware } from "./core/middlewares/error.middleware.js";
+import { notFoundMiddleware } from "./core/middlewares/notFound.middleware.js";
+import { globalRateLimiter } from "./core/middlewares/rateLimiter.middleware.js";
+import { requestLogger } from "./core/middlewares/requestLogger.js";
+
 import apiRoutes from "./routes/index.route.js";
-import { requestLogger } from "./middlewares/requestLogger.js";
 
 const app = express();
 

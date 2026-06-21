@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import ApiError from "../utils/ApiError.js";
-import { verifyAccessToken, verifyRefreshToken } from "../utils/Token.js";
+import ApiError from "../../shared/utils/ApiError.js";
+import { verifyAccessToken, verifyRefreshToken } from "../../shared/utils/Token.js";
 
 // Middleware to authenticate access tokens - used for protected routes
 export const authMiddleware = (req: Request, _res: Response, next: NextFunction): void => {

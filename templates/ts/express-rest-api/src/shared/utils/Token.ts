@@ -1,5 +1,5 @@
 import jwt, { type Secret, type SignOptions } from "jsonwebtoken";
-import { env } from "../config/env.js";
+import { env } from "../../core/config/env.js";
 
 type TokenPayload = {
   userId: string;

@@ -1,10 +1,10 @@
 import { Router } from "express";
 
-import { authMiddleware, refreshTokenMiddleware } from "../../middlewares/auth.middleware.js";
-import { authRateLimiter } from "../../middlewares/rateLimiter.middleware.js";
-import { validateBody } from "../../middlewares/validateRequest.middleware.js";
 import { login, logout, me, refreshToken, register } from "./auth.controller.js";
 import { loginSchema, registerSchema } from "./auth.validation.js";
+import { authMiddleware, refreshTokenMiddleware } from "../../core/middlewares/auth.middleware.js";
+import { authRateLimiter } from "../../core/middlewares/rateLimiter.middleware.js";
+import { validateBody } from "../../core/middlewares/validateRequest.middleware.js";
 
 const router = Router();
 

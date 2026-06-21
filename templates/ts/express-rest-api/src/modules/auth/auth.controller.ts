@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import sendResponse from "../../utils/ApiResponse.js";
-import CatchAsync from "../../utils/CatchAsync.js";
+import sendResponse from "../../shared/utils/ApiResponse.js";
+import CatchAsync from "../../shared/utils/CatchAsync.js";
 import { loginService, logoutService, meService, refreshTokensService, registerService } from "./auth.service.js";
 
 // Register a new user

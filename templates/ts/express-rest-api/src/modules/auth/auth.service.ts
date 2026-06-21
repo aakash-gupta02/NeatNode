@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 
-import ApiError from "../../utils/ApiError.js";
-import { createAccessToken, createRefreshToken } from "../../utils/Token.js";
+import ApiError from "../../shared/utils/ApiError.js";
+import { createAccessToken, createRefreshToken } from "../../shared/utils/Token.js";
 import type { LoginInput, RegisterInput } from "./auth.validation.js";
 import { User } from "./user.model.js";
 import bcrypt from "bcryptjs";
