@@ -1,9 +1,9 @@
 import axios from "axios";
-import extract from "extract-zip";
 import fs from "fs";
 import path from "path";
 import os from "os";
 import { fileURLToPath } from "url";
+import decompress from "decompress";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,8 +56,7 @@ const downloadFromRef = async ({ repoPath, ref, refType }) => {
   });
 
   fs.writeFileSync(tempZip, response.data);
-  await extract(tempZip, { dir: tempExtractDir });
-
+  await decompress(tempZip, tempExtractDir);
   const extractedRootDir = fs
     .readdirSync(tempExtractDir, { withFileTypes: true })
     .find((entry) => entry.isDirectory());
