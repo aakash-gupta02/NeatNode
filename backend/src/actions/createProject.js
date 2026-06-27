@@ -24,8 +24,12 @@ export async function createProject({
   const projectConfig = {
     language: langKey === "ts" ? "typescript" : "javascript",
     architecture: isModular ? "modular" : "mvc",
-    database: "mongodb",
+    database: {
+      provider: "mongodb",
+      client: "mongoose",
+    },
     validation: langKey === "ts" ? "zod" : "joi",
+    srcDir: "src",
     langKey,
   };
 
