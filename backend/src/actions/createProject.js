@@ -1,41 +1,73 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
-import { cleanupTemplateMarkers, removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
+import {
+  cleanupTemplateMarkers,
+  removeCrud,
+  removeCrudModule,
+  removeCrudReferences,
+} from "./removeCRUD.js";
 import { downloadTemplate } from "../utils/downloadRepoTemplateByVersionTags.js";
 import { addEnv } from "./addEnv.js";
+import { generateNeatNodeConfig } from "../templates/config.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export async function createProject({
+  projectName,
+  repoPath,
+  includeCrud,
+  crudName,
+  langKey,
+  isModular,
+}) {
+  // Project configuration based on user choices
+  const projectConfig = {
+    language: langKey === "ts" ? "typescript" : "javascript",
+    architecture: isModular ? "modular" : "mvc",
+    database: "mongodb",
+    validation: langKey === "ts" ? "zod" : "joi",
+    langKey,
+  };
 
-export async function createProject({ projectName, repoPath, includeCrud, crudName, langKey, isModular }) {
   try {
-    const targetPath = projectName === "."
-      ? process.cwd()
-      : path.join(process.cwd(), projectName);
+    const targetPath =
+      projectName === "."
+        ? process.cwd()
+        : path.join(process.cwd(), projectName);
 
+    // Check if the target directory already exists
     if (fs.existsSync(targetPath) && projectName !== ".") {
       console.error(`❌ Folder "${projectName}" already exists.`);
       process.exit(1);
     }
 
+    // Create the project folder if the project name is not "."
     if (projectName !== ".") {
       console.log("Creating project folder...");
       fs.mkdirSync(targetPath);
     }
 
+    // Download the template from the specified repository path
     console.log("Downloading template...");
     const localTemplatePath = await downloadTemplate(repoPath);
 
+    // Copy the template files to the target directory and replace placeholders
     await copyTemplate(localTemplatePath, targetPath, {
-      "project-name": projectName === "." ? path.basename(process.cwd()) : projectName,
-      "author": os.userInfo().username || "author",
+      "project-name":
+        projectName === "." ? path.basename(process.cwd()) : projectName,
+      author: os.userInfo().username || "author",
     });
 
+    // Generate the Neatnode configuration file based on the user's choices
+    await generateNeatNodeConfig({
+      targetPath,
+      ...projectConfig,
+    });
+
+    // Add environment variables to the project
     await addEnv({ targetPath });
 
+    // Handle CRUD removal if the user chose not to include it
     if (!includeCrud && crudName) {
       console.log("🗑 Removing CRUD files...");
 
@@ -43,34 +75,26 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
         removeCrudModule(targetPath, crudName);
 
         removeCrudReferences(
-          path.join(targetPath, "src", `routes/index.route.${langKey}`)
+          path.join(targetPath, "src", `routes/index.route.${langKey}`),
         );
       }
 
       removeCrud(targetPath, crudName, langKey);
 
-      removeCrudReferences(
-        path.join(targetPath, "src", `app.${langKey}`)
-      );
+      removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
     }
 
-    // ALWAYS CLEANUP MARKERS
-    cleanupTemplateMarkers(
-      path.join(targetPath, "src", `app.${langKey}`)
-    );
+    // Cleanup template markers for mvc pattern
+    cleanupTemplateMarkers(path.join(targetPath, "src", `app.${langKey}`));
 
+    // Cleanup template markers for modular pattern if applicable
     if (isModular) {
       cleanupTemplateMarkers(
-        path.join(targetPath, "src", `routes/index.route.${langKey}`)
+        path.join(targetPath, "src", `routes/index.route.${langKey}`),
       );
     }
-
-    console.log(`\n✅ Project "${projectName}" created successfully!\n`);
-
   } catch (err) {
     console.error("❌ Failed to create project:", err);
     process.exit(1);
   }
 }
-
-
