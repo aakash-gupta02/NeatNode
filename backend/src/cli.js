@@ -2,6 +2,7 @@
 import inquirer from "inquirer";
 import templates from "./config/templates.js";
 import { createProject } from "./actions/createProject.js";
+import { generate } from "./commands/generate.js";
 
 async function main() {
   console.log("\n🚀 Welcome to NeatNode CLI!\n");
@@ -59,7 +60,6 @@ async function main() {
     isModular = architecture === "modular";
 
     chosen.repoPath = chosen.architecture[architecture];
-
   }
 
   // STEP 4 — CRUD Optional (only for some templates)
@@ -128,8 +128,9 @@ async function main() {
     isModular,
   });
 
-
-  console.log(`\n✅ Project "${projectName}" created successfully using "${chosen.name}".\n`);
+  console.log(
+    `\n✅ Project "${projectName}" created successfully using "${chosen.name}".\n`,
+  );
 
   console.log("Next steps:");
   console.log(`  cd ${projectName}`);
@@ -137,11 +138,21 @@ async function main() {
   console.log("  npm run dev\n");
 
   console.log("🎉 Happy Coding!\n");
-
-
-
 }
 
-main().catch((err) => {
+async function run() {
+  const args = process.argv.slice(2);
+
+  if (args[0] === "g" || args[0] === "generate") {
+    return generate({
+      type: args[1],
+      name: args[2],
+    });
+  }
+
+  return main();
+}
+
+run().catch((err) => {
   console.error("❌ Error:", err.message || err);
 });
