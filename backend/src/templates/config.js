@@ -8,22 +8,24 @@ export async function generateNeatNodeConfig({
   validation,
   langKey,
   database,
-  dbClient,
+  srcDir,
 }) {
+  const { provider, client } = database;
+
   const content = `export default {
   language: "${language}",
   architecture: "${architecture}",
   database: {
-    provider: "${database}", 
-    client: "${dbClient}"
+    provider: "${provider}",
+    client: "${client}"
   },
   validation: "${validation}",
-  srcDir: "src",
+  srcDir: "${srcDir}",
 };
 `;
 
   fs.writeFileSync(
     path.join(targetPath, `neatnode.config.${langKey}`),
-    content,
+    content
   );
 }
