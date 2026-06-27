@@ -20,12 +20,11 @@ export async function createProject({
   langKey,
   isModular,
 }) {
-
+  // Project configuration based on user choices
   const projectConfig = {
     language: langKey === "ts" ? "typescript" : "javascript",
     architecture: isModular ? "modular" : "mvc",
     database: "mongodb",
-    dbClient: "mongoose",
     validation: langKey === "ts" ? "zod" : "joi",
     langKey,
   };
@@ -36,32 +35,39 @@ export async function createProject({
         ? process.cwd()
         : path.join(process.cwd(), projectName);
 
+    // Check if the target directory already exists
     if (fs.existsSync(targetPath) && projectName !== ".") {
       console.error(`❌ Folder "${projectName}" already exists.`);
       process.exit(1);
     }
 
+    // Create the project folder if the project name is not "."
     if (projectName !== ".") {
       console.log("Creating project folder...");
       fs.mkdirSync(targetPath);
     }
 
+    // Download the template from the specified repository path
     console.log("Downloading template...");
     const localTemplatePath = await downloadTemplate(repoPath);
 
+    // Copy the template files to the target directory and replace placeholders
     await copyTemplate(localTemplatePath, targetPath, {
       "project-name":
         projectName === "." ? path.basename(process.cwd()) : projectName,
       author: os.userInfo().username || "author",
     });
 
+    // Generate the Neatnode configuration file based on the user's choices
     await generateNeatNodeConfig({
       targetPath,
       ...projectConfig,
     });
 
+    // Add environment variables to the project
     await addEnv({ targetPath });
 
+    // Handle CRUD removal if the user chose not to include it
     if (!includeCrud && crudName) {
       console.log("🗑 Removing CRUD files...");
 
@@ -78,8 +84,10 @@ export async function createProject({
       removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
     }
 
+    // Cleanup template markers for mvc pattern
     cleanupTemplateMarkers(path.join(targetPath, "src", `app.${langKey}`));
 
+    // Cleanup template markers for modular pattern if applicable
     if (isModular) {
       cleanupTemplateMarkers(
         path.join(targetPath, "src", `routes/index.route.${langKey}`),
