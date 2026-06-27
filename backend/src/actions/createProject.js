@@ -1,20 +1,40 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import { fileURLToPath } from "url";
 import { copyTemplate } from "../utils/copyTemplate.js";
-import { cleanupTemplateMarkers, removeCrud, removeCrudModule, removeCrudReferences } from "./removeCRUD.js";
+import {
+  cleanupTemplateMarkers,
+  removeCrud,
+  removeCrudModule,
+  removeCrudReferences,
+} from "./removeCRUD.js";
 import { downloadTemplate } from "../utils/downloadRepoTemplateByVersionTags.js";
 import { addEnv } from "./addEnv.js";
+import { generateNeatNodeConfig } from "../templates/config.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export async function createProject({
+  projectName,
+  repoPath,
+  includeCrud,
+  crudName,
+  langKey,
+  isModular,
+}) {
 
-export async function createProject({ projectName, repoPath, includeCrud, crudName, langKey, isModular }) {
+  const projectConfig = {
+    language: langKey === "ts" ? "typescript" : "javascript",
+    architecture: isModular ? "modular" : "mvc",
+    database: "mongodb",
+    dbClient: "mongoose",
+    validation: langKey === "ts" ? "zod" : "joi",
+    langKey,
+  };
+
   try {
-    const targetPath = projectName === "."
-      ? process.cwd()
-      : path.join(process.cwd(), projectName);
+    const targetPath =
+      projectName === "."
+        ? process.cwd()
+        : path.join(process.cwd(), projectName);
 
     if (fs.existsSync(targetPath) && projectName !== ".") {
       console.error(`❌ Folder "${projectName}" already exists.`);
@@ -30,8 +50,14 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
     const localTemplatePath = await downloadTemplate(repoPath);
 
     await copyTemplate(localTemplatePath, targetPath, {
-      "project-name": projectName === "." ? path.basename(process.cwd()) : projectName,
-      "author": os.userInfo().username || "author",
+      "project-name":
+        projectName === "." ? path.basename(process.cwd()) : projectName,
+      author: os.userInfo().username || "author",
+    });
+
+    await generateNeatNodeConfig({
+      targetPath,
+      ...projectConfig,
     });
 
     await addEnv({ targetPath });
@@ -43,34 +69,24 @@ export async function createProject({ projectName, repoPath, includeCrud, crudNa
         removeCrudModule(targetPath, crudName);
 
         removeCrudReferences(
-          path.join(targetPath, "src", `routes/index.route.${langKey}`)
+          path.join(targetPath, "src", `routes/index.route.${langKey}`),
         );
       }
 
       removeCrud(targetPath, crudName, langKey);
 
-      removeCrudReferences(
-        path.join(targetPath, "src", `app.${langKey}`)
-      );
+      removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
     }
 
-    // ALWAYS CLEANUP MARKERS
-    cleanupTemplateMarkers(
-      path.join(targetPath, "src", `app.${langKey}`)
-    );
+    cleanupTemplateMarkers(path.join(targetPath, "src", `app.${langKey}`));
 
     if (isModular) {
       cleanupTemplateMarkers(
-        path.join(targetPath, "src", `routes/index.route.${langKey}`)
+        path.join(targetPath, "src", `routes/index.route.${langKey}`),
       );
     }
-
-    console.log(`\n✅ Project "${projectName}" created successfully!\n`);
-
   } catch (err) {
     console.error("❌ Failed to create project:", err);
     process.exit(1);
   }
 }
-
-
