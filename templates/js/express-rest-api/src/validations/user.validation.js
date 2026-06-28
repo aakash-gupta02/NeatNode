@@ -1,7 +1,7 @@
 import joi from "joi";
 
-// Schema for creating a new user
-export const createUserSchema = joi.object({
+// Input for creating a new user
+export const createUserInput = joi.object({
     name: joi.string().min(3).max(30).required().messages({
         'string.min': 'Name should have a minimum length of 3',
         'string.max': 'Name should have a maximum length of 30',
@@ -17,8 +17,8 @@ export const createUserSchema = joi.object({
     }),
 });
 
-// Schema for updating an existing user
-export const updateUserSchema = joi.object({
+// Input for updating an existing user
+export const updateUserInput = joi.object({
     name: joi.string().min(3).max(30).messages({
         'string.min': 'Name should have a minimum length of 3',
         'string.max': 'Name should have a maximum length of 30',
@@ -31,8 +31,8 @@ export const updateUserSchema = joi.object({
     }),
 });
 
-// Schema for user login
-export const loginSchema = joi.object({
+// Input for user login
+export const loginInput = joi.object({
     email: joi.string().email().required().messages({
         'string.email': 'Email must be a valid email',
         'any.required': 'Email is required'

@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 
-const validatePart = (part, schema) => (req, res, next) => {
-  const { error, value } = schema.validate(req[part], {
+const validatePart = (part, input) => (req, res, next) => {
+  const { error, value } = input.validate(req[part], {
     abortEarly: false,
   });
 
@@ -23,6 +23,6 @@ const validatePart = (part, schema) => (req, res, next) => {
   next();
 };
 
-export const validateBody = (schema) => validatePart("body", schema);
-export const validateParams = (schema) => validatePart("params", schema);
-export const validateQuery = (schema) => validatePart("query", schema);
+export const validateBody = (input) => validatePart("body", input);
+export const validateParams = (input) => validatePart("params", input);
+export const validateQuery = (input) => validatePart("query", input);

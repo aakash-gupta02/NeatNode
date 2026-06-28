@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const registerSchema = z
+export const registerInput = z
   .object({
     name: z.string().trim().min(2).max(60),
     email: z.email().transform((val) => val.toLowerCase()),
@@ -8,12 +8,12 @@ export const registerSchema = z
   })
   .strict();
 
-export const loginSchema = z
+export const loginInput = z
   .object({
     email: z.email().transform((val) => val.toLowerCase()),
     password: z.string().min(6).max(100),
   })
   .strict();
 
-export type RegisterInput = z.infer<typeof registerSchema>;
-export type LoginInput = z.infer<typeof loginSchema>;
+export type RegisterInput = z.infer<typeof registerInput>;
+export type LoginInput = z.infer<typeof loginInput>;
