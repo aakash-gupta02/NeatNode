@@ -11,7 +11,7 @@ import {
   refreshToken,
 } from "./user.controller.js";
 import { validateBody } from "../../core/middleware/validateRequest.middleware.js";
-import { createUserSchema, loginSchema } from "./user.validation.js";
+import { createUserInput, loginInput } from "./user.validation.js";
 import { authRateLimiter } from "../../core/middleware/rateLimiter.js";
 
 const router = express.Router();
@@ -20,10 +20,10 @@ const router = express.Router();
 router.post(
   "/register",
   authRateLimiter,
-  validateBody(createUserSchema),
+  validateBody(createUserInput),
   registerUser,
 );
-router.post("/login", authRateLimiter, validateBody(loginSchema), loginUser);
+router.post("/login", authRateLimiter, validateBody(loginInput), loginUser);
 
 // Protected route to get user details
 router.get("/me", protect, getUser);
