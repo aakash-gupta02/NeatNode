@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import CatchAsync from "../../core/utils/CatchAsync.js";
-import sendResponse from "../../core/utils/ApiResponse.js";
+import CatchAsync from "../../shared/utils/CatchAsync.js";
+import sendResponse from "../../shared/utils/ApiResponse.js";
 import {
   createUserService,
   getUserService,
@@ -8,8 +8,8 @@ import {
   logoutService,
   refreshTokenService,
 } from "./user.service.js";
-import ApiError from "../../core/utils/ApiError.js";
-import { setCookie } from "../../core/utils/Token.js";
+import ApiError from "../../shared/utils/ApiError.js";
+import { setCookie } from "../../shared/utils/Token.js";
 
 // Controller to create a new user
 export const registerUser = CatchAsync(async (req, res) => {
