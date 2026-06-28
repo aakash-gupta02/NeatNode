@@ -9,7 +9,6 @@ export async function generate({ type, name }) {
   if (!name) {
     throw new Error("Missing resource name.");
   }
-
   const config = await loadConfig();
 
   switch (type) {
