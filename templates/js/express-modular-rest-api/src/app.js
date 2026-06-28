@@ -5,10 +5,11 @@ import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 
-import { config } from './config/env.config.js';
-import { errorHandler, notFound } from './core/middleware/error.middleware.js';
-import sendResponse from './core/utils/ApiResponse.js';
+import { config } from './core/config/env.config.js';
 import indexRoute from './routes/index.route.js';
+import sendResponse from './shared/utils/ApiResponse.js';
+import { errorHandler, notFound } from './core/middleware/error.middleware.js';
+
 
 
 

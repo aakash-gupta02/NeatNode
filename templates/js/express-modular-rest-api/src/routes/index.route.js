@@ -1,10 +1,10 @@
 import express from "express";
 import { StatusCodes } from "http-status-codes";
 import { healthRateLimiter } from "../core/middleware/rateLimiter.js";
-import sendResponse from "../core/utils/ApiResponse.js";
 
 // ROUTE_IMPORTS_START
 import authRoute from "../modules/user/user.route.js";
+import sendResponse from "../shared/utils/ApiResponse.js";
 // ROUTE_IMPORTS_END
 
 

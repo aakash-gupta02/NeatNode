@@ -1,8 +1,9 @@
-import { config } from "../config/env.config.js";
 
 /**
  * @typedef {import("express").CookieOptions} CookieOptions
  */
+
+import { config } from "../../core/config/env.config.js";
 
 /**
  * Convert JWT expiresIn format to milliseconds

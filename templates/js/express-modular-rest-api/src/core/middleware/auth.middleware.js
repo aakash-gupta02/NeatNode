@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import ApiError from "../utils/ApiError.js";
-import { verifyAccessToken, verifyRefreshToken } from "../utils/Token.js";
+import ApiError from "../../shared/utils/ApiError.js";
+import { verifyAccessToken, verifyRefreshToken } from "../../shared/utils/Token.js";
 
 // Middleware to protect routes
 export const protect = (req, res, next) => {

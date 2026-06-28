@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { config } from "../../config/env.config.js";
+import { config } from "../../core/config/env.config.js";
 
 // Generate Access Token
 export const generateAccessToken = (payload) => {

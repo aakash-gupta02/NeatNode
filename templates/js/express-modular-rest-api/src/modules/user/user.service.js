@@ -1,11 +1,11 @@
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 import User from "./user.model.js";
-import ApiError from "../../core/utils/ApiError.js";
+import ApiError from "../../shared/utils/ApiError.js";
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "../../core/utils/Token.js";
+} from "../../shared/utils/Token.js";
 
 // Service to create a new user
 export const createUserService = async ({ name, email, password }) => {
