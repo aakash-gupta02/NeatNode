@@ -9,11 +9,7 @@ import { config } from './config/env.config.js';
 import { rateLimiter } from './middleware/rateLimiter.js';
 import sendResponse from './utils/ApiResponse.js';
 
-// ROUTE_IMPORTS_START
-import authRoutes from './routes/user.route.js'
-// ROUTE_IMPORTS_END
-
-
+import indexRoute from './routes/index.route.js';
 
 // instance 
 const app = express();
@@ -29,18 +25,13 @@ app.use(morgan('dev'));
 app.use(helmet());
 
 // routes
-
-// ROUTE_USES_START
-app.use("/api/auth", authRoutes);
-// ROUTE_USES_END
-
+app.use("/api/v1", indexRoute);
 
 // default route
 app.get("/", (req, res) => {
     sendResponse(res, StatusCodes.OK, "API is running...");
 });
 app.get("/favicon.ico", (req, res) => res.status(204).end());
-
 
 // health check route with rate limiting
 app.get("/health", rateLimiter(20), (req, res) => {
