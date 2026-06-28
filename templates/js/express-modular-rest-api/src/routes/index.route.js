@@ -6,6 +6,9 @@ import { healthRateLimiter } from "../core/middleware/rateLimiter.js";
 import authRoute from "../modules/user/user.route.js";
 import sendResponse from "../shared/utils/ApiResponse.js";
 // ROUTE_IMPORTS_END
+/* <NEATNODE_IMPORTS> */
+// Reserved for NeatNode file generation. Do not remove or modify.
+
 
 
 // instance
@@ -20,6 +23,8 @@ router.get("/health", healthRateLimiter, (req, res) => {
 // ROUTE_USES_START
 router.use("/auth", authRoute);
 // ROUTE_USES_END
+/* <NEATNODE_ROUTES> */
+// Reserved for NeatNode file generation. Do not remove or modify.
 
 
 
