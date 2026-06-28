@@ -88,11 +88,11 @@ export const FILE_DEFINITIONS = [
     },
   },
 
-  // schema
+  // model
   {
-    type: "schema",
+    type: "model",
 
-    template: "schema.hbs",
+    template: "model.hbs",
 
     database: "mongoose",
 
@@ -101,7 +101,7 @@ export const FILE_DEFINITIONS = [
         return path.join(config.srcDir, "models", `${name}.model.${ext}`);
       }
 
-      return path.join(config.srcDir, "modules", name, `${name}.schema.${ext}`);
+      return path.join(config.srcDir, "modules", name, `${name}.model.${ext}`);
     },
   },
 ];
