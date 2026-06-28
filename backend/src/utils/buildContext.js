@@ -52,6 +52,7 @@ export function buildContext(name, config) {
 
   return {
     name,
+    rawName: name,
 
     camelName,
     pascalName,

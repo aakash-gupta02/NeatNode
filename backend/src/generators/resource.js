@@ -2,6 +2,7 @@ import { buildContext } from "../utils/buildContext.js";
 import { buildGenerationPlan } from "../utils/buildGenerationPlan.js";
 import { renderTemplate } from "../utils/renderTemplate.js";
 import { writeFile } from "../utils/writeFile.js";
+import { updateRouteRegistry } from "./updateRouteRegistry.js";
 
 export async function generateResource({ name, config }) {
   const files = ["controller", "service", "route", "validation", "model"];
@@ -23,6 +24,12 @@ export async function generateResource({ name, config }) {
       await file.postGenerate(config, context);
     }
   }
+
+  updateRouteRegistry({
+    targetPath: process.cwd(),
+    context,
+    config,
+  });
 
   return plan;
 }

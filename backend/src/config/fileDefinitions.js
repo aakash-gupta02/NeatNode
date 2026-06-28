@@ -59,9 +59,6 @@ export const FILE_DEFINITIONS = [
       return path.join(config.srcDir, "modules", name, `${name}.route.${ext}`);
     },
 
-    // async postGenerate(config, context) {
-    //   // updateRouteIndex(...)
-    // },
   },
 
   // validation
