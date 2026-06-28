@@ -1,0 +1,16 @@
+import { StatusCodes } from "http-status-codes";
+import {{pascalName}} from "{{modelImport}}{{camelName}}.model.js";
+import ApiError from "{{utilsImport}}ApiError.js";
+
+export const get{{pascalName}}Service = async (id) => {
+  const {{camelName}} = await {{pascalName}}.findById(id);
+
+  if (!{{camelName}}) {
+    throw new ApiError(
+      StatusCodes.NOT_FOUND,
+      "{{pascalName}} not found"
+    );
+  }
+
+  return {{camelName}};
+};

@@ -1,0 +1,12 @@
+import mongoose from "mongoose";
+
+const {{camelName}}Schema = new mongoose.Schema(
+  {
+    // Define your schema fields here
+  },
+  { timestamps: true }
+);
+
+const {{pascalName}} = mongoose.model("{{pascalName}}", {{camelName}}Schema);
+
+export default {{pascalName}};

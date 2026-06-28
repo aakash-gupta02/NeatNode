@@ -6,7 +6,7 @@ import { writeFile } from "../utils/writeFile.js";
 export async function generateResource({ name, config }) {
   const files = ["controller", "service", "route", "validation", "model"];
 
-  const context = buildContext(name);
+  const context = buildContext(name, config);
 
   const plan = buildGenerationPlan({
     config,

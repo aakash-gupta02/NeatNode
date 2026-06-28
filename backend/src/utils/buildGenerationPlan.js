@@ -13,7 +13,9 @@ export function buildGenerationPlan({ config, context, files }) {
     })
     .map((file) => ({
       type: file.type,
-      template: `${config.language}/${file.template}`,
+      template: file.database
+        ? `${config.language}/${config.database.client}/${file.template}`
+        : `${config.language}/${file.template}`,
       output: file.output(config, context.camelName, extension),
       // postGenerate: file.postGenerate,
     }));
