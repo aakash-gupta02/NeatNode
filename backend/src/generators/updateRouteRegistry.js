@@ -24,16 +24,16 @@ export function updateRouteRegistry({ targetPath, context, config }) {
   // Prevent duplicate imports
   if (!content.includes(importStatement)) {
     content = content.replace(
-      "/* NEATNODE_IMPORTS */",
-      `${importStatement}\n/* NEATNODE_IMPORTS */`,
+      "/* <NEATNODE_IMPORTS> */",
+      `${importStatement}\n/* <NEATNODE_IMPORTS> */`,
     );
   }
 
   // Prevent duplicate routes
   if (!content.includes(routeStatement)) {
     content = content.replace(
-      "/* NEATNODE_ROUTES */",
-      `${routeStatement}\n/* NEATNODE_ROUTES */`,
+      "/* <NEATNODE_ROUTES> */",
+      `${routeStatement}\n/* <NEATNODE_ROUTES> */`,
     );
   }
 
