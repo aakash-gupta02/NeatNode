@@ -77,26 +77,19 @@ export async function createProject({
 
       if (isModular) {
         removeCrudModule(targetPath, crudName);
-
-        removeCrudReferences(
-          path.join(targetPath, "src", `routes/index.route.${langKey}`),
-        );
       }
 
       removeCrud(targetPath, crudName, langKey);
 
-      removeCrudReferences(path.join(targetPath, "src", `app.${langKey}`));
-    }
-
-    // Cleanup template markers for mvc pattern
-    cleanupTemplateMarkers(path.join(targetPath, "src", `app.${langKey}`));
-
-    // Cleanup template markers for modular pattern if applicable
-    if (isModular) {
-      cleanupTemplateMarkers(
-        path.join(targetPath, "src", `routes/index.route.${langKey}`),
+      removeCrudReferences(
+        path.join(targetPath, "src", "routes", `index.route.${langKey}`),
       );
     }
+
+    // Cleanup template markers
+    cleanupTemplateMarkers(
+      path.join(targetPath, "src", "routes", `index.route.${langKey}`),
+    );
   } catch (err) {
     console.error("❌ Failed to create project:", err);
     process.exit(1);
