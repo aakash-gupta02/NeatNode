@@ -5,6 +5,7 @@ import { writeFile } from "../utils/writeFile.js";
 import { updateRouteRegistry } from "./updateRouteRegistry.js";
 import path from "path";
 import fs from "fs";
+import { validateRouteRegistry } from "./verifyRouteRegistry.js";
 
 export async function generateResource({ name, config, force }) {
   const files = ["controller", "service", "route", "validation", "model"];
@@ -18,7 +19,8 @@ export async function generateResource({ name, config, force }) {
   });
 
   const createdFiles = [];
-
+  
+  // Check if any of the files in the plan already exist
   if (!force) {
     for (const file of plan) {
       if (fs.existsSync(file.output)) {
@@ -31,6 +33,13 @@ export async function generateResource({ name, config, force }) {
     }
   }
 
+  // Validate the route registry before proceeding with file generation
+  validateRouteRegistry({
+    targetPath: process.cwd(),
+    config,
+  });
+
+  // Generate files based on the plan
   for (const file of plan) {
     const content = renderTemplate(file.template, context);
 
@@ -39,6 +48,7 @@ export async function generateResource({ name, config, force }) {
     createdFiles.push(file.output);
   }
 
+  // Update the route registry after generating files
   updateRouteRegistry({
     targetPath: process.cwd(),
     context,
