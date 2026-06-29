@@ -1,7 +1,7 @@
 import { generateResource } from "../generators/resource.js";
 import { loadConfig } from "../utils/loadConfig.js";
 
-export async function generate({ type, name }) {
+export async function generate({ type, name, force }) {
   if (!type) {
     throw new Error("Missing generator type.");
   }
@@ -9,12 +9,11 @@ export async function generate({ type, name }) {
   if (!name) {
     throw new Error("Missing resource name.");
   }
-
   const config = await loadConfig();
 
   switch (type) {
     case "resource":
-      return generateResource({ name, config });
+      return generateResource({ name, config, force });
 
     default:
       throw new Error(`Unknown generator: "${type}"`);
