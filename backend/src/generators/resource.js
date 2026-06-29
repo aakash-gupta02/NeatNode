@@ -4,8 +4,9 @@ import { renderTemplate } from "../utils/renderTemplate.js";
 import { writeFile } from "../utils/writeFile.js";
 import { updateRouteRegistry } from "./updateRouteRegistry.js";
 import path from "path";
+import fs from "fs";
 
-export async function generateResource({ name, config }) {
+export async function generateResource({ name, config, force }) {
   const files = ["controller", "service", "route", "validation", "model"];
 
   const context = buildContext(name, config);
@@ -18,10 +19,22 @@ export async function generateResource({ name, config }) {
 
   const createdFiles = [];
 
+  if (!force) {
+    for (const file of plan) {
+      if (fs.existsSync(file.output)) {
+        console.error(`❌ ${path.basename(file.output)} already exists.`);
+
+        console.log("\nUse --force to overwrite existing files.");
+
+        process.exit(1);
+      }
+    }
+  }
+
   for (const file of plan) {
     const content = renderTemplate(file.template, context);
 
-    await writeFile(file.output, content);
+    await writeFile(file.output, content, { overwrite: force });
 
     createdFiles.push(file.output);
   }

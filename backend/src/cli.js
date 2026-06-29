@@ -142,11 +142,13 @@ async function main() {
 
 async function run() {
   const args = process.argv.slice(2);
+  const force = args.includes("--force");
 
   if (args[0] === "g" || args[0] === "generate") {
     return generate({
       type: args[1],
       name: args[2],
+      force,
     });
   }
 
