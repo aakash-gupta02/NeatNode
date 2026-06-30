@@ -11,13 +11,13 @@ const __dirname = path.dirname(__filename);
 const owner = "aakash-gupta02";
 const repo = "NeatNode";
 
-const getPackageVersion = () => {
+export const getPackageVersion = () => {
   try {
     const pkgPath = path.resolve(__dirname, "../../package.json");
     const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
     return pkg.version;
   } catch {
-    return null;
+    throw new Error("Failed to read NeatNode package version.");
   }
 };
 

@@ -8,9 +8,10 @@ import {
   removeCrudModule,
   removeCrudReferences,
 } from "./removeCRUD.js";
-import { downloadTemplate } from "../utils/downloadRepoTemplateByVersionTags.js";
+import { downloadTemplate, getPackageVersion } from "../utils/downloadRepoTemplateByVersionTags.js";
 import { addEnv } from "./addEnv.js";
 import { generateNeatNodeConfig } from "../templates/config.js";
+import { updatePackageJson } from "../utils/updatePackageJson.js";
 
 export async function createProject({
   projectName,
@@ -32,6 +33,8 @@ export async function createProject({
     srcDir: "src",
     langKey,
   };
+
+  const neatnodeVersion = getPackageVersion();
 
   try {
     const targetPath =
@@ -60,6 +63,11 @@ export async function createProject({
       "project-name":
         projectName === "." ? path.basename(process.cwd()) : projectName,
       author: os.userInfo().username || "author",
+    });
+
+    await updatePackageJson({
+      targetPath,
+      neatnodeVersion,
     });
 
     // Generate the Neatnode configuration file based on the user's choices
