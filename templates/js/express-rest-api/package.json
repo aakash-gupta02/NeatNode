@@ -33,6 +33,6 @@
     "eslint": "^9.0.0",
     "globals": "^15.0.0",
     "nodemon": "^3.1.10",
-    "neatnode": "^0.0.0"
+    "neatnode": "^3.3.3"
   }
 }
