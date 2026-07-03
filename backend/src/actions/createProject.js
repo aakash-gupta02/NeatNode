@@ -20,6 +20,7 @@ export async function createProject({
   crudName,
   langKey,
   isModular,
+  tempConfig,
 }) {
   // Project configuration based on user choices
   const projectConfig = {
@@ -29,6 +30,7 @@ export async function createProject({
       provider: "mongodb",
       client: "mongoose",
     },
+    tempConfig,
     validation: langKey === "ts" ? "zod" : "joi",
     srcDir: "src",
     langKey,

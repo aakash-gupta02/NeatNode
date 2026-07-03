@@ -9,16 +9,24 @@ export async function generateNeatNodeConfig({
   langKey,
   database,
   srcDir,
+  tempConfig,
 }) {
   const { provider, client } = database;
 
   const content = `export default {
+  template: "${tempConfig.template}",
+
   language: "${language}",
   architecture: "${architecture}",
+
   database: {
     provider: "${provider}",
     client: "${client}"
   },
+  features: {
+    resourceGenerator: ${tempConfig.features.resourceGenerator},
+  },
+  
   validation: "${validation}",
   srcDir: "${srcDir}",
 };
@@ -26,6 +34,6 @@ export async function generateNeatNodeConfig({
 
   fs.writeFileSync(
     path.join(targetPath, `neatnode.config.${langKey}`),
-    content
+    content,
   );
 }
