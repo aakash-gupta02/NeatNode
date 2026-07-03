@@ -10,6 +10,13 @@ import { validateRouteRegistry } from "./verifyRouteRegistry.js";
 export async function generateResource({ name, config, force }) {
   const files = ["controller", "service", "route", "validation", "model"];
 
+  if (!config.features.resourceGenerator) {
+    console.error(
+      `❌ The "${config.template}" template does not support resource generation.`,
+    );
+    process.exit(1);
+  }
+
   const context = buildContext(name, config);
 
   const plan = buildGenerationPlan({
@@ -19,7 +26,7 @@ export async function generateResource({ name, config, force }) {
   });
 
   const createdFiles = [];
-  
+
   // Check if any of the files in the plan already exist
   if (!force) {
     for (const file of plan) {
