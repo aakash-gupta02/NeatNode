@@ -126,6 +126,7 @@ async function main() {
     crudName,
     langKey,
     isModular,
+    tempConfig: chosen.config,
   });
 
   console.log(
