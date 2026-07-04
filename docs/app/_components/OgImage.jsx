@@ -7,6 +7,8 @@ export const size = {
 
 export const contentType = 'image/png'
 
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+
 export function createDocOgImage({
   eyebrow,
   title,
@@ -25,43 +27,50 @@ export function createDocOgImage({
           position: 'relative',
           overflow: 'hidden',
           color: '#f8fafc',
-          background:
-            'radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.22), transparent 34%), radial-gradient(circle at 80% 10%, rgba(34, 197, 94, 0.18), transparent 28%), linear-gradient(135deg, #020617 0%, #071827 48%, #0f172a 100%)',
-          fontFamily:
-            'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+          background: 'linear-gradient(135deg, #09090b 0%, #111827 55%, #18181b 100%)',
+          fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
         }}
       >
+        {/* Subtle Emerald Ambient Glow Overlays */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -140,
+            right: -100,
+            width: 360,
+            height: 360,
+            borderRadius: 999,
+            background: 'rgba(16, 185, 129, 0.12)',
+            filter: 'blur(80px)',
+            display: 'flex'
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: -120,
+            bottom: -120,
+            width: 320,
+            height: 320,
+            borderRadius: 999,
+            background: 'rgba(16, 185, 129, 0.08)',
+            filter: 'blur(80px)',
+            display: 'flex'
+          }}
+        />
+
+        {/* Framing Premium Border */}
         <div
           style={{
             position: 'absolute',
             inset: 40,
             borderRadius: 36,
-            border: '1px solid rgba(148, 163, 184, 0.16)'
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            left: -90,
-            top: -90,
-            width: 260,
-            height: 260,
-            borderRadius: '999px',
-            background: 'rgba(16, 185, 129, 0.18)'
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            right: -120,
-            bottom: -120,
-            width: 340,
-            height: 340,
-            borderRadius: '999px',
-            background: 'rgba(14, 165, 233, 0.16)'
+            border: '1px solid rgba(63, 63, 70, 0.4)',
+            display: 'flex'
           }}
         />
 
+        {/* Master Flex Container */}
         <div
           style={{
             position: 'relative',
@@ -74,6 +83,7 @@ export function createDocOgImage({
             alignItems: 'stretch'
           }}
         >
+          {/* Left Column: Documentation Metadata & Command */}
           <div
             style={{
               flex: 1,
@@ -82,111 +92,107 @@ export function createDocOgImage({
               justifyContent: 'space-between'
             }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              {/* Eyebrow Badge */}
               <div
                 style={{
                   display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
                   alignSelf: 'flex-start',
-                  padding: '10px 16px',
+                  padding: '8px 16px',
                   borderRadius: 999,
-                  border: `1px solid ${accent}`,
-                  background: 'rgba(15, 23, 42, 0.7)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  background: 'rgba(9, 9, 11, 0.8)',
                   color: '#cbd5e1',
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: 700,
                   letterSpacing: 0.8
                 }}
               >
-                {eyebrow}
+                <div style={{ width: 10, height: 10, borderRadius: 999, background: '#34d399', display: 'flex' }} />
+                <span>{eyebrow}</span>
               </div>
 
+              {/* Title */}
               <div
                 style={{
-                  fontSize: 68,
-                  lineHeight: 1.02,
+                  fontSize: 62,
+                  lineHeight: 1.1,
                   fontWeight: 800,
                   letterSpacing: -2,
-                  maxWidth: 760,
-                  textWrap: 'balance'
+                  maxWidth: 700,
+                  color: '#f8fafc',
+                  display: 'flex'
                 }}
               >
                 {title}
               </div>
 
+              {/* Description */}
               <div
                 style={{
-                  maxWidth: 730,
-                  fontSize: 30,
-                  lineHeight: 1.35,
-                  color: '#cbd5e1'
+                  maxWidth: 680,
+                  fontSize: 26,
+                  lineHeight: 1.4,
+                  color: '#a1a1aa',
+                  display: 'flex'
                 }}
               >
                 {description}
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 12,
-                  marginTop: 8,
-                  alignSelf: 'flex-start'
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 22,
-                    color: '#94a3b8',
-                    fontWeight: 700,
-                    letterSpacing: 0.6,
-                    textTransform: 'uppercase'
-                  }}
-                >
-                  Try this command
-                </div>
+              {/* Mini Terminal Execution Block */}
+              {command && (
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
+                    flexDirection: 'column',
                     gap: 12,
-                    padding: '18px 22px',
-                    borderRadius: 22,
-                    background: 'rgba(15, 23, 42, 0.9)',
-                    border: '1px solid rgba(148, 163, 184, 0.22)',
-                    boxShadow: '0 22px 50px rgba(2, 6, 23, 0.45)',
-                    fontSize: 28,
-                    fontWeight: 700,
-                    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                    color: '#f8fafc'
+                    padding: 22,
+                    borderRadius: 20,
+                    background: '#09090b',
+                    border: '1px solid rgba(63, 63, 70, 0.9)',
+                    alignSelf: 'flex-start',
+                    marginTop: 8,
+                    minWidth: 460,
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
                   }}
                 >
-                  <span
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: 999, background: '#ef4444', display: 'flex' }} />
+                    <div style={{ width: 10, height: 10, borderRadius: 999, background: '#eab308', display: 'flex' }} />
+                    <div style={{ width: 10, height: 10, borderRadius: 999, background: '#22c55e', display: 'flex' }} />
+                  </div>
+                  <div
                     style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: 999,
-                      background: accent,
-                      boxShadow: `0 0 0 6px rgba(16, 185, 129, 0.14)`
+                      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                      color: '#34d399',
+                      fontSize: 26,
+                      fontWeight: 700,
+                      display: 'flex'
                     }}
-                  />
-                  {command}
+                  >
+                    $ {command}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#94a3b8', fontSize: 22 }}>
-              <div
-                style={{
-                  width: 14,
-                  height: 14,
-                  borderRadius: 999,
-                  background: accent
-                }}
+            {/* Footer Branding Area */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#e4e4e7', fontSize: 22, fontWeight: 600 }}>
+              <img
+                src={`${baseUrl}/icons/apple-touch-icon.png`}
+                width={36}
+                height={36}
+                style={{ borderRadius: 8 }}
+                alt="NeatNode"
               />
-              NeatNode Docs
+              <span>NeatNode Docs</span>
             </div>
           </div>
 
+          {/* Right Column: Premium Visual Architecture Blocks instead of text tree */}
           <div
             style={{
               width: 360,
@@ -195,59 +201,60 @@ export function createDocOgImage({
               justifyContent: 'space-between',
               padding: 28,
               borderRadius: 28,
-              background: 'rgba(15, 23, 42, 0.88)',
-              border: '1px solid rgba(148, 163, 184, 0.18)',
-              boxShadow: '0 24px 60px rgba(2, 6, 23, 0.38)'
+              background: 'rgba(9, 9, 11, 0.85)',
+              border: '1px solid rgba(63, 63, 70, 0.5)',
+              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.6)'
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <div style={{ fontSize: 20, color: '#94a3b8', fontWeight: 700, letterSpacing: 0.6 }}>
-                What you get
+              <div style={{ fontSize: 18, color: '#71717a', fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', display: 'flex' }}>
+                Generated Output
               </div>
 
-              {notes.map((note, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 14,
-                    padding: '14px 16px',
-                    borderRadius: 18,
-                    background: 'rgba(30, 41, 59, 0.85)',
-                    border: '1px solid rgba(148, 163, 184, 0.12)',
-                    fontSize: 22,
-                    lineHeight: 1.25,
-                    color: '#e2e8f0'
-                  }}
-                >
-                  <span
+              {/* Clean stacked architecture visual pills */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {['Routes Config', 'Controller Layer', 'Service Layer', 'Data Model'].map((layer, idx) => (
+                  <div
+                    key={idx}
                     style={{
-                      width: 10,
-                      height: 10,
-                      borderRadius: 999,
-                      background: accent,
-                      flexShrink: 0
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 12,
+                      padding: '12px 16px',
+                      borderRadius: 12,
+                      background: 'rgba(24, 24, 27, 0.7)',
+                      border: '1px solid rgba(63, 63, 70, 0.4)'
                     }}
-                  />
-                  {note}
-                </div>
-              ))}
+                  >
+                    {/* Tiny green bullet indicating live module */}
+                    <div style={{ width: 8, height: 8, borderRadius: 999, background: '#34d399', display: 'flex' }} />
+                    <span style={{ fontSize: 18, color: '#e2e8f0', fontWeight: 500 }}>{layer}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Status Message */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
+                <span style={{ color: '#34d399', fontSize: 18, fontWeight: 700 }}>✓</span>
+                <span style={{ color: '#a1a1aa', fontSize: 18 }}>Architecture compiled</span>
+              </div>
             </div>
 
+            {/* Target Card Footer */}
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 12,
+                gap: 8,
                 paddingTop: 20,
-                marginTop: 12,
-                borderTop: '1px solid rgba(148, 163, 184, 0.16)'
+                borderTop: '1px solid rgba(63, 63, 70, 0.4)'
               }}
             >
-              <div style={{ fontSize: 20, color: '#94a3b8', fontWeight: 700 }}>Route-aware image</div>
-              <div style={{ fontSize: 24, lineHeight: 1.35, color: '#cbd5e1' }}>
-                Every docs section gets its own Open Graph card through the Next.js file convention.
+              <div style={{ fontSize: 18, color: '#34d399', fontWeight: 700, letterSpacing: 0.5, display: 'flex' }}>
+                Production Engineered
+              </div>
+              <div style={{ fontSize: 20, lineHeight: 1.4, color: '#a1a1aa', display: 'flex' }}>
+                Skip repetitive architecture setups and ship backend features instantly.
               </div>
             </div>
           </div>
