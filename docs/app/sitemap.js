@@ -8,6 +8,8 @@ const routes = [
   '/getting-started/cli-usage',
   '/guides',
   '/guides/folder-structure',
+  '/guides/resource-generation',
+  '/guides/generated-files',
   '/guides/customization',
   '/guides/contributing',
   '/templates',

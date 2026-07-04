@@ -1,0 +1,78 @@
+---
+title: Resource Generation
+sidebarTitle: Resource Generation
+description: Learn how to generate a complete backend resource with a single command in NeatNode.
+icon: Terminal
+---
+
+# Resource Generation
+
+Generate a complete backend resource with a single command:
+
+```bash
+neatnode g resource user
+```
+
+NeatNode creates the full feature slice, updates route registration, and keeps the generated project coherent from the start.
+
+---
+
+## Overview
+
+Use resource generation when you want to add a new feature quickly without wiring each layer manually.
+
+### What gets generated
+
+| File | Purpose |
+|------|---------|
+| `user.controller.js` | Request handlers |
+| `user.service.js` | Business logic |
+| `user.route.js` | Express routes |
+| `user.validation.js` | Input validation |
+| `user.model.js` | Database model |
+
+---
+
+## Automatic Updates
+
+Resource generation also updates the application wiring for you:
+
+- Route registration in the central route index
+- Import updates for the generated resource
+
+---
+
+## Overwrite Protection
+
+If the resource already exists, NeatNode stops instead of replacing files:
+
+```bash
+neatnode g resource user
+```
+
+```text
+❌ Resource already exists.
+Use --force to overwrite.
+```
+
+Use `--force` when you want to regenerate the resource:
+
+```bash
+neatnode g resource user --force
+```
+
+---
+
+## Requirements
+
+Resource generation is available only in supported templates and expects the standard NeatNode route markers to exist in the generated project.
+
+- Supported templates only
+- NeatNode route markers must be present
+- A route registry must already exist
+
+---
+
+## Generated Files
+
+See the [Generated Files](/guides/generated-files) page for a visual tree of the output and a short explanation of each file’s responsibility.

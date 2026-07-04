@@ -5,7 +5,7 @@ icon: Terminal
 
 # CLI Commands
 
-NeatNode provides an interactive CLI to scaffold Node.js projects. Here's how to use it.
+NeatNode provides an interactive CLI to scaffold Node.js projects and a focused resource generator for feature slices.
 
 ---
 
@@ -16,6 +16,31 @@ npx neatnode
 ```
 
 This launches the interactive project generator. No flags required - you'll be guided through prompts.
+
+---
+
+## Resource Generation
+
+```bash
+neatnode g resource <name>
+```
+
+Generates a complete backend resource and updates the route registry automatically.
+
+### Options
+
+| Flag | Description |
+|------|-------------|
+| `--force` | Overwrite an existing resource when regenerating it. |
+
+### Future Commands
+
+Planned resource-oriented commands for later releases:
+
+- `g controller`
+- `g service`
+- `g route`
+- `g validation`
 
 ---
 
