@@ -10,13 +10,12 @@ const METADATA = {
 };
 
 export default function Terminal() {
-  const [activeLang, setActiveLang] = useState("JavaScript"); // 'JavaScript' or 'TypeScript'
-  const [currentLoop, setCurrentLoop] = useState("scaffold"); // 'scaffold' | 'resource'
+  const [activeLang, setActiveLang] = useState("JavaScript");
+  const [currentLoop, setCurrentLoop] = useState("scaffold");
   const [typedText, setTypedText] = useState("");
   const [visibleLines, setVisibleLines] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  // Configuration combinations holder
   const [currentConfig, setCurrentConfig] = useState({
     template: "REST API",
     architecture: "Modular",
@@ -24,8 +23,17 @@ export default function Terminal() {
     resource: "user",
   });
 
-  // Track rendering loops to safely prevent stale state interval updates across ticks
   const cycleRef = useRef(0);
+  // Ref to target the scrollable element
+  const scrollContainerRef = useRef(null);
+
+  // Automatically handles scrolling to keep new console content visible
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop =
+        scrollContainerRef.current.scrollHeight;
+    }
+  }, [visibleLines, typedText]);
 
   const getLanguageClasses = () => {
     if (activeLang === "JavaScript") {
@@ -36,7 +44,7 @@ export default function Terminal() {
         badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
         border: "border-emerald-500/20",
         button:
-          "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 font-bold",
+          "bg-emerald-500 text-neutral-950 shadow-lg shadow-emerald-500/20 font-bold",
         checkColor: "text-emerald-400",
         dollar: "text-emerald-400",
       };
@@ -71,10 +79,14 @@ export default function Terminal() {
     cycleRef.current += 1;
     const activeCycle = cycleRef.current;
 
-    // Reset layout display frames
     setTypedText("");
     setVisibleLines([]);
     setIsTyping(true);
+
+    // Explicitly reset scroll view position to top when starting a fresh frame line
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
 
     const ext = activeLang === "JavaScript" ? "js" : "ts";
     const appName = activeLang === "JavaScript" ? "neat-app" : "neat-app-ts";
@@ -88,7 +100,6 @@ export default function Terminal() {
     const targetCommand = commands[currentLoop];
     let charIndex = 0;
 
-    // Clear and execute fresh sequential key insertion
     const runTypingSimulation = () => {
       const typingInterval = setInterval(() => {
         if (!isMounted || activeCycle !== cycleRef.current) {
@@ -198,7 +209,6 @@ export default function Terminal() {
         }
       }
 
-      // Route sequence holds and alternative loops triggers
       setTimeout(() => {
         if (isMounted && activeCycle === cycleRef.current) {
           if (currentLoop === "resource") {
@@ -225,7 +235,7 @@ export default function Terminal() {
   };
 
   return (
-    <div className="mt-12 max-w-3xl mx-auto px-4 w-full select-none">
+    <div className="mt-16 max-w-3xl mx-auto px-4 w-full select-none">
       {/* Interactive Tabs Menu */}
       <div className="flex items-center space-x-2 mb-3 pl-1">
         <button
@@ -256,7 +266,7 @@ export default function Terminal() {
           className={`absolute top-0 left-0 w-full h-40 bg-gradient-to-b ${ui.bgGradient} opacity-30 pointer-events-none blur-xl`}
         />
 
-        {/* Apple/Linux Window Control Titlebar */}
+        {/* Window Control Titlebar */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800/60 bg-zinc-900/50 backdrop-blur-sm relative z-10">
           <div className="flex space-x-2 shrink-0">
             <div className="w-3 h-3 rounded-full bg-red-500/90 border border-red-600/40 shadow-sm shadow-red-500/20" />
@@ -266,14 +276,19 @@ export default function Terminal() {
           <span className="text-[11px] font-mono text-zinc-400 font-medium truncate max-w-[180px] sm:max-w-none px-2">
             neatnode — {activeLang.toLowerCase()} shell
           </span>
-          {/* <div className="text-[10px] font-mono text-zinc-600 shrink-0 hidden sm:block">
-            v4.0.0
-          </div> */}
+          <div className="text-[10px] font-mono text-zinc-600 shrink-0 hidden sm:block">
+            v3.1.0
+          </div>
         </div>
 
         {/* Display Output Terminal Logs */}
-        <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm min-h-[360px] flex flex-col justify-between relative z-10 text-left">
-          <div className="space-y-4 break-words">
+        <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm h-[380px] sm:h-[350px] flex flex-col justify-between relative z-10 text-left overflow-hidden">
+          {/* Scrollable Container Box */}
+          <div
+            ref={scrollContainerRef}
+            className="space-y-4 break-words overflow-y-auto h-full pr-1 scrollbar-none scroll-smooth"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {/* Command Retention Continuity Line */}
             {currentLoop === "resource" && (
               <div className="opacity-25 space-y-1 transition-all duration-700 text-zinc-400">
@@ -312,7 +327,7 @@ export default function Terminal() {
               {visibleLines.map((line, index) => (
                 <div
                   key={index}
-                  className="flex items-start space-x-2.5 text-zinc-300"
+                  className="flex items-start space-x-2.5 text-zinc-300 animate-[fadeIn_0.15s_ease-out_forwards]"
                 >
                   {line.icon && (
                     <span
@@ -345,7 +360,7 @@ export default function Terminal() {
           </div>
 
           {/* Fully Responsive Blueprint Metadata Panel Footer */}
-          <div className="mt-8 pt-4 border-t border-zinc-900/60 flex flex-col gap-3 sm:flex-row justify-between items-start sm:items-center text-[11px] text-zinc-500">
+          <div className="mt-2 pt-4 border-t border-zinc-900/60 flex flex-col gap-3 sm:flex-row justify-between items-start sm:items-center text-[11px] text-zinc-500 shrink-0 bg-zinc-950 relative z-20">
             <div className="flex flex-wrap gap-1.5 items-center w-full sm:w-auto">
               <span className="text-zinc-600 shrink-0">Blueprint:</span>
               <span className="bg-zinc-900/80 border border-zinc-800 text-zinc-400 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] truncate max-w-[130px] sm:max-w-none">
