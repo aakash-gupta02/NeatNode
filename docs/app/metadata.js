@@ -7,7 +7,7 @@ export const siteConfig = {
   description:
     'Official NeatNode documentation for installation, quickstart, CLI usage, templates, guides, and full API reference.',
   url: siteUrl,
-  ogImage: '/meta/og-image.png',
+  ogImage: '/opengraph-image',
   author: {
     name: 'Aakash Gupta',
     github: 'https://github.com/aakash-gupta02',
