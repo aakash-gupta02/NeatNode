@@ -5,7 +5,7 @@ icon: Settings2Icon
 
 # CLI Options
 
-NeatNode uses an **interactive prompt-based** interface. Currently, all configuration is done through prompts rather than command-line flags.
+NeatNode uses an **interactive prompt-based** interface for project scaffolding. Resource generation adds a focused command, but the main setup flow still runs through prompts.
 
 ---
 
@@ -32,6 +32,14 @@ When you run `npx neatnode`, you'll be prompted for:
 
 ---
 
+## Resource Generation Flags
+
+| Flag | Description |
+|------|-------------|
+| `--force` | Overwrite an existing resource when using `neatnode g resource <name>`. |
+
+---
+
 ## Examples
 
 ```bash
@@ -54,7 +62,6 @@ Planned flags for upcoming releases:
 - `--template <name>` - Skip template prompt
 - `--typescript` / `--js` - Skip language prompt
 - `--no-crud` - Skip CRUD prompt
-- `--force` - Overwrite existing directory
 
 > [!NOTE]
 > These flags are planned but not yet implemented. Use interactive mode for now.

@@ -176,6 +176,19 @@ Infrastructure concerns such as authentication, validation, logging, and error h
 * **Request logging middleware**
 * **Centralized utility layer**
 
+## Resource Generation
+
+The REST API (TS) template supports generating a complete feature resource with one command:
+
+```bash
+neatnode g resource user
+```
+
+This creates the controller, service, route, validation, and model files, then updates the route registry automatically.
+
+> [!TIP]
+> Use `--force` if you want to regenerate an existing resource.
+
 ---
 
 ## Default API Endpoints

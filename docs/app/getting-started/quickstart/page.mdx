@@ -38,6 +38,24 @@ npm install
 npm run dev
 ```
 
+Then generate your first feature resource:
+
+```bash
+neatnode g resource user
+```
+
+```text
+✔ Created user.controller.js
+✔ Created user.service.js
+✔ Created user.route.js
+✔ Created user.validation.js
+✔ Created user.model.js
+
+✔ Updated routes/index.route.js
+
+✨ Resource "user" generated successfully.
+```
+
 > [!TIP]
 > Use `npm start` for production mode (if available in the template).
 
@@ -56,6 +74,8 @@ npx neatnode
 cd my-app
 npm install
 npm run dev
+
+neatnode g resource user
 ```
 
 Server starts at:

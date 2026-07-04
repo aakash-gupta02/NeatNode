@@ -15,7 +15,7 @@ const FooterSubtle = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                     {/* Left - Made by */}
                     <div className="text-zinc-400 text-sm">
-                        Built with <span className='text-emerald-400'>love</span> by {" "}
+                        Built with <span className='text-red-500'>love</span> by {" "}
                         <Link href="https://aakashgupta.app" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">Aakash Gupta</Link>
                     </div>
 

@@ -1,0 +1,56 @@
+---
+title: Generated Files
+sidebarTitle: Generated Files
+description: See the files created by NeatNode resource generation and what each one does.
+icon: FileText
+---
+
+# Generated Files
+
+When you run resource generation, NeatNode creates a complete feature slice instead of a single isolated file.
+
+---
+
+## Visual Tree
+
+```text
+src/
+├── controllers/
+│   └── user.controller.js
+├── services/
+│   └── user.service.js
+├── routes/
+│   └── user.route.js
+├── validations/
+│   └── user.validation.js
+└── models/
+    └── user.model.js
+```
+
+In modular templates, these files live under `src/modules/<resource>/` instead of the top-level layer folders.
+
+---
+
+## File Roles
+
+| File | Responsibility |
+|------|----------------|
+| Controller | Handles requests and sends responses. |
+| Service | Holds business logic and orchestration. |
+| Route | Defines the Express endpoints. |
+| Validation | Validates incoming payloads and params. |
+| Model | Represents the database entity or schema. |
+
+---
+
+## What Changes Automatically
+
+- The new route gets registered in the central route index
+- Required imports are updated for the generated feature
+- The resource is scaffolded with the template's existing architecture rules
+
+---
+
+## Why It Helps
+
+The generated structure keeps each feature predictable and easy to extend, while still fitting cleanly into the template architecture you started with.

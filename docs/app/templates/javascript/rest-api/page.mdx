@@ -44,6 +44,19 @@ The template is already wired with everything you'd expect in a real backend - y
 - Environment-ready `.env` support
 - Optional CRUD removal (like Basic Template)
 
+## Resource Generation
+
+The REST API template supports generating a complete feature resource with one command:
+
+```bash
+neatnode g resource user
+```
+
+This creates the controller, service, route, validation, and model files, then updates the route registry automatically.
+
+> [!TIP]
+> Use `--force` if you want to regenerate an existing resource.
+
 ---
 
 ## How It Works

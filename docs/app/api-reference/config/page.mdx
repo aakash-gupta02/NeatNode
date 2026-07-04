@@ -5,7 +5,50 @@ icon: CogIcon
 
 # Configuration
 
-NeatNode templates come preconfigured, but you can adjust settings via config files and environment variables.
+NeatNode templates come preconfigured, but you can still adjust the generated project through config files, environment variables, and template-aware project settings.
+
+---
+
+## Project Config
+
+Use a project config file to control the template, feature flags, validation stack, and source layout.
+
+```js
+export default {
+	template: "rest-api",
+
+	features: {
+		resourceGenerator: true,
+	},
+
+	language: "typescript",
+	architecture: "modular",
+
+	database: {
+		provider: "mongodb",
+		client: "mongoose",
+	},
+
+	validation: "zod",
+	srcDir: "src",
+};
+```
+
+### Configuration Fields
+
+| Field | Purpose |
+|------|---------|
+| `template` | Selects the template family to generate. |
+| `features.resourceGenerator` | Enables resource generation in supported templates. |
+| `language` | Chooses JavaScript or TypeScript output. |
+| `architecture` | Selects the folder architecture when a template supports multiple layouts. |
+| `validation` | Chooses the validation library or strategy. |
+| `srcDir` | Sets the source directory root. |
+| `database.provider` | Declares the database backend. |
+| `database.client` | Selects the database client or ORM. |
+
+> [!NOTE]
+> Unsupported fields are ignored by templates that do not recognize them.
 
 ---
 

@@ -1,72 +1,97 @@
 ---
 title: Welcome to NeatNode
-description: Official documentation for NeatNode - a CLI tool to generate production-oriented Node.js backends using prebuilt JavaScript and TypeScript templates.
+description: Official documentation for NeatNode - a CLI for scaffolding production-ready Node.js backends and generating resources with a single command.
 ---
 
-# Welcome to NeatNode Docs
+# Welcome to NeatNode
 
-NeatNode is a CLI tool that scaffolds **production-oriented Node.js backends** in seconds using clean, opinionated **JavaScript and TypeScript templates**.
+NeatNode is a CLI that helps you build **production-ready Node.js backends** without spending hours setting up boilerplate.
 
-It removes repetitive setup by generating structured, extensible Express-based backend blueprints.
+Whether you're starting a new project or adding new modules to an existing one, NeatNode generates clean, opinionated code so you can focus on building features instead of writing repetitive scaffolding.
+
+---
+
+## What NeatNode Can Do
+
+* Scaffold complete Express.js backend projects
+* Support both **JavaScript** and **TypeScript**
+* Generate projects using clean, production-oriented architectures
+* Generate complete resources (controller, service, routes, validation, schema, and more) with a single command
+* Keep your codebase consistent as your project grows
 
 ---
 
 ## Quick Start
 
-Run the CLI directly with **npx** - no installation required:
+Run NeatNode directly with **npx**-no installation required.
 
 ```bash
 npx neatnode
-````
+```
 
 Follow the interactive prompts to:
 
-* Enter a project name
-* Choose **JavaScript or TypeScript**
-* Select a template
-* Decide whether to include example CRUD
+* Enter your project name
+* Choose JavaScript or TypeScript
+* Select an architecture/template
+* Configure your project
+* Generate your backend
 
-Once complete, NeatNode generates a backend ready to run.
+Once complete, you'll have a ready-to-run Express application with a clean project structure.
 
 ---
 
-## Included Templates
+## Generate Resources
 
-### JavaScript Templates
+After creating your project, you can scaffold new modules in seconds.
 
-| Template               | Description                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- |
-| **Basic Express (JS)** | Minimal Express setup for learning, prototyping, or microservices.          |
-| **REST API (JS)**      | Express REST API with CRUD, authentication, validation, and error handling. |
-| **Socket.IO (JS)**     | Real-time Express server with integrated Socket.IO.                         |
+```bash
+npx neatnode g resource user
+```
 
-### TypeScript Templates
+This generates all the boilerplate required for a new resource, including the files needed for your selected template and architecture.
 
-| Template               | Description                                                                       |
-| ---------------------- | --------------------------------------------------------------------------------- |
-| **Basic Express (TS)** | Minimal Express setup with TypeScript, strict typing, and preconfigured tsconfig. |
-| **REST API (TS)**      | Production-ready modular API with JWT auth, Zod validation, typed middleware, and MongoDB support. |
-| Socket.IO (TS)         | Planned template for real-time TypeScript backends.                              |
+---
+
+## Available Templates
+
+### JavaScript
+
+| Template               | Description                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| **Basic Express (JS)** | Minimal Express starter for learning, prototypes, and small services.                       |
+| **REST API (JS)**      | Production-ready REST API with authentication, validation, middleware, and MongoDB support. |
+| **Socket.IO (JS)**     | Express server configured for real-time applications using Socket.IO.                       |
+
+### TypeScript
+
+| Template               | Description                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Basic Express (TS)** | Minimal Express starter with TypeScript and strict type safety.                                           |
+| **REST API (TS)**      | Production-ready REST API with Zod validation, JWT authentication, typed middleware, and MongoDB support. |
+| **Socket.IO (TS)**     | Planned template for real-time TypeScript applications.                                                   |
 
 ---
 
 ## Why NeatNode?
 
-* **Zero setup** - one command, instant scaffold
-* **Opinionated architecture** - controllers, services, middleware, utils
-* **JavaScript & TypeScript support**
-* **Extendable** - modify structure or scale as needed
-* **Beginner-friendly** - simple start, scalable foundation
+* Start projects in seconds
+* Opinionated, scalable project structures
+* Consistent folder organization
+* Generate resources instead of writing boilerplate
+* JavaScript and TypeScript support
+* Easy to learn and easy to extend
 
 ---
 
 ## Next Steps
 
-* Read [Getting Started](/getting-started) to run your first project
-* Explore [Built-In Templates](/templates) for template details
-* Learn the [Folder Structure](/guides/folder-structure) to understand the generated codebase
+* Read **Getting Started** to create your first project.
+* Explore **Templates** to understand the available project types.
+* Learn about **Resource Generation** to scaffold new modules.
+* Review the **Folder Structure** to understand the generated architecture.
+* Check the **Changelog** to see what's new in each release.
 
 ---
 
-NeatNode helps you focus on application logic instead of boilerplate -
-so you can build **cleaner, faster, and more maintainable** Node.js backends.
+NeatNode handles the repetitive parts of backend development so you can spend your time building features-not boilerplate.
