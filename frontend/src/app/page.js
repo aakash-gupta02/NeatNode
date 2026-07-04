@@ -1,11 +1,12 @@
-import CTA from "@/components/landingPage/CTA"
-import DocsnSetup from "@/components/landingPage/DocsnSetup"
-import Features from "@/components/landingPage/Features"
-import Footer from "@/components/landingPage/Footer"
-import Hero from "@/components/landingPage/Hero"
-import Navbar from "@/components/landingPage/Navbar"
-import Templates from "@/components/landingPage/Templates"
-import Usage from "@/components/landingPage/Usage"
+import CTA from "@/components/landingPage/CTA";
+import DocsnSetup from "@/components/landingPage/DocsnSetup";
+import Features from "@/components/landingPage/Features";
+import Footer from "@/components/landingPage/Footer";
+import Hero from "@/components/landingPage/Hero";
+import Navbar from "@/components/landingPage/Navbar";
+import Templates from "@/components/landingPage/Templates";
+import Usage from "@/components/landingPage/Usage";
+import WorkflowComparison from "@/components/landingPage/WorkflowComparison";
 
 export default function Home() {
   return (
@@ -13,7 +14,13 @@ export default function Home() {
       <Navbar />
 
       <Hero />
-      
+
+      <WorkflowComparison />
+
+      <div id="features">
+        <Features />
+      </div>
+
       <div id="templates">
         <Templates />
       </div>
@@ -22,13 +29,11 @@ export default function Home() {
         <Usage />
       </div>
 
-      <div id="features">
-        <Features />
-      </div>
-
       <DocsnSetup />
+
       <CTA />
+
       <Footer />
     </main>
-  )
+  );
 }

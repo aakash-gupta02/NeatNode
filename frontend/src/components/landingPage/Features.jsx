@@ -17,40 +17,40 @@ const features = [
   {
     icon: <Rocket className="w-6 h-6 text-emerald-500" />,
     title: "Instant Project Setup",
-    desc: "Spin up a full Node.js project with one command - folder structure, routes, configs, and utils ready.",
-  },
-  {
-    icon: <Type className="w-6 h-6 text-emerald-500" />,
-    title: "Full TypeScript Support",
-    desc: "Complete TypeScript configuration with type definitions, tsconfig, and type-safe modules out of the box.",
-  },
-  {
-    icon: <Settings className="w-6 h-6 text-emerald-500" />,
-    title: "Dynamic Template Logic",
-    desc: "Choose to include or remove CRUD setups dynamically, no manual file editing needed.",
+    desc: "Bootstrap production-ready Express projects with batteries included, using a single command.",
   },
   {
     icon: <FolderTree className="w-6 h-6 text-emerald-500" />,
-    title: "Scalable Project Architecture",
-    desc: "Supports both MVC and modular Express structures for clean and maintainable backend systems.",
+    title: "Resource Generation",
+    desc: "Generate controllers, services, routes, validation, models, and automatic route registration with one command.",
+  },
+  {
+    icon: <Type className="w-6 h-6 text-emerald-500" />,
+    title: "JavaScript & TypeScript",
+    desc: "First-class support for both JavaScript and TypeScript, with language-specific templates and configuration.",
+  },
+  {
+    icon: <Settings className="w-6 h-6 text-emerald-500" />,
+    title: "MVC & Modular Architecture",
+    desc: "Choose between MVC or modular project structures without changing your development workflow.",
   },
   {
     icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />,
-    title: "Security First",
-    desc: "Includes Helmet, Rate Limiter, and CORS - secure defaults baked in.",
+    title: "Config-Driven Development",
+    desc: "NeatNode understands your project through configuration, enabling smart code generation and future extensibility.",
   },
   {
     icon: <Activity className="w-6 h-6 text-emerald-500" />,
-    title: "Production Error & Logging",
-    desc: "Centralized error handlers, Winston logger, Morgan setup, and validation - production-ready from day one.",
+    title: "Production Ready",
+    desc: "Built-in validation, security middleware, centralized error handling, logging, and scalable project structure from day one.",
   },
 ];
 
 const Features = () => {
   return (
     <SectionCommon
-      title="Why NeatNode?"
-      desc="A practical CLI tool built for developers who value time, structure, and scalability"
+      title="Everything You Need to Build <Faster>"
+      desc="Scaffold projects, generate resources, and stay productive with production-ready defaults."
     >
       <div className="grid lg:grid-cols-2 gap-4 relative">
         {features.map((feature, index) => (
