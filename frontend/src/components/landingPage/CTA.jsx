@@ -48,7 +48,7 @@ const CTAMinimalSimple = () => {
                 {/* Header */}
                 <div className="mb-10">
                     <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
-                        Start Building Faster
+                        Start Building <span className="text-emerald-400">Faster</span>
                     </h2>
                     <p className="text-lg text-zinc-400">
                         Join developers worldwide who are saving hours on project setup.

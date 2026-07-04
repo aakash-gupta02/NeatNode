@@ -34,7 +34,7 @@ const DocsnSetup = () => {
 
     return (
         <SectionCommon
-            title="Documentation & Setup"
+            title="<Documentation> & Setup"
             desc="Comprehensive guides and references for NeatNode"
         >
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
