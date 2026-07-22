@@ -1,11 +1,11 @@
-import { buildContext } from "../utils/buildContext.js";
+import { buildContext } from "../../shared/builders/buildContext.js";
 import { buildGenerationPlan } from "../utils/buildGenerationPlan.js";
-import { renderTemplate } from "../utils/renderTemplate.js";
-import { writeFile } from "../utils/writeFile.js";
-import { updateRouteRegistry } from "./updateRouteRegistry.js";
+import { renderTemplate } from "../../core/template/render.js";
+import { writeFile } from "../../core/filesystem/writeFile.js";
+import { updateRouteRegistry } from "../../generators/updateRouteRegistry.js";
 import path from "path";
 import fs from "fs";
-import { validateRouteRegistry } from "./verifyRouteRegistry.js";
+import { validateRouteRegistry } from "../../generators/verifyRouteRegistry.js";
 
 export async function generateResource({ name, config, force }) {
   const files = ["controller", "service", "route", "validation", "model"];

@@ -7,9 +7,9 @@ import {
   removeCrud,
   removeCrudModule,
   removeCrudReferences,
-} from "./removeCRUD.js";
+} from "./cleanup.js";
 import { downloadTemplate, getPackageVersion } from "../utils/downloadRepoTemplateByVersionTags.js";
-import { addEnv } from "./addEnv.js";
+import { addEnv } from "./env.js";
 import { generateNeatNodeConfig } from "../templates/config.js";
 import { updatePackageJson } from "../utils/updatePackageJson.js";
 

@@ -1,5 +1,5 @@
-import { generateResource } from "../generators/resource.js";
-import { loadConfig } from "../utils/loadConfig.js";
+import { generateResource } from "./resource.js";
+import { loadConfig } from "../../core/config/loadConfig.js";
 
 export async function generate({ type, name, force }) {
   if (!type) {

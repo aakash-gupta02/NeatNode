@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import inquirer from "inquirer";
-import templates from "./config/templates.js";
-import { createProject } from "./actions/createProject.js";
-import { generate } from "./commands/generate.js";
+import templates from "../../modules/starter/registry/templates.js";
+import { createProject } from "../../actions/createProject.js";
+import { generate } from "../../modules/generate/command.js";
 
 async function main() {
   console.log("\n🚀 Welcome to NeatNode CLI!\n");
