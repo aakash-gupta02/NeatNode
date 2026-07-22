@@ -1,0 +1,8 @@
+import express from "express";
+import { get{{pascalName}} } from "{{controllerImport}}{{camelName}}.controller.js";
+
+const router = express.Router();
+
+router.get("/", get{{pascalName}});
+
+export default router;

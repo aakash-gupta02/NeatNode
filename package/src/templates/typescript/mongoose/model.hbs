@@ -1,0 +1,16 @@
+import mongoose, { type Model, Schema, type InferSchemaType } from "mongoose";
+
+const {{camelName}}Schema = new Schema(
+  {
+    // Define your schema fields here
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  },
+);
+
+type {{pascalName}}Document = InferSchemaType<typeof {{camelName}}Schema>;
+type {{pascalName}}Model = Model<{{pascalName}}Document>;
+
+export const {{pascalName}} = mongoose.model<{{pascalName}}Document, {{pascalName}}Model>("{{pascalName}}", {{camelName}}Schema);

@@ -1,0 +1,14 @@
+import type { Request, Response } from "express";
+import { StatusCodes } from "http-status-codes";
+import { get{{pascalName}}Service } from "{{serviceImport}}{{camelName}}.service.js";
+import sendResponse from "{{utilsImport}}ApiResponse.js";
+import CatchAsync from "{{utilsImport}}CatchAsync.js";
+
+export const get{{pascalName}} = CatchAsync(async (req: Request, res: Response) => {
+    const {{camelName}} = await get{{pascalName}}Service(req.params.id);
+
+    sendResponse(res, StatusCodes.OK, "{{pascalName}} fetched successfully",
+        {{camelName}},
+    );
+
+});
