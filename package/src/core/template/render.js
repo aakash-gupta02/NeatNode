@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const TEMPLATE_ROOT = path.join(__dirname, "../templates");
+const TEMPLATE_ROOT = path.join(__dirname, "../../templates");
 
 export function renderTemplate(templatePath, context) {
   const fullPath = path.join(TEMPLATE_ROOT, templatePath);

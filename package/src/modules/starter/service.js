@@ -1,17 +1,17 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import { copyTemplate } from "../utils/copyTemplate.js";
+import { copyTemplate } from "../../core/filesystem/copyTemplate.js";
 import {
   cleanupTemplateMarkers,
   removeCrud,
   removeCrudModule,
   removeCrudReferences,
 } from "./cleanup.js";
-import { downloadTemplate, getPackageVersion } from "../utils/downloadRepoTemplateByVersionTags.js";
+import { downloadTemplate, getPackageVersion } from "./githubDownloader.js";
 import { addEnv } from "./env.js";
-import { generateNeatNodeConfig } from "../templates/config.js";
-import { updatePackageJson } from "../utils/updatePackageJson.js";
+import { generateNeatNodeConfig } from "./registry/neatnodeConfig.js";
+import { updatePackageJson } from "../../core/filesystem/packageJson.js";
 
 export async function createProject({
   projectName,

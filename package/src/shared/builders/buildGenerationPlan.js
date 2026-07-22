@@ -1,4 +1,4 @@
-import { FILE_DEFINITIONS } from "../config/fileDefinitions.js";
+import { FILE_DEFINITIONS } from "../../modules/generate/registry/fileDefinitions.js";
 
 export function buildGenerationPlan({ config, context, files }) {
   const extension = config.language === "typescript" ? "ts" : "js";
