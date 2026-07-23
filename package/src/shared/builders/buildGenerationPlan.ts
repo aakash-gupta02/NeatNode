@@ -1,11 +1,24 @@
-import { FILE_DEFINITIONS } from "../../modules/generate/registry/fileDefinitions.js";
+import {
+  FILE_DEFINITIONS,
+  type FileDefinition,
+} from "../../modules/generate/registry/fileDefinitions.js";
+import { GenerationContext } from "../types/GenerationContext.js";
+import { FileType, NeatNodeConfig } from "../types/Domain.js";
 
-export function buildGenerationPlan({ config, context, files }) {
+export function buildGenerationPlan({
+  config,
+  context,
+  files,
+}: {
+  config: NeatNodeConfig;
+  context: GenerationContext;
+  files: FileType[];
+}) {
   const extension = config.language === "typescript" ? "ts" : "js";
 
   const fileDefinitions = files
     .map((type) => FILE_DEFINITIONS.find((file) => file.type === type))
-    .filter(Boolean)
+    .filter((file): file is FileDefinition => file !== undefined)
     .filter((file) => {
       if (!file.database) return true;
 

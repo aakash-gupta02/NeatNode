@@ -1,6 +1,21 @@
 import path from "path";
+import {
+  DatabaseClient,
+  FileType,
+  NeatNodeConfig,
+} from "../../../shared/types/Domain.js";
 
-export const FILE_DEFINITIONS = [
+export interface FileDefinition {
+  type: FileType;
+
+  template: string;
+
+  database?: DatabaseClient;
+
+  output(config: NeatNodeConfig, name: string, ext: string): string;
+}
+
+export const FILE_DEFINITIONS: FileDefinition[] = [
   // controller
   {
     type: "controller",
@@ -58,7 +73,6 @@ export const FILE_DEFINITIONS = [
 
       return path.join(config.srcDir, "modules", name, `${name}.route.${ext}`);
     },
-
   },
 
   // validation
