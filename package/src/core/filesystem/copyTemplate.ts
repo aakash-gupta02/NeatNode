@@ -1,15 +1,26 @@
 import fs from "fs";
 import path from "path";
 
-export async function copyTemplate(srcDir, destDir, replacements = {}) {
-  const ignoreList = [
-    "node_modules",
-    ".git",
-    ".env",
-    "package-lock.json",
-    ".npmignore",
-    "logs",
-  ];
+interface CopyTemplateOptions {
+  srcDir: string;
+  destDir: string;
+  replacements?: Record<string, string | number | boolean>;
+}
+
+export async function copyTemplate({
+  srcDir,
+  destDir,
+  replacements = {},
+}: CopyTemplateOptions): Promise<void> {
+
+const IGNORE_LIST: readonly string[] = [
+  "node_modules",
+  ".git",
+  ".env",
+  "package-lock.json",
+  ".npmignore",
+  "logs",
+];
 
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
@@ -18,14 +29,14 @@ export async function copyTemplate(srcDir, destDir, replacements = {}) {
   const items = fs.readdirSync(srcDir, { withFileTypes: true });
 
   for (const item of items) {
-    if (ignoreList.includes(item.name)) continue;
+    if (IGNORE_LIST.includes(item.name)) continue;
 
     const srcPath = path.join(srcDir, item.name);
     const destPath = path.join(destDir, item.name);
 
     if (item.isDirectory()) {
       // recursively copy folders
-      await copyTemplate(srcPath, destPath, replacements);
+      await copyTemplate({ srcDir: srcPath, destDir: destPath, replacements });
     } else {
       // for certain files, replace placeholders
       if (["package.json"].includes(item.name)) {

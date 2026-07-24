@@ -1,7 +1,15 @@
 import fs from "fs";
 import path from "path";
 
-export async function writeFile(filePath, content, options = {}) {
+interface WriteFileOptions {
+  overwrite?: boolean;
+}
+
+export async function writeFile(
+  filePath: string,
+  content: string,
+  options: WriteFileOptions = {},
+): Promise<void> {
   const { overwrite = false } = options;
 
   if (fs.existsSync(filePath) && !overwrite) {
