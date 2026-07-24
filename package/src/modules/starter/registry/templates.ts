@@ -1,10 +1,16 @@
-export default {
-  // javascript templates
+import { StarterTemplate } from "../../../shared/types/StarterTemplate.js";
+
+const templates: Record<"js" | "ts", StarterTemplate[]> = {
+  // JavaScript templates
   js: [
-    // basic express template
     {
+      id: "basic",
       name: "Basic Express",
       repoPath: "templates/js/express-basic",
+      crud: {
+        message: "Include example Todo CRUD?",
+        resource: "todo",
+      },
       config: {
         template: "basic",
         features: {
@@ -13,12 +19,16 @@ export default {
       },
     },
 
-    // rest api template
     {
+      id: "rest-api",
       name: "REST API",
       architecture: {
         mvc: "templates/js/express-rest-api",
         modular: "templates/js/express-modular-rest-api",
+      },
+      crud: {
+        message: "Include example User CRUD?",
+        resource: "user",
       },
       config: {
         template: "rest-api",
@@ -28,8 +38,8 @@ export default {
       },
     },
 
-    // socket.io template
     {
+      id: "socket",
       name: "Socket.IO",
       repoPath: "templates/js/express-socket",
       config: {
@@ -41,12 +51,16 @@ export default {
     },
   ],
 
-  // typescript templates
+  // TypeScript templates
   ts: [
-    // basic express template
     {
-      name: "Basic Express (TS)",
+      id: "basic",
+      name: "Basic Express",
       repoPath: "templates/ts/basic-express",
+      crud: {
+        message: "Include example Todo CRUD?",
+        resource: "todo",
+      },
       config: {
         template: "basic",
         features: {
@@ -55,11 +69,15 @@ export default {
       },
     },
 
-    // rest api template
     {
-      name: "REST API (TS)",
+      id: "rest-api",
+      name: "REST API",
       repoPath: "templates/ts/express-rest-api",
       isModular: true,
+      crud: {
+        message: "Include example Auth CRUD?",
+        resource: "auth",
+      },
       config: {
         template: "rest-api",
         features: {
@@ -68,6 +86,12 @@ export default {
       },
     },
 
-    // { name: "Socket.IO (TS)", repoPath: "templates/ts/express-socket" },
+    // {
+    //   id: "socket",
+    //   name: "Socket.IO",
+    //   repoPath: "templates/ts/express-socket",
+    // },
   ],
 };
+
+export default templates;
