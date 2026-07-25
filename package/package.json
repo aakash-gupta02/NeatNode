@@ -1,23 +1,32 @@
 {
   "name": "neatnode",
   "version": "3.4.0",
-  "description": "Plug & Play Node.js backend starter templates — build REST APIs, socket servers, and more in seconds.",
+  "description": "Scaffold production-ready Node.js backends with reusable templates, multiple architectures, built-in generators, and a fully configurable developer workflow.",
   "bin": {
     "neatnode": "./dist/bin/index.js"
   },
   "keywords": [
     "nodejs",
+    "typescript",
+    "javascript",
     "express",
-    "mongodb",
-    "rest-api",
+    "backend",
     "cli",
-    "backend-starter",
+    "scaffold",
+    "boilerplate",
     "template",
+    "generator",
+    "rest-api",
+    "mvc",
+    "modular",
+    "starter",
     "neatnode"
   ],
   "files": [
     "dist/",
-    "templates/"
+    "templates/",
+    "README.md",
+    "LICENSE"
   ],
   "author": {
     "name": "Aakash Gupta",
@@ -34,8 +43,15 @@
   "homepage": "https://github.com/aakash-gupta02/NeatNode#readme",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsc",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
     "dev": "tsx src/bin/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
