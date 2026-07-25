@@ -7,7 +7,7 @@ import type { GenerationContext } from "../../shared/types/GenerationContext.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const TEMPLATE_ROOT: string = path.join(__dirname, "../../templates");
+const TEMPLATE_ROOT: string = path.join(__dirname, "../../../templates");
 
 export function renderTemplate(
   templatePath: string,
