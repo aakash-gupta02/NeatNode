@@ -12,13 +12,9 @@ export interface StarterTemplateCrud {
   resource: string;
 }
 
-export interface StarterTemplate {
+interface BaseStarterTemplate {
   id: string;
   name: string;
-
-  repoPath?: string;
-
-  architecture?: Record<Architecture, string>;
 
   isModular?: boolean;
 
@@ -26,3 +22,16 @@ export interface StarterTemplate {
 
   config: StarterTemplateConfig;
 }
+
+interface FixedStarterTemplate extends BaseStarterTemplate {
+  repoPath: string;
+  architecture?: never;
+}
+
+interface ArchitectureStarterTemplate extends BaseStarterTemplate {
+  repoPath?: never;
+  architecture: Record<Architecture, string>;
+}
+
+export type StarterTemplate =
+  FixedStarterTemplate | ArchitectureStarterTemplate;

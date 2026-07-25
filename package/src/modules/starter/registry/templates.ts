@@ -1,4 +1,4 @@
-import { StarterTemplate } from "../../../shared/types/StarterTemplate.js";
+import type { StarterTemplate } from "../../../shared/types/StarterTemplate.js";
 
 const templates: Record<"js" | "ts", StarterTemplate[]> = {
   // JavaScript templates

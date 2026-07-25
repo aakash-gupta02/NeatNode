@@ -10,8 +10,16 @@ export type DatabaseClient = "mongoose" | "prisma";
 export type FileType =
   "controller" | "service" | "route" | "validation" | "model";
 
-export type GeneratorType = "resource";
-// | FileType;
+export const GENERATOR_TYPES = [
+  "resource",
+  // "controller",
+  // "service",
+  // "route",
+  // "model",
+  // "validation",
+] as const;
+
+export type GeneratorType = (typeof GENERATOR_TYPES)[number];
 
 export interface DatabaseConfig {
   provider: string;
