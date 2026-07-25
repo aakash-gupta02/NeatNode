@@ -1,7 +1,14 @@
-import { generateResource } from "./resource.js";
+import { generateResource } from "./service.js";
 import { loadConfig } from "../../core/config/loadConfig.js";
+import type { GeneratorType } from "../../shared/types/Domain.js";
 
-export async function generate({ type, name, force }) {
+interface GenerateOptions {
+  type: GeneratorType;
+  name: string;
+  force: boolean;
+}
+
+export async function generate({ type, name, force }: GenerateOptions) {
   if (!type) {
     throw new Error("Missing generator type.");
   }

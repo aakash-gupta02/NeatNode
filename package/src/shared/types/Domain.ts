@@ -1,3 +1,5 @@
+import type { StarterTemplateConfig } from "./StarterTemplate.js";
+
 export type Language = "javascript" | "typescript";
 export type LangKey = "js" | "ts";
 
@@ -7,6 +9,9 @@ export type DatabaseClient = "mongoose" | "prisma";
 
 export type FileType =
   "controller" | "service" | "route" | "validation" | "model";
+
+export type GeneratorType = "resource";
+// | FileType;
 
 export interface DatabaseConfig {
   provider: string;
@@ -20,3 +25,5 @@ export interface NeatNodeConfig {
   srcDir: string;
   database: DatabaseConfig;
 }
+
+export type RuntimeNeatNodeConfig = NeatNodeConfig & StarterTemplateConfig;

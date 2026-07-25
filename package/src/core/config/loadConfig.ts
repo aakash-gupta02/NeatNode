@@ -2,9 +2,9 @@ import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
 
-import type { NeatNodeConfig } from "../../shared/types/Domain.js";
+import type { RuntimeNeatNodeConfig } from "../../shared/types/Domain.js";
 
-export async function loadConfig(): Promise<NeatNodeConfig> {
+export async function loadConfig(): Promise<RuntimeNeatNodeConfig> {
   const cwd = process.cwd();
 
   const possibleConfigs = ["neatnode.config.js", "neatnode.config.ts"];
@@ -26,5 +26,5 @@ export async function loadConfig(): Promise<NeatNodeConfig> {
 
   const { default: config } = await import(pathToFileURL(configPath).href);
 
-  return config as NeatNodeConfig;
+  return config as RuntimeNeatNodeConfig;
 }
