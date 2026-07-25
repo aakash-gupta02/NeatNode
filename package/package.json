@@ -3,7 +3,7 @@
   "version": "3.4.0",
   "description": "Plug & Play Node.js backend starter templates — build REST APIs, socket servers, and more in seconds.",
   "bin": {
-    "neatnode": "bin/index.js"
+    "neatnode": "./dist/bin/index.js"
   },
   "keywords": [
     "nodejs",
@@ -16,12 +16,8 @@
     "neatnode"
   ],
   "files": [
-    "bin/",
-    "src/",
-    "templates/",
-    "utils/",
-    "package.json",
-    "README.md"
+    "dist/",
+    "templates/"
   ],
   "author": {
     "name": "Aakash Gupta",
@@ -39,9 +35,12 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/bin/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "node --test"
+    "test": "node --test",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "axios": "^1.18.1",
