@@ -1,4 +1,6 @@
 export type Language = "javascript" | "typescript";
+export type LangKey = "js" | "ts";
+
 export type Architecture = "mvc" | "modular";
 export type Validation = "joi" | "zod";
 export type DatabaseClient = "mongoose" | "prisma";

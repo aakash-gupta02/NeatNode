@@ -1,48 +1,68 @@
 import axios from "axios";
-import fs from "fs";
-import path from "path";
-import os from "os";
-import { fileURLToPath } from "url";
 import decompress from "decompress";
+import fs from "fs";
+import os from "os";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const owner = "aakash-gupta02";
-const repo = "NeatNode";
+const OWNER = "aakash-gupta02";
+const REPO = "NeatNode";
 
-export const getPackageVersion = () => {
+type RefType = "tag" | "branch";
+
+interface PackageJson {
+  version: string;
+}
+
+interface RefCandidate {
+  ref: string;
+  refType: RefType;
+}
+
+interface DownloadFromRefOptions {
+  repoPath: string;
+  ref: string;
+  refType: RefType;
+}
+
+export function getPackageVersion(): string {
   try {
     const pkgPath = path.resolve(__dirname, "../../../package.json");
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+
+    const pkg: PackageJson = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+
     return pkg.version;
   } catch {
     throw new Error("Failed to read NeatNode package version.");
   }
-};
+}
 
-const getTemplateRef = () => {
+function getTemplateRef(): string {
   if (process.env.NEATNODE_TEMPLATE_REF) {
     return process.env.NEATNODE_TEMPLATE_REF;
   }
 
   const version = getPackageVersion();
 
-  if (!version) {
-    return "main";
-  }
+  return version ? `v${version}` : "main";
+}
 
-  return `v${version}`;
-};
-
-const getZipUrl = (ref, refType = "tag") => {
+function getZipUrl(ref: string, refType: RefType = "tag"): string {
   if (refType === "branch") {
-    return `https://codeload.github.com/${owner}/${repo}/zip/refs/heads/${ref}`;
+    return `https://codeload.github.com/${OWNER}/${REPO}/zip/refs/heads/${ref}`;
   }
-  return `https://codeload.github.com/${owner}/${repo}/zip/refs/tags/${ref}`;
-};
 
-const downloadFromRef = async ({ repoPath, ref, refType }) => {
+  return `https://codeload.github.com/${OWNER}/${REPO}/zip/refs/tags/${ref}`;
+}
+
+async function downloadFromRef({
+  repoPath,
+  ref,
+  refType,
+}: DownloadFromRefOptions): Promise<string> {
   const zipUrl = getZipUrl(ref, refType);
 
   const tmpBase = fs.mkdtempSync(path.join(os.tmpdir(), "neatnode-"));
@@ -56,7 +76,9 @@ const downloadFromRef = async ({ repoPath, ref, refType }) => {
   });
 
   fs.writeFileSync(tempZip, response.data);
+
   await decompress(tempZip, tempExtractDir);
+
   const extractedRootDir = fs
     .readdirSync(tempExtractDir, { withFileTypes: true })
     .find((entry) => entry.isDirectory());
@@ -68,6 +90,7 @@ const downloadFromRef = async ({ repoPath, ref, refType }) => {
   }
 
   const extractedRoot = path.join(tempExtractDir, extractedRootDir.name);
+
   const srcTemplatePath = path.join(extractedRoot, repoPath);
 
   if (!fs.existsSync(srcTemplatePath)) {
@@ -76,12 +99,18 @@ const downloadFromRef = async ({ repoPath, ref, refType }) => {
     );
   }
 
-  fs.mkdirSync(tempFinalDir, { recursive: true });
-  fs.cpSync(srcTemplatePath, tempFinalDir, { recursive: true });
-  return tempFinalDir;
-};
+  fs.mkdirSync(tempFinalDir, {
+    recursive: true,
+  });
 
-export async function downloadTemplate(repoPath) {
+  fs.cpSync(srcTemplatePath, tempFinalDir, {
+    recursive: true,
+  });
+
+  return tempFinalDir;
+}
+
+export async function downloadTemplate(repoPath: string): Promise<string> {
   const packageRoot = path.resolve(__dirname, "../..");
   const packagedTemplatePath = path.join(packageRoot, repoPath);
 
@@ -90,32 +119,38 @@ export async function downloadTemplate(repoPath) {
   }
 
   const preferredRef = getTemplateRef();
-  const candidates = [
-    { ref: preferredRef, refType: "tag" },
-    { ref: "main", refType: "branch" },
+
+  const candidates: RefCandidate[] = [
+    {
+      ref: preferredRef,
+      refType: "tag",
+    },
+    {
+      ref: "main",
+      refType: "branch",
+    },
   ];
 
   const uniqueCandidates = candidates.filter(
-    (candidate, index, arr) =>
-      arr.findIndex(
+    (candidate, index, array) =>
+      array.findIndex(
         (item) =>
           item.ref === candidate.ref && item.refType === candidate.refType,
       ) === index,
   );
 
-  const errors = [];
+  const errors: string[] = [];
 
   for (const candidate of uniqueCandidates) {
     try {
-      const templatePath = await downloadFromRef({
+      return await downloadFromRef({
         repoPath,
         ref: candidate.ref,
         refType: candidate.refType,
       });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
 
-      return templatePath;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
       errors.push(`${candidate.refType}:${candidate.ref} -> ${message}`);
     }
   }

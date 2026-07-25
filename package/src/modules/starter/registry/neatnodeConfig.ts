@@ -1,13 +1,16 @@
 import fs from "fs";
 import path from "path";
 import { NeatNodeConfig } from "../../../shared/types/Domain.js";
-import { StarterTemplate } from "../../../shared/types/StarterTemplate.js";
+import {
+  StarterTemplate,
+  StarterTemplateConfig,
+} from "../../../shared/types/StarterTemplate.js";
 
 interface GenerateNeatNodeConfigOptions {
   targetPath: string;
   langKey: "js" | "ts";
   config: NeatNodeConfig;
-  tempConfig: StarterTemplate;
+  tempConfig: StarterTemplateConfig;
 }
 
 export async function generateNeatNodeConfig({
@@ -17,7 +20,7 @@ export async function generateNeatNodeConfig({
   tempConfig,
 }: GenerateNeatNodeConfigOptions): Promise<void> {
   const content = `export default {
-  template: "${tempConfig.config.template}",
+  template: "${tempConfig.template}",
 
   language: "${config.language}",
   architecture: "${config.architecture}",
@@ -28,7 +31,7 @@ export async function generateNeatNodeConfig({
   },
 
   features: {
-    resourceGenerator: ${tempConfig.config.features.resourceGenerator},
+    resourceGenerator: ${tempConfig.features.resourceGenerator},
   },
 
   validation: "${config.validation}",
