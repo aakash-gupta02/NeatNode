@@ -1,7 +1,5 @@
 import fs from "fs";
-import path from "path";
 
-import { getExtension } from "../../shared/utils/getExtension.js";
 import type { GenerationContext } from "../../shared/types/GenerationContext.js";
 import type { NeatNodeConfig } from "../../shared/types/Domain.js";
 import { getRouteRegistryPath } from "../../shared/utils/getRouteRegistryPath.js";
@@ -18,16 +16,14 @@ export function updateRouteRegistry({
   context,
   config,
 }: UpdateRouteRegistryOptions): void {
-  const extension = getExtension(config.language);
-
   const routeRegistry = getRouteRegistryPath(targetPath, config);
 
   let content = fs.readFileSync(routeRegistry, "utf8");
 
   const importStatement =
     config.architecture === "modular"
-      ? `import ${context.camelName}Route from "../modules/${context.rawName}/${context.rawName}.route.${extension}";`
-      : `import ${context.camelName}Route from "./${context.rawName}.route.${extension}";`;
+      ? `import ${context.camelName}Route from "../modules/${context.rawName}/${context.rawName}.route.js";`
+      : `import ${context.camelName}Route from "./${context.rawName}.route.js";`;
 
   const routeStatement = `router.use("/${context.pluralName}", ${context.camelName}Route);`;
 
