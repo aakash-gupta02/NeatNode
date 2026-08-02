@@ -1,6 +1,6 @@
 {
   "name": "neatnode",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "Scaffold production-ready Node.js backends with reusable templates, multiple architectures, built-in generators, and a fully configurable developer workflow.",
   "bin": {
     "neatnode": "./dist/bin/index.js"
