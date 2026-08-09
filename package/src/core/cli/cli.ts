@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import inquirer from "inquirer";
 
 import { generate } from "../../modules/generate/command.js";
