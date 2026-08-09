@@ -7,6 +7,8 @@ import templates from "../../modules/starter/registry/templates.js";
 import type { GeneratorType, LangKey } from "../../shared/types/Domain.js";
 import type { StarterTemplate } from "../../shared/types/StarterTemplate.js";
 import { parseGeneratorType } from "./parsers/generatorType.js";
+import { showHelp, helpCommands } from "./help.js";
+import { showVersion, versionCommands } from "./version.js";
 
 async function main(): Promise<void> {
   console.log("\n🚀 Welcome to NeatNode CLI!\n");
@@ -118,6 +120,16 @@ async function main(): Promise<void> {
 async function run() {
   const args = process.argv.slice(2);
   const force = args.includes("--force");
+
+  if (helpCommands.some((command) => args.includes(command))) {
+    showHelp();
+    return;
+  }
+
+  if (versionCommands.some((command) => args.includes(command))) {
+    showVersion();
+    return;
+  }
 
   if (args[0] === "g" || args[0] === "generate") {
     return generate({
