@@ -4,6 +4,7 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getPackageVersion } from "../../shared/utils/getPackageVersion.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,17 +29,7 @@ interface DownloadFromRefOptions {
   refType: RefType;
 }
 
-export function getPackageVersion(): string {
-  try {
-    const pkgPath = path.resolve(__dirname, "../../../package.json");
 
-    const pkg: PackageJson = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
-
-    return pkg.version;
-  } catch {
-    throw new Error("Failed to read NeatNode package version.");
-  }
-}
 
 function getTemplateRef(): string {
   if (process.env.NEATNODE_TEMPLATE_REF) {

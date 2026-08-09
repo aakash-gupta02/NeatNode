@@ -22,8 +22,8 @@ export function updateRouteRegistry({
 
   const importStatement =
     config.architecture === "modular"
-      ? `import ${context.camelName}Route from "../modules/${context.rawName}/${context.rawName}.route.js";`
-      : `import ${context.camelName}Route from "./${context.rawName}.route.js";`;
+      ? `import ${context.camelName}Route from "../modules/${context.camelName}/${context.camelName}.route.js";`
+      : `import ${context.camelName}Route from "./${context.camelName}.route.js";`;
 
   const routeStatement = `router.use("/${context.pluralName}", ${context.camelName}Route);`;
 

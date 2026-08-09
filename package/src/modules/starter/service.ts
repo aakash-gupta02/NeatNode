@@ -13,8 +13,9 @@ import {
   removeCrudReferences,
 } from "./cleanup.js";
 import { addEnv } from "./env.js";
-import { downloadTemplate, getPackageVersion } from "./githubDownloader.js";
+import { downloadTemplate } from "./githubDownloader.js";
 import { generateNeatNodeConfig } from "./registry/neatnodeConfig.js";
+import { getPackageVersion } from "../../shared/utils/getPackageVersion.js";
 
 export async function createProject({
   projectName,

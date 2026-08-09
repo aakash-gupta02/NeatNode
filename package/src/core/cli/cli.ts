@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import inquirer from "inquirer";
 
 import { generate } from "../../modules/generate/command.js";
@@ -6,6 +7,9 @@ import templates from "../../modules/starter/registry/templates.js";
 import type { GeneratorType, LangKey } from "../../shared/types/Domain.js";
 import type { StarterTemplate } from "../../shared/types/StarterTemplate.js";
 import { parseGeneratorType } from "./parsers/generatorType.js";
+import { showHelp, helpCommands } from "./help.js";
+import { showVersion, versionCommands } from "./version.js";
+import { showUnknownCommand } from "./unknownCommand.js";
 
 async function main(): Promise<void> {
   console.log("\n🚀 Welcome to NeatNode CLI!\n");
@@ -118,12 +122,26 @@ async function run() {
   const args = process.argv.slice(2);
   const force = args.includes("--force");
 
+  if (helpCommands.some((command) => args.includes(command))) {
+    showHelp();
+    return;
+  }
+
+  if (versionCommands.some((command) => args.includes(command))) {
+    showVersion();
+    return;
+  }
+
   if (args[0] === "g" || args[0] === "generate") {
     return generate({
       type: parseGeneratorType(args[1]),
       name: args[2],
       force,
     });
+  }
+
+  if (args[0]) {
+    showUnknownCommand(args[0]);
   }
 
   return main();
