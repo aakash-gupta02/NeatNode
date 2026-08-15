@@ -56,7 +56,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "node --test",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "convert:addons": "node scripts/convert-addon-templates.js"
   },
   "dependencies": {
     "axios": "^1.18.1",
