@@ -10,6 +10,8 @@ import { parseGeneratorType } from "./parsers/generatorType.js";
 import { showHelp, helpCommands } from "./help.js";
 import { showVersion, versionCommands } from "./version.js";
 import { showUnknownCommand } from "./unknownCommand.js";
+import { add } from "../../modules/add/command.js";
+import { AddonType } from "../../shared/types/Addon.js";
 
 async function main(): Promise<void> {
   console.log("\n🚀 Welcome to NeatNode CLI!\n");
@@ -139,6 +141,13 @@ async function run() {
       force,
     });
   }
+
+  if (args[0] === "add") {
+  return add({
+    type: args[1] as AddonType,
+    force,
+  });
+}
 
   if (args[0]) {
     showUnknownCommand(args[0]);

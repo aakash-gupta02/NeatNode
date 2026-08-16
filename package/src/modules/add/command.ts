@@ -1,5 +1,6 @@
 import { loadConfig } from "../../core/config/loadConfig.js";
 import type { AddonType } from "../../shared/types/Addon.js";
+import { addAddon } from "./service.js";
 
 interface AddonOptions {
   type: AddonType;
@@ -13,11 +14,9 @@ export async function add({ type, force }: AddonOptions) {
 
   const config = await loadConfig();
 
-  switch (type) {
-    case "auth":
-    // return addAuth({ config, force });
-
-    default:
-      throw new Error(`Unknown addon: "${type}"`);
-  }
+  return addAddon({
+    addon: type,
+    config,
+    force,
+  });
 }
