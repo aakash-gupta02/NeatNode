@@ -9,9 +9,9 @@ import {
   loginUser,
   logoutUser,
   refreshToken,
-} from "./user.controller.js";
+} from "./auth.controller.js";
 import { validateBody } from "../../core/middleware/validateRequest.middleware.js";
-import { createUserInput, loginInput } from "./user.validation.js";
+import { createUserInput, loginInput } from "./auth.validation.js";
 import { authRateLimiter } from "../../core/middleware/rateLimiter.js";
 
 const router = express.Router();
