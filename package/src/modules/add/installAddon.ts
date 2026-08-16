@@ -5,7 +5,7 @@ import { renderTemplate } from "../../core/template/render.js";
 import { writeFile } from "../../core/filesystem/writeFile.js";
 import type { GenerationContext } from "../../shared/types/GenerationContext.js";
 import { getExtension } from "../../shared/utils/getExtension.js";
-import { RuntimeNeatNodeConfig } from "../../shared/types/Domain.js";
+import type { RuntimeNeatNodeConfig } from "../../shared/types/Domain.js";
 
 interface InstallAddonOptions {
   sourcePath: string;
@@ -13,6 +13,10 @@ interface InstallAddonOptions {
   context: GenerationContext;
   force: boolean;
   language: RuntimeNeatNodeConfig["language"];
+}
+interface AddonFile {
+  source: string;
+  output: string;
 }
 
 export async function installAddon({
@@ -22,6 +26,7 @@ export async function installAddon({
   force,
   language,
 }: InstallAddonOptions): Promise<string[]> {
+  const files: AddonFile[] = [];
   const createdFiles: string[] = [];
 
   async function processDirectory(
@@ -49,38 +54,53 @@ export async function installAddon({
 
         const outputName = entry.name.slice(0, -4) + `.${extension}`;
 
-        const outputPath = path.join(destinationDir, outputName);
-
-        const content = renderTemplate(sourceFile, context);
-
-        await writeFile(outputPath, content, {
-          overwrite: force,
+        files.push({
+          source: sourceFile,
+          output: path.join(destinationDir, outputName),
         });
-
-        createdFiles.push(outputPath);
 
         continue;
       }
 
-      const outputPath = path.join(destinationDir, entry.name);
-
-      if (fs.existsSync(outputPath) && !force) {
-        throw new Error(
-          `${path.relative(process.cwd(), outputPath)} already exists.\n\nUse --force to overwrite existing files.`,
-        );
-      }
-
-      await fs.promises.mkdir(path.dirname(outputPath), {
-        recursive: true,
+      files.push({
+        source: sourceFile,
+        output: path.join(destinationDir, entry.name),
       });
-
-      await fs.promises.copyFile(sourceFile, outputPath);
-
-      createdFiles.push(outputPath);
     }
   }
 
+  // Phase 1 — Build installation plan
   await processDirectory(sourcePath, targetPath);
+
+  // Phase 2 — Validate entire plan
+  if (!force) {
+    for (const file of files) {
+      if (fs.existsSync(file.output)) {
+        throw new Error(
+          `File already exists: ${path.relative(process.cwd(), file.output)}`,
+        );
+      }
+    }
+  }
+
+  // Phase 3 — Install everything
+  for (const file of files) {
+    if (file.source.endsWith(".hbs")) {
+      const content = renderTemplate(file.source, context);
+
+      await writeFile(file.output, content, {
+        overwrite: force,
+      });
+    } else {
+      await fs.promises.mkdir(path.dirname(file.output), {
+        recursive: true,
+      });
+
+      await fs.promises.copyFile(file.source, file.output);
+    }
+
+    createdFiles.push(file.output);
+  }
 
   return createdFiles;
 }
