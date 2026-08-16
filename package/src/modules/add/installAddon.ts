@@ -4,12 +4,15 @@ import path from "path";
 import { renderTemplate } from "../../core/template/render.js";
 import { writeFile } from "../../core/filesystem/writeFile.js";
 import type { GenerationContext } from "../../shared/types/GenerationContext.js";
+import { getExtension } from "../../shared/utils/getExtension.js";
+import { RuntimeNeatNodeConfig } from "../../shared/types/Domain.js";
 
 interface InstallAddonOptions {
   sourcePath: string;
   targetPath: string;
   context: GenerationContext;
   force: boolean;
+  language: RuntimeNeatNodeConfig["language"];
 }
 
 export async function installAddon({
@@ -17,6 +20,7 @@ export async function installAddon({
   targetPath,
   context,
   force,
+  language,
 }: InstallAddonOptions): Promise<string[]> {
   const createdFiles: string[] = [];
 
@@ -41,7 +45,10 @@ export async function installAddon({
       }
 
       if (entry.name.endsWith(".hbs")) {
-        const outputName = entry.name.slice(0, -4);
+        const extension = getExtension(language);
+
+        const outputName = entry.name.slice(0, -4) + `.${extension}`;
+
         const outputPath = path.join(destinationDir, outputName);
 
         const content = renderTemplate(sourceFile, context);

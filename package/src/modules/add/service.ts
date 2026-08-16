@@ -22,7 +22,6 @@ export async function addAddon({
   config,
   force,
 }: AddAddonOptions): Promise<void> {
-
   const definition = ADDON_DEFINITIONS[addon];
 
   if (!definition) {
@@ -44,6 +43,7 @@ export async function addAddon({
     targetPath: process.cwd(),
     context,
     force,
+    language: config.language,
   });
 
   console.log();
